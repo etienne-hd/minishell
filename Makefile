@@ -1,11 +1,7 @@
 CC=cc
 NAME = minishell
 SRC_DIR = src/
-SRCS = $(SRC_DIR)pipex.c \
-	$(SRC_DIR)env.c \
-	$(SRC_DIR)cmd.c \
-	$(SRC_DIR)process.c \
-	$(SRC_DIR)utils.c
+SRCS = $(SRC_DIR)minishell.c
 
 OBJ_DIR = objs/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
