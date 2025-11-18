@@ -1,19 +1,20 @@
 CC=cc
 NAME = minishell
 SRC_DIR = src/
-SRCS = $(SRC_DIR)minishell.c
+SRCS = $(SRC_DIR)minishell.c \
+	$(SRC_DIR)env/load_env.c
 
 OBJ_DIR = objs/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT = ./libft/libft.a
 
-CFLAGS = -g \
+CFLAGS = -Wall -Werror -Wextra -g \
 		-I include \
 		-I libft \
 		-I libft/ft_printf/includes \
 		-I libft/get_next_line/
 
-LDFLAGS = -Wall -Werror -Wextra -g $(LIBFT)
+LDFLAGS = $(LIBFT)
 
 all: $(NAME)
 
@@ -22,6 +23,7 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p objs/
+	@mkdir -p objs/env/
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
