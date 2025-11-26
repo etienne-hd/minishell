@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 17:39:35 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 18:43:53 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:49:39 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	*get_key(char *raw)
 	key = ft_strndup(raw, end_key - raw);
 	return (key);
 }
+
 /**
  * @brief load envp into a parsed structured dictionary
  * 

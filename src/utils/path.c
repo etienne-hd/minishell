@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:17:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:13:44 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:49:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*path_tilde_collapse(char *path, t_dict *env)
 	char	*collapse_path;
 	char	*home_path;
 	size_t	home_path_len;
-	
+
 	home_path = ft_dict_get(env, "HOME");
 	if (!home_path)
 		return (NULL);

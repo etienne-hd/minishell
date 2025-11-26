@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:01 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:39:44 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:48:30 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	destroy_ctx(t_ctx **ctx)
 t_ctx	*get_ctx(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
+
 	(void)argc;
 	(void)argv;
-
 	ctx = ft_calloc(1, sizeof(t_ctx));
 	if (!ctx)
 		return (NULL);
