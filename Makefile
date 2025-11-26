@@ -1,7 +1,12 @@
 CC=cc
 NAME = minishell
 SRC_DIR = src/
-SRCS = $(SRC_DIR)minishell.c
+
+SRC_ENV = $(SRC_DIR)env/load_env.c \
+	$(SRC_DIR)env/destroy_env.c
+
+SRCS = $(SRC_DIR)minishell.c \
+	$(SRC_ENV)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -22,6 +27,7 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)env
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
