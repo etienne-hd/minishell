@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 21:45:56 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:17:50 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "libft.h"
 #include <stdio.h>
 
+/**
+ * @brief free all dynamic allocation of ctx including sub struct
+ * 
+ * @param ctx 
+ */
 void	destroy_ctx(t_ctx **ctx)
 {
 	if (!*ctx)
@@ -26,6 +31,14 @@ void	destroy_ctx(t_ctx **ctx)
 	*ctx = NULL;
 }
 
+/**
+ * @brief get the ctx object with initialized env
+ * 
+ * @param argc 
+ * @param argv 
+ * @param envp 
+ * @return t_ctx* 
+ */
 t_ctx	*get_ctx(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
