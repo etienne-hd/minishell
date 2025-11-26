@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:17:50 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:31:17 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,24 @@ t_ctx	*get_ctx(int argc, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
+	char	*input;
 
 	ctx = get_ctx(argc, argv, envp);
 	if (!ctx)
 		return (1);
-	get_input(ctx);
+	while (1)
+	{
+		input = get_input(ctx);
+		if (!input)
+			break;
+		// TMP
+		printf("INPUT -> %s", input);
+		if (ft_strcmp(input, "exit\n") == 0)
+		{
+			free(input);	
+			break;
+		}
+		free(input);
+	}
 	destroy_ctx(&ctx);
 }
