@@ -6,7 +6,8 @@ SRC_ENV = $(SRC_DIR)env/load_env.c \
 	$(SRC_DIR)env/destroy_env.c
 
 SRC_UTILS = $(SRC_DIR)utils/path.c \
-	$(SRC_DIR)utils/get_input.c
+	$(SRC_DIR)utils/get_input.c \
+	$(SRC_DIR)utils/safe_exit.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
