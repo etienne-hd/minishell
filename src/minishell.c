@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:48:01 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 23:03:26 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	main(int argc, char **argv, char **envp)
 	t_ctx	*ctx;
 	char	*input;
 
-	ctx = get_ctx(argc, argv, envp);
+	ctx = init_ctx(argc, argv, envp);
 	if (!ctx)
-		return (1);
+		safe_exit(&ctx, "Unable to init ctx.");
 	while (1)
 	{
 		input = get_input(ctx);

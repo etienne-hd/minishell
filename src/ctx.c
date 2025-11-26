@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:01 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:48:30 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 23:02:19 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	destroy_ctx(t_ctx **ctx)
 }
 
 /**
- * @brief get the ctx object with initialized env
+ * @brief init the ctx object and sub struct
  * 
  * @param argc 
  * @param argv 
  * @param envp 
  * @return t_ctx* 
  */
-t_ctx	*get_ctx(int argc, char **argv, char **envp)
+t_ctx	*init_ctx(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
 
