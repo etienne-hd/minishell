@@ -6,56 +6,13 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:31:17 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:39:27 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "env.h"
+#include "ctx.h"
 #include "utils.h"
-#include "libft.h"
 #include <stdio.h>
-
-/**
- * @brief free all dynamic allocation of ctx including sub struct
- * 
- * @param ctx 
- */
-void	destroy_ctx(t_ctx **ctx)
-{
-	if (!*ctx)
-		return ;
-	if ((*ctx)->env)
-		destroy_env(&(*ctx)->env);
-	free(*ctx);
-	*ctx = NULL;
-}
-
-/**
- * @brief get the ctx object with initialized env
- * 
- * @param argc 
- * @param argv 
- * @param envp 
- * @return t_ctx* 
- */
-t_ctx	*get_ctx(int argc, char **argv, char **envp)
-{
-	t_ctx	*ctx;
-	(void)argc;
-	(void)argv;
-
-	ctx = ft_calloc(1, sizeof(t_ctx));
-	if (!ctx)
-		return (NULL);
-	ctx->env = load_env(envp);
-	if (!ctx->env)
-	{
-		destroy_ctx(&ctx);
-		return (NULL);
-	}
-	return (ctx);
-}
 
 int	main(int argc, char **argv, char **envp)
 {

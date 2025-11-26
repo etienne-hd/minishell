@@ -5,8 +5,14 @@ SRC_DIR = src/
 SRC_ENV = $(SRC_DIR)env/load_env.c \
 	$(SRC_DIR)env/destroy_env.c
 
+SRC_UTILS = $(SRC_DIR)utils/path.c \
+	$(SRC_DIR)utils/get_input.c
+
 SRCS = $(SRC_DIR)minishell.c \
-	$(SRC_ENV)
+	$(SRC_DIR)ctx.c \
+	$(SRC_UTILS) \
+	$(SRC_ENV) \
+	$(SRC_INPUT)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -28,6 +34,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)env
+	@mkdir -p $(OBJ_DIR)utils
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

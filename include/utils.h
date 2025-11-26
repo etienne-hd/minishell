@@ -6,14 +6,14 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:11:05 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:38:28 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 # include "libft.h"
-# include "minishell.h"
+# include "ctx.h"
 
 char	*get_input(t_ctx *ctx);
 
