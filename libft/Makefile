@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ft_printf/includes/ -I get_next_line/ -I .
+CFLAGS = -Wall -Wextra -Werror -g -I ft_printf/includes/ -I get_next_line/ -I .
 NAME = libft.a
 HEADER = libft.h ft_printf/includes/ft_printf.h get_next_line/get_next_line.h
 
@@ -19,6 +19,7 @@ SRCS_STRING = string/ft_atoi.c \
 		string/ft_strchr.c \
 		string/ft_strrchr.c \
 		string/ft_strdup.c \
+		string/ft_strndup.c \
 		string/ft_striteri.c \
 		string/ft_strjoin.c \
 		string/ft_strlcat.c \
@@ -30,7 +31,8 @@ SRCS_STRING = string/ft_atoi.c \
 		string/ft_strtrim.c \
 		string/ft_substr.c \
 		string/ft_startwith.c \
-		string/ft_endwith.c
+		string/ft_endwith.c \
+		string/ft_replace.c
 
 SRCS_MEMORY = memory/ft_bzero.c \
 		memory/ft_calloc.c \
@@ -96,7 +98,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

@@ -1,10 +1,9 @@
 CC=cc
 NAME = minishell
 SRC_DIR = src/
-SRCS = $(SRC_DIR)minishell.c \
-	$(SRC_DIR)env/load_env.c
+SRCS = $(SRC_DIR)minishell.c
 
-OBJ_DIR = objs/
+OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT = ./libft/libft.a
 
@@ -22,8 +21,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p objs/
-	@mkdir -p objs/env/
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

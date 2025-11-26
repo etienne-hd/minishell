@@ -1,22 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:46:06 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/20 16:26:53 by ehode            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# custom_libft
+*This custom libft adds functions to the traditional [libft](https://github.com/etienne-hd/libft) that will be useful in my course at 42.*
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
-# include "ft_printf/includes/ft_printf.h"
-# include "get_next_line/get_next_line.h"
-
+```h
 // character
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -104,5 +89,6 @@ void				ft_dict_unset(t_dict *dict, const char *key);
 void				*ft_dict_get(t_dict *dict, const char *key);
 t_dict_node			*ft_dict_get_node(t_dict *dict, const char *key);
 void				ft_dict_clear(t_dict **dict);
+```
 
-#endif
+![42](https://img.shields.io/badge/-42-black?style=for-the-badge&logo=42&logoColor=white)
