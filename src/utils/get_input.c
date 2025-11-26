@@ -6,11 +6,10 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:10:27 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:26:18 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/26 22:58:09 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "utils.h"
 #include <stddef.h>
 #include <stdio.h>
