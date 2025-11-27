@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctx.h                                              :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 22:37:55 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:10:28 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/27 15:10:35 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CTX_H
-# define CTX_H
-# include "libft.h"
-#include <stdint.h>
+#ifndef PARSING_H
+# define PARSING_H
 
-typedef struct s_ctx
-{
-	t_dict		*env;
-	uint8_t		status_code;
-}				t_ctx;
+# include "ctx.h"
 
-void	destroy_ctx(t_ctx **ctx);
-t_ctx	*init_ctx(int argc, char **argv, char **envp);
+int	is_valid_scope(char *s, t_ctx *ctx);
 
 #endif

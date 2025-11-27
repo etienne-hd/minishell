@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctx.h                                              :+:      :+:    :+:   */
+/*   is_blank.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 22:37:55 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:10:28 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/27 13:46:45 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/27 13:47:45 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CTX_H
-# define CTX_H
-# include "libft.h"
-#include <stdint.h>
+#include "libft.h"
+#include <stddef.h>
 
-typedef struct s_ctx
+int	is_blank(char *s)
 {
-	t_dict		*env;
-	uint8_t		status_code;
-}				t_ctx;
+	size_t	i;
 
-void	destroy_ctx(t_ctx **ctx);
-t_ctx	*init_ctx(int argc, char **argv, char **envp);
-
-#endif
+	i = 0;
+	while (ft_isspace(s[i]))
+		i++;
+	return (s[i] == 0);
+}

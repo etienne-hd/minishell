@@ -6,13 +6,14 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:01 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 23:02:19 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/27 14:36:20 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "ctx.h"
 #include "libft.h"
+#include <readline/readline.h>
 
 /**
  * @brief free all dynamic allocation of ctx including sub struct
@@ -25,6 +26,7 @@ void	destroy_ctx(t_ctx **ctx)
 		return ;
 	if ((*ctx)->env)
 		destroy_env(&(*ctx)->env);
+	rl_clear_history();
 	free(*ctx);
 	*ctx = NULL;
 }

@@ -7,13 +7,17 @@ SRC_ENV = $(SRC_DIR)env/load_env.c \
 
 SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/get_input.c \
-	$(SRC_DIR)utils/safe_exit.c
+	$(SRC_DIR)utils/safe_exit.c \
+	$(SRC_DIR)utils/is_blank.c
+
+SRC_PARSING = $(SRC_DIR)/parsing/check_scope.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
 	$(SRC_UTILS) \
 	$(SRC_ENV) \
-	$(SRC_INPUT)
+	$(SRC_INPUT) \
+	$(SRC_PARSING)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -36,6 +40,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)env
 	@mkdir -p $(OBJ_DIR)utils
+	@mkdir -p $(OBJ_DIR)parsing
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

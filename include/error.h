@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctx.h                                              :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 22:37:55 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:10:28 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/27 15:01:25 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/27 15:03:43 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CTX_H
-# define CTX_H
-# include "libft.h"
-#include <stdint.h>
+#ifndef ERROR_H
+# define ERROR_H
 
-typedef struct s_ctx
-{
-	t_dict		*env;
-	uint8_t		status_code;
-}				t_ctx;
-
-void	destroy_ctx(t_ctx **ctx);
-t_ctx	*init_ctx(int argc, char **argv, char **envp);
+# define SUCCESS		0
+# define FAILURE		1
+# define CMD_BAD_USAGE	2
+# define CMD_NOT_FOUND	127
+# define CTRL_C			130
 
 #endif
