@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:10:27 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:58:09 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/27 08:46:48 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,20 @@ char	*get_input(t_ctx *ctx)
 {
 	char	*buffer;
 	size_t	size;
+	ssize_t	length;
 
 	size = 4096;
-	buffer = malloc(size * sizeof(char));
+	buffer = malloc((size + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	show_shell_prompt(ctx);
-	if (getline(&buffer, &size, stdin) == -1)
+	length = getline(&buffer, &size, stdin);
+	if (length == -1)
 	{
 		free(buffer);
 		return (NULL);
 	}
+	if (buffer[length - 1] == '\n')
+		buffer[length - 1] = 0;
 	return (buffer);
 }
