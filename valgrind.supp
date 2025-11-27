@@ -1,0 +1,8 @@
+{
+   name
+   Memcheck:Leak
+   fun:*
+   ...
+   obj:*libreadline.so*
+   ...
+}

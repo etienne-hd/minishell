@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I libft/ft_printf/includes \
 		-I libft/get_next_line/
 
-LDFLAGS = $(LIBFT)
+LDFLAGS = $(LIBFT) -lreadline
 
 all: $(NAME)
 

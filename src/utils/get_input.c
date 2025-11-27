@@ -6,58 +6,66 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:10:27 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 08:46:48 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/27 13:42:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "utils.h"
 #include <stddef.h>
-#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <stdlib.h>
 
-static void	show_shell_prompt(t_ctx *ctx)
+static char	*ft_strjoin_wrapper(char *s1, char *s2)
 {
+	char	*res;
+
+	res = ft_strjoin(s1, s2);
+	if (s1)
+		free(s1);
+	return (res);
+}
+
+static char	*get_shell_prompt(t_ctx *ctx)
+{
+	char	*prompt;
 	char	*pwd;
 	char	*collapse_path;
 	char	*user;
 
+	prompt = ft_strdup("");
 	user = ft_dict_get(ctx->env, "USER");
 	if (user)
-		printf("%s", user);
+		prompt = ft_strjoin(prompt, user);
 	pwd = ft_dict_get(ctx->env, "PWD");
 	if (pwd)
 	{
 		if (user)
-			printf(":");
+			prompt = ft_strjoin_wrapper(prompt, ":");
 		collapse_path = path_tilde_collapse(pwd, ctx->env);
 		if (collapse_path)
 		{
-			printf("%s", collapse_path);
+			prompt = ft_strjoin_wrapper(prompt, collapse_path);
 			free(collapse_path);
 		}
 		else
-			printf("%s", pwd);
+			prompt = ft_strjoin_wrapper(prompt, pwd);
 	}
-	printf("$ ");
+	prompt = ft_strjoin_wrapper(prompt, "$ ");
+	return (prompt);
 }
 
 char	*get_input(t_ctx *ctx)
 {
-	char	*buffer;
-	size_t	size;
-	ssize_t	length;
+	char	*line;
+	char	*prompt;
 
-	size = 4096;
-	buffer = malloc((size + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	show_shell_prompt(ctx);
-	length = getline(&buffer, &size, stdin);
-	if (length == -1)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	if (buffer[length - 1] == '\n')
-		buffer[length - 1] = 0;
-	return (buffer);
+	prompt = get_shell_prompt(ctx);
+	if (!prompt)
+		line = readline("$ ");
+	else
+		line = readline(prompt);
+	free(prompt);
+	return (line);
 }

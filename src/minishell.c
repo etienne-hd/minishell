@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 08:47:05 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/27 13:14:12 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv, char **envp)
 		input = get_input(ctx);
 		if (!input)
 			safe_exit(&ctx, "Unable to retreive user input.");
-		printf("INPUT -> %s\n", input);
-		if (ft_strcmp(input, "exit\n") == 0)
+		printf("INPUT -> %s - LENGTH -> %zu\n", input, ft_strlen(input));
+		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
 			break ;
