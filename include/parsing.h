@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:10:35 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 10:30:05 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ typedef enum	e_redirect_type
 typedef struct	s_redirect
 {
 	t_redirect_type	redirect_type;
-	char			*raw_content;
 }				t_redirect;
 
+// ? : Set element to NULL when it's a pipe ?
 typedef struct	s_pipe
 {
-	char	*raw_content;
 }				t_pipe;
 
 typedef struct	s_txt
@@ -63,5 +62,9 @@ typedef struct	s_txt
 }				t_txt;
 
 int	is_valid_scope(char *s, t_ctx *ctx);
+
+// Parsing clearing
+void	clear_txt(void **elmt);
+void	clear_pre_token_list(t_tokenised_list **lst);
 
 #endif
