@@ -10,7 +10,10 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/safe_exit.c \
 	$(SRC_DIR)utils/is_blank.c
 
-SRC_PARSING = $(SRC_DIR)/parsing/check_scope.c
+SRC_PARSING = $(SRC_DIR)/parsing/check_scope.c \
+	$(SRC_DIR)/parsing/clear_token_type.c \
+	$(SRC_DIR)/parsing/token_list_managment.c \
+	$(SRC_DIR)/parsing/pre_token_chain.c \
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \

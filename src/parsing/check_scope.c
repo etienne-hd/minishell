@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:45:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:25:11 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 11:00:40 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	is_valid_scope(char *s, t_ctx *ctx)
 	}
 	if (current_scopes == 0)
 		return (1);
-	ft_dprintf(2, "minishell: syntax error unclosed scope near '%c'\n", current_scopes);
+	ft_dprintf(2, "minishell: syntax error unclosed scope near '%c'\n",
+		current_scopes);
 	ctx->status_code = CMD_BAD_USAGE;
 	return (0);
 }
