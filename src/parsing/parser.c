@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 14:55:05 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 16:11:22 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,12 @@ int	parse(char *input, t_ctx *ctx)
 		free(input);
 		safe_exit(&ctx, "Malloc failed");
 	}
-	print_token_lst(pre_token);
+	if (!check_syntax(pre_token, ctx))
+	{
+		print_token_lst(pre_token);
+		ft_lstclear(&pre_token, clear_pre_token);
+		return (0);
+	}
 	ft_lstclear(&pre_token, clear_pre_token);
-	return (0);
+	return (1);
 }

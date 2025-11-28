@@ -6,12 +6,11 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 14:42:18 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 15:21:28 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
-#include "libft.h"
 #include "utils.h"
 #include "parsing.h"
 #include <readline/history.h>
