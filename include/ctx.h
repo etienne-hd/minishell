@@ -6,14 +6,15 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:55 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 15:10:28 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 15:15:14 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CTX_H
 # define CTX_H
+
 # include "libft.h"
-#include <stdint.h>
+# include <stdint.h>
 
 typedef struct s_ctx
 {

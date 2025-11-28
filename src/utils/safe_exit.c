@@ -6,12 +6,13 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:31:46 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:55:44 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 13:57:58 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "ctx.h"
+#include "utils.h"
 
 void	safe_exit(t_ctx **ctx, char *message)
 {

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   is_in_scope.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 13:56:26 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/28 13:55:34 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/28 14:56:51 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include "libft.h"
-# include "ctx.h"
+#include "utils.h"
 
-char	*get_input(t_ctx *ctx);
-void	safe_exit(t_ctx **ctx, char *message);
-int		is_blank(char *s);
-char	is_in_scope(char c);
+char	is_in_scope(char c)
+{
+	const char	scopes[] = {'\'', '"', 0};
+	size_t		i;
 
-// Path
-char	*path_tilde_expand(char *path, t_dict *env);
-char	*path_tilde_collapse(char *path, t_dict *env);
-
-#endif
+	i = 0;
+	while (scopes[i])
+	{
+		if (c == scopes[i])
+			return (scopes[i]);
+		i++;
+	}
+	return (0);
+}

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   clear_pre_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 13:56:26 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/28 10:22:10 by ncorrear          #+#    #+#             */
+/*   Updated: 2025/11/28 14:32:47 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include "libft.h"
-# include "ctx.h"
+#include "parsing.h"
 
-char	*get_input(t_ctx *ctx);
-void	safe_exit(t_ctx **ctx, char *message);
-int		is_blank(char *s);
-char	is_in_scope(char c);
+void	clear_pre_token(void *ptr)
+{
+	t_pre_token	*token;
 
-// Path
-char	*path_tilde_expand(char *path, t_dict *env);
-char	*path_tilde_collapse(char *path, t_dict *env);
-
-#endif
+	if (ptr == NULL)
+		return ;
+	token = (t_pre_token *)ptr;
+	free((token)->raw_content);
+	free(token);
+}

@@ -8,12 +8,14 @@ SRC_ENV = $(SRC_DIR)env/load_env.c \
 SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/get_input.c \
 	$(SRC_DIR)utils/safe_exit.c \
-	$(SRC_DIR)utils/is_blank.c
+	$(SRC_DIR)utils/is_blank.c \
+	$(SRC_DIR)utils/is_in_scope.c
 
-SRC_PARSING = $(SRC_DIR)/parsing/check_scope.c \
-	$(SRC_DIR)/parsing/clear_token_type.c \
-	$(SRC_DIR)/parsing/token_list_managment.c \
-	$(SRC_DIR)/parsing/pre_token_chain.c \
+SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
+	$(SRC_DIR)/parsing/check_scope.c \
+	$(SRC_DIR)/parsing/pre_token/clear_pre_token.c \
+	$(SRC_DIR)/parsing/pre_token/pre_token_chain.c \
+	$(SRC_DIR)/parsing/pre_token/pre_token_chain_utils.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -44,6 +46,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)env
 	@mkdir -p $(OBJ_DIR)utils
 	@mkdir -p $(OBJ_DIR)parsing
+	@mkdir -p $(OBJ_DIR)parsing/pre_token
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

@@ -6,12 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:17:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/26 22:49:55 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 13:57:54 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
+#include "utils.h"
 
 /**
  * @brief expand home path ~ -> /home/user

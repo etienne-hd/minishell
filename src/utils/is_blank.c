@@ -6,12 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 13:46:45 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 13:47:45 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 14:56:47 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
+#include "utils.h"
 
 int	is_blank(char *s)
 {
