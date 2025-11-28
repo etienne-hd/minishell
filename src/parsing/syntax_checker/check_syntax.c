@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:45:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 16:25:24 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/28 18:23:13 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ static int	check_expected_type(const t_token_type *expected_type, size_t size,
 		return (0);
 	else if (token_lst->next == NULL)
 	{
-		ft_dprintf(2, "minishell: parse error near '\\n'\n");
+		ft_dprintf(2, "minishell: syntax error near \
+unexpected token 'newline'\n");
 		return (1);
 	}
 	next_token = (t_pre_token *)token_lst->next->content;
 	if (is_expected(expected_type, size, next_token->type))
 		return (0);
-	ft_dprintf(2, "minishell: parse error near '%s'\n",
+	ft_dprintf(2, "minishell: syntax error near unexpected token '%s'\n",
 		next_token->raw_content);
 	return (1);
 }
