@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 18:02:09 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/29 17:44:53 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_token
 }				t_token;
 
 t_list	*get_token_list(t_list *pre_token_list);
+t_list	*get_arg(t_pre_token *pre_token);
 void	clear_arg(void *ptr);
 void	clear_token(void *ptr);
 

@@ -18,7 +18,8 @@ SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
 	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain.c \
 	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain_utils.c \
 	$(SRC_DIR)/parsing/tokenizer/clear_token.c \
-	$(SRC_DIR)/parsing/tokenizer/token_chain.c
+	$(SRC_DIR)/parsing/tokenizer/token_chain.c \
+	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \

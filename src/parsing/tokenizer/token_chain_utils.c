@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_token.c                                      :+:      :+:    :+:   */
+/*   token_chain_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 17:15:37 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/29 17:57:36 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/29 17:41:36 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/29 17:57:50 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parsing.h"
 
-void	clear_arg(void *ptr)
+t_list	*get_arg(t_pre_token *pre_token)
 {
 	t_arg	*arg;
+	t_list	*arg_node;
 
-	if (!ptr)
-		return ;
-	arg = (t_arg *)ptr;
-	free(arg->raw_content);
-	free(arg->arg);
-	free(arg);
-}
-
-void	clear_token(void *ptr)
-{
-	t_token	*token;
-
-	if (!ptr)
-		return ;
-	token = (t_token *)ptr;
-	ft_lstclear(&token->args, clear_arg);
-	free(token);
+	arg = ft_calloc(1, sizeof(t_arg));
+	if (!arg)
+		return (NULL);
+	arg->raw_content = ft_strdup(pre_token->raw_content);
+	arg_node = ft_lstnew(arg);
+	if (arg->raw_content == NULL || arg_node == NULL)
+	{
+		free(arg->raw_content);
+		free(arg_node);
+		free(arg);
+		return (NULL);
+	}
+	return (arg_node);
 }
