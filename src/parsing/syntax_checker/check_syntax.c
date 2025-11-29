@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:45:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 18:23:13 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/29 01:23:22 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 const t_token_type	g_redirection_expected[] = {TEXT};
 const t_token_type	g_text_expected[] = {TEXT, PIPE, REDIRECTION, END};
-const t_token_type	g_pipe_expected[] = {TEXT};
+const t_token_type	g_pipe_expected[] = {TEXT, REDIRECTION};
 
 static int	is_expected(const t_token_type *expected_type, size_t size,
 	t_token_type type)
