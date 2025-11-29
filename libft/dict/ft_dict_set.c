@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 06:09:29 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/02 07:59:32 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/29 18:04:59 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_dict_node	*ft_dict_set(t_dict *dict, const char *key, void *value)
 	node->value = value;
 	node->next = dict->entry;
 	dict->entry = node;
+	dict->size++;
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:46:06 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/20 16:26:53 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/29 18:19:44 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_startwith(char *str, char *start);
 int					ft_endwith(char *str, char *end);
 char				*ft_replace(const char *s, const char *target,
 						const char *new);
+char				*ft_strnjoin(size_t n, ...);
 
 // memory
 void				*ft_memset(void *s, int c, size_t n);

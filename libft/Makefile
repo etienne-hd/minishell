@@ -32,7 +32,8 @@ SRCS_STRING = string/ft_atoi.c \
 		string/ft_substr.c \
 		string/ft_startwith.c \
 		string/ft_endwith.c \
-		string/ft_replace.c
+		string/ft_replace.c \
+		string/ft_strnjoin.c
 
 SRCS_MEMORY = memory/ft_bzero.c \
 		memory/ft_calloc.c \

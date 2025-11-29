@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 06:19:01 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/02 07:59:36 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/29 18:06:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_dict_unset(t_dict *dict, const char *key)
 	node = dict->entry;
 	if (node && !ft_strcmp(node->key, key))
 	{
+		dict->size--;
 		dict->entry = node->next;
 		ft_free_node(node);
 		return ;
@@ -35,6 +36,7 @@ void	ft_dict_unset(t_dict *dict, const char *key)
 		temp_node = node->next;
 		if (!ft_strcmp(temp_node->key, key))
 		{
+			dict->size--;
 			node->next = temp_node->next;
 			ft_free_node(temp_node);
 			return ;
