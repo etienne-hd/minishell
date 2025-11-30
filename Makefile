@@ -19,7 +19,8 @@ SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
 	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain_utils.c \
 	$(SRC_DIR)/parsing/tokenizer/clear_token.c \
 	$(SRC_DIR)/parsing/tokenizer/token_chain.c \
-	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c
+	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c \
+	$(SRC_DIR)/parsing/expander/n_expand.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -53,6 +54,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/pre_tokenizer
 	@mkdir -p $(OBJ_DIR)parsing/tokenizer
 	@mkdir -p $(OBJ_DIR)parsing/syntax_checker
+	@mkdir -p $(OBJ_DIR)parsing/expander
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
