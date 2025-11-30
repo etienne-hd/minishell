@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 13:56:26 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/30 11:35:40 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ char	is_in_scope(char c);
 // Path
 char	*path_tilde_expand(char *path, t_dict *env);
 char	*path_tilde_collapse(char *path, t_dict *env);
+
+// Convert no malloc
+char	*ft_ulltoa(unsigned long long nbr);
 
 #endif

@@ -9,7 +9,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/get_input.c \
 	$(SRC_DIR)utils/safe_exit.c \
 	$(SRC_DIR)utils/is_blank.c \
-	$(SRC_DIR)utils/is_in_scope.c
+	$(SRC_DIR)utils/is_in_scope.c \
+	$(SRC_DIR)utils/ulltoa.c
 
 SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
 	$(SRC_DIR)/parsing/syntax_checker/check_scope.c \
@@ -19,7 +20,8 @@ SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
 	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain_utils.c \
 	$(SRC_DIR)/parsing/tokenizer/clear_token.c \
 	$(SRC_DIR)/parsing/tokenizer/token_chain.c \
-	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c
+	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c \
+	$(SRC_DIR)/parsing/expander/expand.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -53,6 +55,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/pre_tokenizer
 	@mkdir -p $(OBJ_DIR)parsing/tokenizer
 	@mkdir -p $(OBJ_DIR)parsing/syntax_checker
+	@mkdir -p $(OBJ_DIR)parsing/expander
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
