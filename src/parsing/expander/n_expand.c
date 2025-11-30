@@ -6,13 +6,14 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:43:46 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 17:27:43 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/30 19:57:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
 #include "ft_printf.h"
 #include "libft.h"
+#include "utils.h"
 #include <stdlib.h>
 
 static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
@@ -41,31 +42,6 @@ static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 	return (value);
 }
 
-static int	join_expand(char **origin, size_t n, char *value, char *end)
-{
-	char	*temp;
-	char	*begin;
-
-	begin = ft_strndup(*origin, n);
-	if (!begin)
-	{
-		free(value);
-		return (1);
-	}
-	temp = ft_strnjoin(3, begin, value, end);
-	if (!temp)
-	{
-		free(value);
-		free(begin);
-		return (1);
-	}
-	free(begin);
-	free(*origin);
-	free(value);
-	*origin = temp;
-	return (0);
-}
-
 static int	n_expand_setter(char **s_expanded, size_t *i, size_t *n, t_ctx *ctx)
 {
 	size_t	key_length;
@@ -75,7 +51,7 @@ static int	n_expand_setter(char **s_expanded, size_t *i, size_t *n, t_ctx *ctx)
 	value = expand_var(&((*s_expanded)[*i + 1]), &key_length, ctx);
 	if (value)
 		value_length = ft_strlen(value);
-	if (!value || join_expand(s_expanded, *i,
+	if (!value || bounded_join(s_expanded, *i,
 			value, &((*s_expanded)[*i + key_length + 1])) == 1)
 	{
 		free(value);
@@ -92,7 +68,7 @@ char	*n_expand(char *s, size_t n, t_ctx *ctx)
 	size_t	i;
 	char	*s_expanded;
 
-	s_expanded = ft_strdup(s);
+	s_expanded = ft_strndup(s, n);
 	if (!s_expanded)
 		return (NULL);
 	i = 0;

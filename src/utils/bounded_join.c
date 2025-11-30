@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   bounded_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 17:39:54 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/30 17:38:57 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/30 17:39:35 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include "libft.h"
-# include "ctx.h"
+#include "libft.h"
+#include "utils.h"
 
-char	*get_input(t_ctx *ctx);
-void	safe_exit(t_ctx **ctx, char *message);
-int		is_blank(char *s);
-char	is_in_scope(char c);
-int		bounded_join(char **origin, size_t n, char *value, char *end);
+int	bounded_join(char **origin, size_t n, char *value, char *end)
+{
+	char	*temp;
+	char	*begin;
 
-// Path
-char	*path_tilde_expand(char *path, t_dict *env);
-char	*path_tilde_collapse(char *path, t_dict *env);
-
-#endif
+	begin = ft_strndup(*origin, n);
+	if (!begin)
+	{
+		free(value);
+		return (1);
+	}
+	temp = ft_strnjoin(3, begin, value, end);
+	if (!temp)
+	{
+		free(value);
+		free(begin);
+		return (1);
+	}
+	free(begin);
+	free(*origin);
+	free(value);
+	*origin = temp;
+	return (0);
+}

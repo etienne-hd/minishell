@@ -9,18 +9,22 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/get_input.c \
 	$(SRC_DIR)utils/safe_exit.c \
 	$(SRC_DIR)utils/is_blank.c \
-	$(SRC_DIR)utils/is_in_scope.c
+	$(SRC_DIR)utils/is_in_scope.c \
+	$(SRC_DIR)utils/bounded_join.c
 
-SRC_PARSING = $(SRC_DIR)/parsing/parser.c \
-	$(SRC_DIR)/parsing/syntax_checker/check_scope.c \
-	$(SRC_DIR)/parsing/syntax_checker/check_syntax.c \
-	$(SRC_DIR)/parsing/pre_tokenizer/clear_pre_token.c \
-	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain.c \
-	$(SRC_DIR)/parsing/pre_tokenizer/pre_token_chain_utils.c \
-	$(SRC_DIR)/parsing/tokenizer/clear_token.c \
-	$(SRC_DIR)/parsing/tokenizer/token_chain.c \
-	$(SRC_DIR)/parsing/tokenizer/token_chain_utils.c \
-	$(SRC_DIR)/parsing/expander/n_expand.c
+SRC_PARSING = $(SRC_DIR)parsing/parser.c \
+	$(SRC_DIR)parsing/syntax_checker/check_scope.c \
+	$(SRC_DIR)parsing/syntax_checker/check_syntax.c \
+	$(SRC_DIR)parsing/pre_tokenizer/clear_pre_token.c \
+	$(SRC_DIR)parsing/pre_tokenizer/pre_token_chain.c \
+	$(SRC_DIR)parsing/pre_tokenizer/pre_token_chain_utils.c \
+	$(SRC_DIR)parsing/tokenizer/clear_token.c \
+	$(SRC_DIR)parsing/tokenizer/token_chain.c \
+	$(SRC_DIR)parsing/tokenizer/token_chain_utils.c \
+	$(SRC_DIR)parsing/expander/n_expand.c \
+	$(SRC_DIR)parsing/expander/expander_utils.c \
+	$(SRC_DIR)parsing/expander/expander.c
+
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \

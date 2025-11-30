@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 18:48:05 by ehode            ###   ########.fr       */
+/*   Updated: 2025/11/30 15:32:42 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	print_token_lst(t_list *lst)
 {
 	t_token	*token;
 	t_list	*current_args;
-	t_arg	*current_arg;
+	char	*current_arg;
 
 	while (lst)
 	{
@@ -57,9 +57,8 @@ static void	print_token_lst(t_list *lst)
 		current_args = token->args;
 		while (current_args)
 		{
-			current_arg = (t_arg *)current_args->content;
-			ft_printf("\t{raw_content: %s, is_expanded: %d},\n",
-				current_arg->raw_content, current_arg->is_expanded);
+			current_arg = current_args->content;
+			ft_printf("\t{raw_content: %s},\n", current_arg);
 			current_args = current_args->next;
 		}
 		ft_printf("}\n");
