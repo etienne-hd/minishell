@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_chain_utils.c                                :+:      :+:    :+:   */
+/*   bounded_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:41:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 15:31:02 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/30 17:38:57 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/30 17:39:35 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "parsing.h"
+#include "utils.h"
 
-t_list	*get_arg(t_pre_token *pre_token)
+int	bounded_join(char **origin, size_t n, char *value, char *end)
 {
-	char	*arg;
-	t_list	*arg_node;
+	char	*temp;
+	char	*begin;
 
-	arg = ft_strdup(pre_token->raw_content);
-	arg_node = ft_lstnew(arg);
-	if (arg == NULL || arg_node == NULL)
+	begin = ft_strndup(*origin, n);
+	if (!begin)
 	{
-		free(arg);
-		free(arg_node);
-		return (NULL);
+		free(value);
+		return (1);
 	}
-	return (arg_node);
+	temp = ft_strnjoin(3, begin, value, end);
+	if (!temp)
+	{
+		free(value);
+		free(begin);
+		return (1);
+	}
+	free(begin);
+	free(*origin);
+	free(value);
+	*origin = temp;
+	return (0);
 }

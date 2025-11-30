@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_chain_utils.c                                :+:      :+:    :+:   */
+/*   argv_viewer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:41:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 15:31:02 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/29 20:04:10 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/29 20:05:34 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "parsing.h"
+#include <stddef.h>
+#include <stdio.h>
 
-t_list	*get_arg(t_pre_token *pre_token)
+int	main(int argc, char **argv)
 {
-	char	*arg;
-	t_list	*arg_node;
+	int	i;
 
-	arg = ft_strdup(pre_token->raw_content);
-	arg_node = ft_lstnew(arg);
-	if (arg == NULL || arg_node == NULL)
+	i = 1;
+	while (i < argc)
 	{
-		free(arg);
-		free(arg_node);
-		return (NULL);
+		printf("ARG %d -> [%s]\n", i, argv[i]);
+		i++;
 	}
-	return (arg_node);
 }

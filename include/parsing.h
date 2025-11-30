@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 11:29:50 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:45:26 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ void	clear_pre_token(void *pre_token);
 int		is_reserved_char(char c);
 size_t	get_text_length(char *text);
 
-// Token
-typedef struct s_arg
-{
-	int		is_expanded;
-	char	*raw_content;
-	char	*arg;
-}				t_arg;
-
 typedef struct s_token
 {
 	t_token_type	type;
@@ -68,7 +60,8 @@ t_list	*get_arg(t_pre_token *pre_token);
 void	clear_arg(void *ptr);
 void	clear_token(void *ptr);
 
-// Expansion
-char	*get_expanded_arg(char	*arg, t_ctx *ctx);
-
+// Expander
+t_list	*expand_arg(char *arg, t_ctx *ctx);
+char	*n_expand(char *s, size_t n, t_ctx *ctx);
+t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n);
 #endif

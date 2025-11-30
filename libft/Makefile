@@ -41,7 +41,8 @@ SRCS_MEMORY = memory/ft_bzero.c \
 		memory/ft_memcmp.c \
 		memory/ft_memcpy.c \
 		memory/ft_memmove.c \
-		memory/ft_memset.c
+		memory/ft_memset.c \
+		memory/ft_find_first_address.c
 
 SRCS_PUT = put/ft_putchar_fd.c \
 		put/ft_putendl_fd.c \

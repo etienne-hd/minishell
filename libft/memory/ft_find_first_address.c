@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_chain_utils.c                                :+:      :+:    :+:   */
+/*   ft_find_first_address.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:41:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 15:31:02 by ehode            ###   ########.fr       */
+/*   Created: 2025/11/30 17:48:22 by ehode             #+#    #+#             */
+/*   Updated: 2025/11/30 17:57:26 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
 #include "libft.h"
-#include "parsing.h"
 
-t_list	*get_arg(t_pre_token *pre_token)
+void	*ft_find_first_address(size_t n, ...)
 {
-	char	*arg;
-	t_list	*arg_node;
+	va_list	args;
+	size_t	i;
+	void	*min;
+	void	*current_addr;
 
-	arg = ft_strdup(pre_token->raw_content);
-	arg_node = ft_lstnew(arg);
-	if (arg == NULL || arg_node == NULL)
+	if (n == 0)
+		return (0);
+	va_start(args, n);
+	i = 0;
+	min = 0;
+	while (i < n)
 	{
-		free(arg);
-		free(arg_node);
-		return (NULL);
+		current_addr = va_arg(args, void *);
+		if (current_addr != 0 && (min > current_addr || min == 0))
+			min = current_addr;
+		i++;
 	}
-	return (arg_node);
+	return (min);
 }
