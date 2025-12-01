@@ -35,6 +35,14 @@ static int	is_expected(const t_token_type *expected_type, size_t size,
 	return (0);
 }
 
+/**
+ * @brief Check if the the given token had the correct token after
+ *
+ * @param expected_type List of type expected after
+ * @param size Number of type expected
+ * @param token_lst token to check
+ * @return 
+ */
 static int	check_expected_type(const t_token_type *expected_type, size_t size,
 	t_list *token_lst)
 {

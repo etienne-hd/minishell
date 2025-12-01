@@ -15,6 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Generate a new allocated _token and init it like a pipe
+ *
+ * @return 
+ */
 static t_pre_token	*get_pipe_token(void)
 {
 	t_pre_token	*token;
@@ -32,6 +37,11 @@ static t_pre_token	*get_pipe_token(void)
 	return (token);
 }
 
+/**
+ * @brief Generate a new allocated pre_token and init it like a redirectrion
+ *
+ * @return 
+ */
 static t_pre_token	*get_redirect_token(char *str)
 {
 	t_pre_token	*token;
@@ -56,6 +66,12 @@ static t_pre_token	*get_redirect_token(char *str)
 	return (token);
 }
 
+/**
+ * @brief Generate a new allocated pre_token and init it like a txt
+ *
+ * @param str 
+ * @return 
+ */
 static t_pre_token	*get_text_token(char *str)
 {
 	size_t		length;
@@ -75,6 +91,12 @@ static t_pre_token	*get_text_token(char *str)
 	return (token);
 }
 
+/**
+ * @brief Return an allocated token with the correct type
+ *
+ * @param str chain to tokenise
+ * @return 
+ */
 t_pre_token	*get_pre_token(char *str)
 {
 	t_pre_token	*token;

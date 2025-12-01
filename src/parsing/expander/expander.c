@@ -133,6 +133,13 @@ t_list	*expand_arg(char *arg, t_ctx *ctx)
 	return (expanded_args);
 }
 
+/**
+ * @brief Expand all the arg list of the token and replace the list
+ *
+ * @param token token to expand
+ * @param ctx global context for variables
+ * @return 
+ */
 int	expand(t_token *token, t_ctx *ctx)
 {
 	t_list	*args;
@@ -147,7 +154,7 @@ int	expand(t_token *token, t_ctx *ctx)
 		if (!new_arg)
 		{
 			ft_lstclear(&new_args, clear_arg);
-			return (NULL);
+			return (1);
 		}
 		ft_lstadd_back(&new_args, new_arg);
 		args = args->next;
