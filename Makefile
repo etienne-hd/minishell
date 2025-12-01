@@ -13,8 +13,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/bounded_join.c
 
 SRC_PARSING = $(SRC_DIR)parsing/parser.c \
-	$(SRC_DIR)parsing/syntax_checker/check_scope.c \
-	$(SRC_DIR)parsing/syntax_checker/check_syntax.c \
+	$(SRC_DIR)parsing/checker/check_scope.c \
+	$(SRC_DIR)parsing/checker/check_syntax.c \
 	$(SRC_DIR)parsing/pre_tokenizer/clear_pre_token.c \
 	$(SRC_DIR)parsing/pre_tokenizer/pre_token_chain.c \
 	$(SRC_DIR)parsing/pre_tokenizer/pre_token_chain_utils.c \
@@ -87,7 +87,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing
 	@mkdir -p $(OBJ_DIR)parsing/pre_tokenizer
 	@mkdir -p $(OBJ_DIR)parsing/tokenizer
-	@mkdir -p $(OBJ_DIR)parsing/syntax_checker
+	@mkdir -p $(OBJ_DIR)parsing/checker
 	@mkdir -p $(OBJ_DIR)parsing/expander
 	$(CC) $(CFLAGS) $< -c -o $@
 
