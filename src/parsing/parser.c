@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "parsing.h"
 #include "utils.h"
-#include <stdio.h>
 
 static void	print_pre_token_lst(t_list *lst)
 {

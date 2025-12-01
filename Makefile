@@ -37,6 +37,8 @@ OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT = ./libft/libft.a
 
+FSANITIZE = -fsanitize=address,undefined,leak -fno-omit-frame-pointer
+
 CFLAGS = -Wall -Werror -Wextra -g \
 		-I include \
 		-I libft \
@@ -44,6 +46,11 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I libft/get_next_line/
 
 LDFLAGS = $(LIBFT) -lreadline
+
+ifdef SANITIZE
+	CFLAGS += $(FSANITIZE)
+	LDFLAGS += $(FSANITIZE)
+endif
 
 all: $(NAME)
 
