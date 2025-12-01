@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 22:46:26 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:38:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void test(t_list *token_lst, t_ctx *ctx)
 	while (current_lst)
 	{
 		current_token = (t_token *)(current_lst->content);
-		expand(current_token, ctx);
+		expand(current_token, ctx); // SI 1 TOUS CLEAR
 		current_lst = current_lst->next;
 	}
 	ft_printf("==================\n==================\n");

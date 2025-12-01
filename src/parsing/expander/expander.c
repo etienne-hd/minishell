@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:10:09 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 21:42:25 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 17:29:39 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int	expand(t_token *token, t_ctx *ctx)
 	while (args)
 	{
 		tmp = ft_strdup(args->content);
-		if (tmp != NULL)
+		if (tmp != NULL && handle_tilde(&tmp) == 0)
 			new_arg = expand_arg(tmp, ctx);
 		if (!new_arg || tmp == NULL)
 		{

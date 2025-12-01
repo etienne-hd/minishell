@@ -23,7 +23,8 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/tokenizer/token_chain_utils.c \
 	$(SRC_DIR)parsing/expander/n_expand.c \
 	$(SRC_DIR)parsing/expander/expander_utils.c \
-	$(SRC_DIR)parsing/expander/expander.c
+	$(SRC_DIR)parsing/expander/expander.c \
+	$(SRC_DIR)parsing/expander/handle_tilde.c
 
 
 SRCS = $(SRC_DIR)minishell.c \
