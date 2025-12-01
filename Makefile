@@ -37,7 +37,8 @@ OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT = ./libft/libft.a
 
-FSANITIZE = -fsanitize=address,undefined,leak -fno-omit-frame-pointer
+FSANITIZE = -fsanitize=address,undefined,leak -fno-omit-frame-pointer \
+            -fsanitize-recover=address
 
 CFLAGS = -Wall -Werror -Wextra -g \
 		-I include \
@@ -53,6 +54,13 @@ ifdef SANITIZE
 endif
 
 all: $(NAME)
+
+
+sanitize:
+	$(MAKE) re SANITIZE=1
+run_sanitize:
+	@echo "Running with AddressSanitizer..."
+	ASAN_OPTIONS=detect_leaks=1:halt_on_error=0 LSAN_OPTIONS=report_objects=1 ./$(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
