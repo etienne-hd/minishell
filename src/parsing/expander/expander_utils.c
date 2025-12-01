@@ -6,14 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 18:04:05 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 22:13:33 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 20:14:56 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parsing.h"
-#include <stdlib.h>
-#include <threads.h>
 
 /**
  * @brief Split the content of the last_arg lst, 0-i into last_arg and i-end into
