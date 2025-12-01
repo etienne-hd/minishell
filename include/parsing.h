@@ -61,6 +61,7 @@ void	clear_arg(void *ptr);
 void	clear_token(void *ptr);
 
 // Expander
+int	expand(t_token *token, t_ctx *ctx);
 t_list	*expand_arg(char *arg, t_ctx *ctx);
 char	*n_expand(char *s, size_t n, t_ctx *ctx);
 t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n);

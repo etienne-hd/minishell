@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "parsing.h"
 #include "utils.h"
+#include <stdio.h>
 
 static void	print_pre_token_lst(t_list *lst)
 {
@@ -66,6 +67,24 @@ static void	print_token_lst(t_list *lst)
 	}
 }
 
+static void test(t_list *token_lst, t_ctx *ctx)
+{
+	t_list	*current_lst;
+	t_token *current_token;
+
+	(void)print_pre_token_lst;
+	print_token_lst(token_lst);
+	current_lst = token_lst;
+	while (current_lst)
+	{
+		current_token = (t_token *)(current_lst->content);
+		expand(current_token, ctx);
+		current_lst = current_lst->next;
+	}
+	ft_printf("==================\n==================\n");
+	print_token_lst(token_lst);
+}
+
 int	parse(char *input, t_ctx *ctx)
 {
 	t_list	*pre_token_list;
@@ -93,8 +112,7 @@ int	parse(char *input, t_ctx *ctx)
 		ft_lstclear(&pre_token_list, clear_pre_token);
 		return (1);
 	}
-	(void)print_pre_token_lst;
-	print_token_lst(token_list);
+	test(token_list, ctx);
 	ft_lstclear(&pre_token_list, clear_pre_token);
 	ft_lstclear(&token_list, clear_token);
 	return (0);

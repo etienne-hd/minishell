@@ -72,7 +72,6 @@ static int	n_expand_setter(char **s_expanded, size_t *i, size_t *n, t_ctx *ctx)
 	if (!value || bounded_join(s_expanded, *i,
 			value, &((*s_expanded)[*i + key_length + 1])) == 1)
 	{
-		free(value);
 		free(*s_expanded);
 		return (1);
 	}

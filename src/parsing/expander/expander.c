@@ -145,13 +145,16 @@ int	expand(t_token *token, t_ctx *ctx)
 	t_list	*args;
 	t_list	*new_args;
 	t_list	*new_arg;
+	char	*tmp;
 
 	args = token->args;
 	new_args = NULL;
 	while (args)
 	{
-		new_arg = expand_arg(args->content, ctx);
-		if (!new_arg)
+		tmp = ft_strdup(args->content);
+		if (tmp != NULL)
+			new_arg = expand_arg(tmp, ctx);
+		if (!new_arg || tmp == NULL)
 		{
 			ft_lstclear(&new_args, clear_arg);
 			return (1);
