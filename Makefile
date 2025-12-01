@@ -25,6 +25,7 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/expander/expander_utils.c \
 	$(SRC_DIR)parsing/expander/expander.c \
 	$(SRC_DIR)parsing/expander/handle_tilde.c \
+	$(SRC_DIR)parsing/expander/expand_tokens.c \
 	$(SRC_DIR)parsing/joiner/join_args_cmd.c
 
 

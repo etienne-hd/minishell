@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 18:04:05 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 20:14:56 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 23:23:44 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n)
 	tmp = last_arg->content;
 	while (tmp[*i])
 	{
-		while (ft_isspace(tmp[*i]) && *i < n)
-			(*i)++;
 		while ((tmp[*i] && !ft_isspace(tmp[*i])) && *i < n)
 			(*i)++;
 		if (tmp[*i] == 0 || *i >= n)

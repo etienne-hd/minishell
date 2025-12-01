@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 19:28:02 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 23:27:17 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,6 @@
 #include "libft.h"
 #include "parsing.h"
 #include "utils.h"
-
-static void	print_pre_token_lst(t_list *lst)
-{
-	t_pre_token	*token;
-
-	while (lst)
-	{
-		token = (t_pre_token *)lst->content;
-		if (token->type == REDIRECTION)
-			ft_printf("REDIRECTION: {content: %s}\n", token->raw_content);
-		if (token->type == PIPE)
-			ft_printf("PIPE: {content: %s}\n", token->raw_content);
-		if (token->type == TEXT)
-			ft_printf("TEXT: {content: %s}\n", token->raw_content);
-		lst = lst->next;
-	}
-}
 
 static void	print_token_lst(t_list *lst)
 {
@@ -58,7 +41,7 @@ static void	print_token_lst(t_list *lst)
 		while (current_args)
 		{
 			current_arg = current_args->content;
-			ft_printf("\t{raw_content: %s},\n", current_arg);
+			ft_printf("\t{raw_content: [%s]},\n", current_arg);
 			current_args = current_args->next;
 		}
 		ft_printf("}\n");
@@ -66,56 +49,40 @@ static void	print_token_lst(t_list *lst)
 	}
 }
 
-static void test(t_list *token_lst, t_ctx *ctx)
-{
-	t_list	*current_lst;
-	t_token *current_token;
-
-	(void)print_pre_token_lst;
-	current_lst = token_lst;
-	while (current_lst)
-	{
-		current_token = (t_token *)(current_lst->content);
-		expand(current_token, ctx); // SI 1 TOUS CLEAR
-		current_lst = current_lst->next;
-	}
-	ft_printf("==================\n==================\n");
-	print_token_lst(token_lst);
-}
-
 int	parse(char *input, t_ctx *ctx)
 {
 	t_list	*pre_token_list;
 	t_list	*token_list;
 
-	ctx->status_code = SUCCESS;
+	// CHECK SCOPE
 	if (is_valid_scope(input, ctx) == 0)
 		return (1);
+	// PRE TOKENIZE
 	pre_token_list = get_pre_token_list(input);
+	free(input);
 	if (!pre_token_list)
-	{
-		free(input);
 		safe_exit(&ctx, "Malloc failed.");
-	}
+	// CHECK SYNTAX
 	if (check_syntax(pre_token_list, ctx))
 	{
 		ft_lstclear(&pre_token_list, clear_pre_token);
 		return (1);
 	}
+	// TOKENIZE
 	token_list = get_token_list(pre_token_list);
-	//print_token_lst(token_list);
-	//printf("BEFORE JOIN ARGS\n");
-	join_args_cmd(token_list);
-	//print_token_lst(token_list);
-	if (!token_list)
-	{
-		free(input);
-		safe_exit(&ctx, "Malloc failed.");
-		ft_lstclear(&pre_token_list, clear_pre_token);
-		return (1);
-	}
-	test(token_list, ctx);
 	ft_lstclear(&pre_token_list, clear_pre_token);
+	// JOIN ARGS
+	join_args_cmd(token_list);
+	if (!token_list)
+		safe_exit(&ctx, "Malloc failed.");
+	// EXPAND
+	if (expand_tokens(token_list, ctx))
+	{
+		ft_lstclear(&token_list, clear_token);
+		safe_exit(&ctx, "Malloc failed.");
+	}
+	print_token_lst(token_list);
 	ft_lstclear(&token_list, clear_token);
+	ctx->status_code = SUCCESS;
 	return (0);
 }

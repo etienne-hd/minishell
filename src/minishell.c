@@ -6,37 +6,15 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 18:14:42 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 23:26:44 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
-#include "libft.h"
 #include "utils.h"
 #include "parsing.h"
 #include <readline/history.h>
 #include <readline/readline.h>
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_ctx	*ctx;
-// 	t_list	*args;
-// 	char	*ta_daronne;
-// 	char	*input;
-//
-// 	ctx = init_ctx(argc, argv, envp);
-// 	if (!ctx)
-// 		return (1);
-// 	input = get_input(ctx);
-// 	ta_daronne = ft_strdup(input);
-// 	args = expand_arg(ta_daronne, ctx);
-// 	while (args)
-// 	{
-// 		printf("[%s]\n", (char *)args->content);
-// 		args = args->next;
-// 	}
-// 	destroy_ctx(&ctx);
-// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -54,13 +32,12 @@ int	main(int argc, char **argv, char **envp)
 		if (is_blank(input))
 			continue ;
 		add_history(input);
-		parse(input, ctx);
 		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
 			break ;
 		}
-		free(input);
+		parse(input, ctx);
 	}
 	destroy_ctx(&ctx);
 }
