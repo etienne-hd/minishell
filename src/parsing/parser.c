@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 17:38:31 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 19:28:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static void test(t_list *token_lst, t_ctx *ctx)
 	t_token *current_token;
 
 	(void)print_pre_token_lst;
-	print_token_lst(token_lst);
 	current_lst = token_lst;
 	while (current_lst)
 	{
@@ -104,6 +103,10 @@ int	parse(char *input, t_ctx *ctx)
 		return (1);
 	}
 	token_list = get_token_list(pre_token_list);
+	//print_token_lst(token_list);
+	//printf("BEFORE JOIN ARGS\n");
+	join_args_cmd(token_list);
+	//print_token_lst(token_list);
 	if (!token_list)
 	{
 		free(input);
