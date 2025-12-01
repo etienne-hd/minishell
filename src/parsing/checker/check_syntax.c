@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:45:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 18:43:02 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 18:45:09 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "parsing.h"
 #include <stdio.h>
 
-static int check_redirection(t_pre_token *previous_token, t_list *token_lst)
+static int	check_redirection(t_pre_token *previous_token, t_list *token_lst)
 {
 	t_pre_token	*next_token;
-	
+
 	(void)previous_token;
 	next_token = NULL;
 	if (token_lst->next)
@@ -35,10 +35,10 @@ unexpected token 'newline'\n");
 	return (1);
 }
 
-static int check_text(t_pre_token *previous_token, t_list *token_lst)
+static int	check_text(t_pre_token *previous_token, t_list *token_lst)
 {
 	t_pre_token	*next_token;
-	
+
 	(void)previous_token;
 	next_token = NULL;
 	if (token_lst->next)
@@ -55,15 +55,15 @@ unexpected token 'newline'\n");
 	return (1);
 }
 
-static int check_pipe(t_pre_token *previous_token, t_list *token_lst)
+static int	check_pipe(t_pre_token *previous_token, t_list *token_lst)
 {
 	t_pre_token	*next_token;
-	
+
 	next_token = NULL;
 	if (token_lst->next)
 		next_token = (t_pre_token *)token_lst->next->content;
 	if (previous_token && next_token && (next_token->type == TEXT
-		|| next_token->type == REDIRECTION))
+			|| next_token->type == REDIRECTION))
 		return (0);
 	if (!previous_token)
 		ft_dprintf(2, "minishell: syntax error near \

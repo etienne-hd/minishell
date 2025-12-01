@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:43:46 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 16:14:56 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 18:44:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
  */
 static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 {
-	char	*key;
-	char	*value;
+	char		*key;
+	char		*value;
 	const char	trim_charset[] = {8, 9, 10, 11, 12, 13, 32, 0};
 
 	*key_length = 0;

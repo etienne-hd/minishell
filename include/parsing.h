@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 17:24:07 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/01 18:45:25 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	clear_arg(void *ptr);
 void	clear_token(void *ptr);
 
 // Expander
-int	expand(t_token *token, t_ctx *ctx);
+int		expand(t_token *token, t_ctx *ctx);
 t_list	*expand_arg(char *arg, t_ctx *ctx);
 char	*n_expand(char *s, size_t n, t_ctx *ctx);
 t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n);
