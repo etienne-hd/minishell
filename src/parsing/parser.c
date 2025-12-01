@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 22:45:33 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:46:26 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	parse(char *input, t_ctx *ctx)
 	}
 	(void)print_pre_token_lst;
 	print_token_lst(token_list);
-	ft_printf("%s\n", get_expanded_arg(((t_arg *)((t_token *)token_list->content)->args->content)->raw_content,
-								  ctx));
 	ft_lstclear(&pre_token_list, clear_pre_token);
 	ft_lstclear(&token_list, clear_token);
 	return (0);

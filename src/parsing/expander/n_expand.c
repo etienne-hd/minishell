@@ -16,6 +16,15 @@
 #include "utils.h"
 #include <stdlib.h>
 
+/**
+ * @brief get a string that start on '$'and return a new one allocated 
+ * with replaced variable ($HOME -> "/home/user")
+ *
+ * @param var string that start on the '$' of the var
+ * @param key_length pointer where store the key length
+ * @param ctx global context of minishell for ($?)
+ * @return allocated expanded var / NULL if failed
+ */
 static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 {
 	char	*key;
@@ -42,6 +51,15 @@ static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 	return (value);
 }
 
+/**
+ * @brief 
+ *
+ * @param s_expanded 
+ * @param i 
+ * @param n 
+ * @param ctx 
+ * @return 
+ */
 static int	n_expand_setter(char **s_expanded, size_t *i, size_t *n, t_ctx *ctx)
 {
 	size_t	key_length;
@@ -63,6 +81,15 @@ static int	n_expand_setter(char **s_expanded, size_t *i, size_t *n, t_ctx *ctx)
 	return (0);
 }
 
+/**
+ * @brief Expand 'n' char from a string (expand even if n = 1 and s = "$PATH"
+ * -> n based on '$')
+ *
+ * @param s String to expand
+ * @param n number of char to look for expand
+ * @param ctx global context of minishel for error code
+ * @return new chain allocated / NULL if malloc failed
+ */
 char	*n_expand(char *s, size_t n, t_ctx *ctx)
 {
 	size_t	i;

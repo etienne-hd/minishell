@@ -15,7 +15,16 @@
 #include "libft.h"
 #include "parsing.h"
 #include "utils.h"
+#include <stddef.h>
 
+/**
+ * @brief Special expand for all a scope ("expand" / 'no expand')
+ *
+ * @param scope Begining of the scope '\"' '\''
+ * @param scope_end Pointer to the next same scope
+ * @param ctx global context of minishell for variables
+ * @return 
+ */
 char	*expand_scope(char *scope, char *scope_end, t_ctx *ctx)
 {
 	char	scope_type;
@@ -32,50 +41,93 @@ char	*expand_scope(char *scope, char *scope_end, t_ctx *ctx)
 	return (expanded_scope);
 }
 
+static int	scope_expand_utils(t_list **expanded_args, char	*current_arg,
+	size_t *i, t_ctx *ctx)
+{
+	char	*scope_end;
+	char	*current_expanded;
+	size_t	expand_length;
+	t_list	*last_arg;
+
+	last_arg = ft_lstlast(*expanded_args);
+	scope_end = ft_strchr(&current_arg[*i + 1], current_arg[*i]);
+	current_expanded = expand_scope(&current_arg[*i], scope_end, ctx);
+	if (current_expanded == NULL)
+	{
+		ft_lstclear(expanded_args, clear_arg);
+		return (1);
+	}
+	expand_length = ft_strlen(current_expanded);
+	if (bounded_join((char **)&last_arg->content, *i,
+			current_expanded, scope_end + 1))
+	{
+		ft_lstclear(expanded_args, clear_arg);
+		return (1);
+	}
+	*i += expand_length;
+	return (0);
+}
+
+static int	outscope_expand_utils(t_list **expanded_args,
+	char	*current_arg, size_t *i, t_ctx *ctx)
+{
+	char	*scope_end;
+	char	*current_expanded;
+	size_t	expand_length;
+	t_list	*last_arg;
+
+	last_arg = ft_lstlast(*expanded_args);
+	scope_end = ft_find_first_address(3, ft_strchr(&current_arg[*i], '\''),
+			ft_strchr(&current_arg[*i], '\"'),
+			ft_strchr(&current_arg[*i], '\0'));
+	current_expanded = n_expand(&current_arg[*i],
+			scope_end - &current_arg[*i], ctx);
+	if (current_expanded == NULL)
+	{
+		ft_lstclear(expanded_args, clear_arg);
+		return (1);
+	}
+	expand_length = ft_strlen(current_expanded);
+	if (bounded_join((char **)&last_arg->content, *i,
+			current_expanded, scope_end))
+	{
+		ft_lstclear(expanded_args, clear_arg);
+		return (1);
+	}
+	split_outscope(last_arg, i, expand_length);
+	return (0);
+}
+
+/**
+ * @brief expand a string and place a splitted element into a t_list
+ *
+ * @param arg string to expand and split
+ * @param ctx global context of minishell for variables
+ * @return 
+ */
 t_list	*expand_arg(char *arg, t_ctx *ctx)
 {
 	t_list	*expanded_args;
 	t_list	*last_arg;
 	size_t	i;
-	char 	*scope_end;
 	char	*current_arg;
-	char	*current_expanded;
-	size_t	expand_length;
 
-	// ARG = "Bonjour"
-	//"Salu"t"$ARG Coucou"
-	//"SalutBonjour Coucou"
-	
 	expanded_args = ft_lstnew(arg);
-	if (expanded_args == NULL)
-		return (NULL);
 	i = 0;
 	last_arg = expanded_args;
-	while (((char *)last_arg->content)[i])
+	while (last_arg && ((char *)last_arg->content)[i])
 	{
 		current_arg = ((char *)last_arg->content);
-		// INSIDE SCOPE
 		if ((current_arg[i] == '\'' || current_arg[i] == '\"'))
 		{
-			scope_end = ft_strchr(&current_arg[i + 1], current_arg[i]);
-			current_expanded = expand_scope(&current_arg[i], scope_end, ctx);
-			expand_length = ft_strlen(current_expanded);
-			if (bounded_join((char **)&last_arg->content, i, current_expanded, scope_end + 1))
-				; // FREEE
-			i += expand_length;
+			if (scope_expand_utils(&expanded_args, current_arg, &i, ctx))
+				return (NULL);
 		}
-		// OUTSIDE SCOPE
 		else
 		{
-			scope_end = ft_find_first_address(3, ft_strchr(&current_arg[i], '\''), 
-				ft_strchr(&current_arg[i], '\"'), ft_strchr(&current_arg[i], '\0'));
-			current_expanded = n_expand(&current_arg[i], scope_end - &current_arg[i], ctx);
-			expand_length = ft_strlen(current_expanded);
-			if (bounded_join((char **)&last_arg->content, i, current_expanded, scope_end))
-				; // FREEE
-			split_outscope(last_arg, &i, expand_length);
+			if (outscope_expand_utils(&expanded_args, current_arg, &i, ctx))
+				return (NULL);
 		}
-		// ajouter a la lst 
 		last_arg = ft_lstlast(expanded_args);
 	}
 	return (expanded_args);
@@ -93,7 +145,10 @@ int	expand(t_token *token, t_ctx *ctx)
 	{
 		new_arg = expand_arg(args->content, ctx);
 		if (!new_arg)
-			;// FAIL
+		{
+			ft_lstclear(&new_args, clear_arg);
+			return (NULL);
+		}
 		ft_lstadd_back(&new_args, new_arg);
 		args = args->next;
 	}
