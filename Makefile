@@ -55,14 +55,28 @@ endif
 
 all: $(NAME)
 
-
 sanitize:
+	@echo ""
+	@echo "================================"
+	@echo "Recompiling with fsanitize flags..."
+	@echo "================================"
+	@echo ""
 	$(MAKE) re SANITIZE=1
+	@$(MAKE) run_sanitize
 run_sanitize:
+	@echo ""
+	@echo "================================"
 	@echo "Running with AddressSanitizer..."
-	ASAN_OPTIONS=detect_leaks=1:halt_on_error=0 LSAN_OPTIONS=report_objects=1 ./$(NAME)
+	@echo "================================"
+	@echo ""
+	@ASAN_OPTIONS=detect_leaks=1:halt_on_error=0 LSAN_OPTIONS=report_objects=1 ./$(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
+	@echo ""
+	@echo "================================"
+	@echo "Creating minishell..."
+	@echo "================================"
+	@echo ""
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -77,6 +91,11 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
+	@echo ""
+	@echo "================================"
+	@echo "Compiling libft objects..."
+	@echo "================================"
+	@echo ""
 	$(MAKE) -C libft
 
 fclean: clean
@@ -90,4 +109,4 @@ clean:
 
 re: fclean all
 
-.PHONY: all fclean clean run run2 re
+.PHONY: all fclean clean re sanitize
