@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 12:51:14 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:11:33 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
 	char	*input;
+	int		status_code;
 
     signal(SIGINT, handle_signal);
     signal(SIGQUIT, handle_signal);
@@ -46,6 +47,8 @@ int	main(int argc, char **argv, char **envp)
 		set_signal_status_code(ctx);
 		parse(input, ctx);
 	}
+	status_code = ctx->status_code;
 	destroy_ctx(&ctx);
+	return (status_code);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_generator.c                                    :+:      :+:    :+:   */
+/*   process_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 11:38:45 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 12:48:03 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:33:33 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,14 @@ static int	is_builtin(char *command)
 	return (0);
 }
 
-static void	fill_cmd_args(t_process *cmd, t_list *args_list)
+static void	fill_process_args(t_process *cmd, t_list *args_list)
 {
 	t_list	*current_arg;
 	char	**args;
 	size_t	nb_arg;
 
 	current_arg = args_list;
-	nb_arg = 0;
-	while (current_arg)
-	{
-		current_arg = current_arg->next;
-		nb_arg++;
-	}
+	nb_arg = ft_lstsize(args_list);
 	args = calloc(nb_arg + 1, sizeof(char *));
 	if (args != NULL)
 	{
@@ -74,27 +69,29 @@ static int	fill_cmd_path(t_process *cmd, t_list *current_arg, t_ctx *ctx)
 	return (cmd->path == NULL);
 }
 
-t_process	*token_to_command(t_token *token, t_ctx *ctx)
+t_process	*init_process(t_token *token, t_ctx *ctx)
 {
-	t_process	*cmd;
+	t_process	*process;
 	t_list		*args;
 
-	cmd = ft_calloc(1, sizeof(t_process));
-	if (cmd == NULL)
+	process = ft_calloc(1, sizeof(t_process));
+	if (process == NULL)
 		return (NULL);
 	args = token->args;
-	if (fill_cmd_path(cmd, args, ctx))
+	if (fill_cmd_path(process, args, ctx))
 	{
-		clear_cmd(cmd);
+		clear_process(process);
 		ctx->status_code = 127;
 		return (NULL);
 	}
-	fill_cmd_args(cmd, args);
-	if (cmd->args == NULL)
+	fill_process_args(process, args);
+	if (process->args == NULL)
 	{
-		clear_cmd(cmd);
+		clear_process(process);
 		ctx->status_code = 1;
 		return (NULL);
 	}
-	return (cmd);
+	process->file_out = NULL;
+	process->file_in = NULL;
+	return (process);
 }

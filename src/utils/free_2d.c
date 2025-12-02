@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_clear.c                                        :+:      :+:    :+:   */
+/*   free_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 12:07:23 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 12:25:39 by ncorrear         ###   ########.fr       */
+/*   Created: 2025/12/02 18:23:41 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/02 18:27:45 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include <stddef.h>
+#include "utils.h"
 
-static void	clear_args(char **args)
+void	free_2d(char ***tab)
 {
 	size_t	i;
 
 	i = 0;
-	while (args[i])
+	while ((*tab)[i])
 	{
-		free(args[i]);
+		free((*tab)[i]);
 		i++;
 	}
-	free(args);
-}
-
-void	clear_cmd(void *ptr)
-{
-	t_process	*cmd;
-
-	cmd = (t_process *) ptr;
-	free(cmd->path);
-	if (cmd->args)
-		clear_args(cmd->args);
-	free(cmd);
+	free(*tab);
+	*tab = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 22:50:18 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/02 18:42:59 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 typedef struct s_file
 {
-	t_list	*args;
-	int		fd;
+	t_token_type	type;
+	t_list			*args;
+	int				fd;
 }				t_file;
 
 typedef struct s_exec
@@ -38,9 +39,12 @@ typedef struct s_process
 	int		is_builtin;
 }				t_process;
 
-char	*get_cmd_path(char *command, t_ctx *ctx);
-void	clear_cmd(void *ptr);
-t_process	*token_to_command(t_token *token, t_ctx *ctx);
-t_list	*get_cmd_list(t_list *token_list, t_ctx *ctx);
+// Parsing Exec init
+char		*get_cmd_path(char *command, t_ctx *ctx);
+void		clear_process(void *ptr);
+void		clear_process_keep_args(void *ptr);
+t_process	*init_process(t_token *token, t_ctx *ctx);
+t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
+int			is_redirection(t_token *token);
 
 #endif

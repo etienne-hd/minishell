@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 12:58:02 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:30:15 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void	print_cmd(t_process *cmd)
 	{
 		ft_printf("\tpath = %s,\n", cmd->path);
 		ft_printf("\tbuiltin = %i,\n", cmd->is_builtin);
-		ft_printf("\tfd_in = %i,\n", cmd->file_in);
-		ft_printf("\tfd_out = %i,\n", cmd->file_out);
+		ft_printf("\tfile_in = %p,\n", cmd->file_in);
+		ft_printf("\tfile_out = %p,\n", cmd->file_out);
 		ft_printf("\targs = {\n");
 		i = 0;
 		while (cmd->args[i])
@@ -75,12 +75,46 @@ static void	print_cmd(t_process *cmd)
 	ft_printf("}\n");
 }
 
-static void	print_cmd_list(t_list *cmd_list)
+static void	print_file(t_file *file)
 {
-	while (cmd_list)
+	if (file)
 	{
-		print_cmd(cmd_list->content);
-		cmd_list = cmd_list->next;
+		ft_printf("FILE {\n");
+		ft_printf("\taddress = %p,\n", file);
+		if (file->type == PIPE)
+			ft_printf("PIPE: {\n");
+		else if (file->type == IN_FILE)
+			ft_printf("\ttype: IN_FILE,\n");
+		else if (file->type == IN_HERE_DOC)
+			ft_printf("\ttype: IN_HERE_DOC,\n");
+		else if (file->type == OUT_FILE)
+			ft_printf("\ttype: OUT_FILE,\n");
+		else
+			ft_printf("\ttype: OUT_FILE_APPEND,\n");
+		if (file->args)
+			ft_printf("\t%s\n", file->args->content);
+		ft_printf("}\n");
+	}
+}
+
+static void	print_cmd_list(t_exec *cmd_list)
+{
+	t_list	*processes;
+	t_list	*files;
+
+	processes = cmd_list->processes;
+	files = cmd_list->files;
+	ft_printf("\n================\nfiles_list\n====================\n");
+	while (files)
+	{
+		print_file(files->content);
+		files = files->next;
+	}
+	ft_printf("\n================\nprocess_list\n====================\n");
+	while (processes)
+	{
+		print_cmd(processes->content);
+		processes = processes->next;
 	}
 }
 
@@ -88,6 +122,7 @@ int	parse(char *input, t_ctx *ctx)
 {
 	t_list	*pre_token_list;
 	t_list	*token_list;
+	t_exec	*exec;
 
 	// CHECK SCOPE
 	if (is_valid_scope(input, ctx) == 0)
@@ -118,11 +153,12 @@ int	parse(char *input, t_ctx *ctx)
 	}
 	// (void) print_token_lst;
 	print_token_lst(token_list);
-	t_list *test = get_cmd_list(token_list, ctx);
-	ft_printf("\n================\ncommand_list\n====================\n");
-	print_cmd_list(test);
-	ft_lstclear(&token_list, clear_token_keep_cmd_arg);
-	ft_lstclear(&test, clear_cmd);
+	exec = init_exec(token_list, ctx);
+	print_cmd_list(exec);
 	ctx->status_code = SUCCESS;
+	ft_lstclear(&exec->files, free);
+	ft_lstclear(&exec->processes, clear_process_keep_args);
+	free(exec);
+	ft_lstclear(&token_list, clear_token);
 	return (0);
 }

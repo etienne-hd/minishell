@@ -11,7 +11,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/is_in_scope.c \
 	$(SRC_DIR)utils/bounded_join.c \
-	$(SRC_DIR)utils/signal.c
+	$(SRC_DIR)utils/signal.c \
+	$(SRC_DIR)utils/free_2d.c
 
 SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/checker/check_scope.c \
@@ -28,11 +29,11 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/expander/handle_tilde.c \
 	$(SRC_DIR)parsing/expander/expand_tokens.c \
 	$(SRC_DIR)parsing/joiner/join_args_cmd.c \
-	$(SRC_DIR)parsing/cmd/cmd_clear.c \
-	$(SRC_DIR)parsing/cmd/cmd_finder.c \
-	$(SRC_DIR)parsing/cmd/cmd_generator.c \
-	$(SRC_DIR)parsing/cmd/cmd_list.c
-
+	$(SRC_DIR)parsing/pre_exec/init_exec_utils.c \
+	$(SRC_DIR)parsing/pre_exec/init_exec.c \
+	$(SRC_DIR)parsing/pre_exec/process_clear.c \
+	$(SRC_DIR)parsing/pre_exec/process_finder.c \
+	$(SRC_DIR)parsing/pre_exec/process_generator.c 
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -97,7 +98,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/checker
 	@mkdir -p $(OBJ_DIR)parsing/expander
 	@mkdir -p $(OBJ_DIR)parsing/joiner
-	@mkdir -p $(OBJ_DIR)parsing/cmd
+	@mkdir -p $(OBJ_DIR)parsing/pre_exec
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
