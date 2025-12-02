@@ -27,7 +27,10 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/expander/expander.c \
 	$(SRC_DIR)parsing/expander/handle_tilde.c \
 	$(SRC_DIR)parsing/expander/expand_tokens.c \
-	$(SRC_DIR)parsing/joiner/join_args_cmd.c
+	$(SRC_DIR)parsing/joiner/join_args_cmd.c \
+	$(SRC_DIR)parsing/cmd/cmd_clear.c \
+	$(SRC_DIR)parsing/cmd/cmd_finder.c \
+	$(SRC_DIR)parsing/cmd/cmd_generator.c \
 
 
 SRCS = $(SRC_DIR)minishell.c \
@@ -93,6 +96,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/checker
 	@mkdir -p $(OBJ_DIR)parsing/expander
 	@mkdir -p $(OBJ_DIR)parsing/joiner
+	@mkdir -p $(OBJ_DIR)parsing/cmd
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

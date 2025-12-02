@@ -6,15 +6,18 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 23:27:17 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/02 12:58:02 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cmd.h"
 #include "ctx.h"
 #include "error.h"
+#include "ft_printf.h"
 #include "libft.h"
 #include "parsing.h"
 #include "utils.h"
+#include <stddef.h>
 
 static void	print_token_lst(t_list *lst)
 {
@@ -49,6 +52,29 @@ static void	print_token_lst(t_list *lst)
 	}
 }
 
+static void	print_cmd(t_cmd *cmd)
+{
+	size_t	i;
+
+	ft_printf("CMD {\n");
+	if (cmd != NULL)
+	{
+		ft_printf("\tpath = %s,\n", cmd->path);
+		ft_printf("\tbuiltin = %i,\n", cmd->is_builtin);
+		ft_printf("\tfd_in = %i,\n", cmd->fd_in);
+		ft_printf("\tfd_out = %i,\n", cmd->fd_out);
+		ft_printf("\targs = {\n");
+		i = 0;
+		while (cmd->args[i])
+		{
+			ft_printf("\t\t%s,\n", cmd->args[i]);
+			i++;
+		}
+		ft_printf("\t}\n");
+	}
+	ft_printf("}\n");
+}
+
 int	parse(char *input, t_ctx *ctx)
 {
 	t_list	*pre_token_list;
@@ -81,7 +107,11 @@ int	parse(char *input, t_ctx *ctx)
 		ft_lstclear(&token_list, clear_token);
 		safe_exit(&ctx, "Malloc failed.");
 	}
-	print_token_lst(token_list);
+	(void) print_token_lst;
+	// print_token_lst(token_list);
+	t_cmd *test = token_to_command(token_list->content, ctx);
+	print_cmd(test);
+	// TODO : une focntion clear_token qui clear pas les char * dedans -> puique meme ptr dans cmd
 	ft_lstclear(&token_list, clear_token);
 	ctx->status_code = SUCCESS;
 	return (0);
