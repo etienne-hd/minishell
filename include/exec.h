@@ -15,18 +15,24 @@
 
 #include "libft.h"
 
+typedef struct s_file
+{
+	t_list	*args;
+	int		fd;
+}				t_file;
+
 typedef struct s_exec
 {
 	t_list	*processes;
-	t_list	*fds;
+	t_file	*files;
 }				t_exec;
 
 typedef struct s_process
 {
 	char	**args;
 	char	*path;
-	int		fd_in;
-	int		fd_out;
+	t_file	file_in;
+	t_file	file_out;
 }				t_process;
 
 #endif
