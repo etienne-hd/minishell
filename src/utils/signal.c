@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ctx.h"
-#include <stdio.h>
+#include "ft_printf.h"
 #include <readline/readline.h>
 
 int g_signal = -1;
@@ -29,7 +29,10 @@ void	handle_signal(int sig)
 { 
     if (sig == 2)
     {
-		// TODO (CTRL + C)
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
     g_signal = sig;
 } 
