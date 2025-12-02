@@ -18,6 +18,20 @@ void	clear_arg(void *ptr)
 	free(ptr);
 }
 
+void	clear_token_keep_cmd_arg(void *ptr)
+{
+	t_token	*token;
+
+	if (!ptr)
+		return ;
+	token = (t_token *)ptr;
+	if (token->type == CMD)
+		free(token->args);
+	else
+		ft_lstclear(&token->args, clear_arg);
+	free(token);
+}
+
 void	clear_token(void *ptr)
 {
 	t_token	*token;

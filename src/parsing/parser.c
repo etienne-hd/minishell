@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
 #include "ctx.h"
 #include "error.h"
+#include "exec.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "parsing.h"
@@ -52,7 +52,7 @@ static void	print_token_lst(t_list *lst)
 	}
 }
 
-static void	print_cmd(t_cmd *cmd)
+static void	print_cmd(t_process *cmd)
 {
 	size_t	i;
 
@@ -61,8 +61,8 @@ static void	print_cmd(t_cmd *cmd)
 	{
 		ft_printf("\tpath = %s,\n", cmd->path);
 		ft_printf("\tbuiltin = %i,\n", cmd->is_builtin);
-		ft_printf("\tfd_in = %i,\n", cmd->fd_in);
-		ft_printf("\tfd_out = %i,\n", cmd->fd_out);
+		ft_printf("\tfd_in = %i,\n", cmd->file_in);
+		ft_printf("\tfd_out = %i,\n", cmd->file_out);
 		ft_printf("\targs = {\n");
 		i = 0;
 		while (cmd->args[i])
@@ -73,6 +73,15 @@ static void	print_cmd(t_cmd *cmd)
 		ft_printf("\t}\n");
 	}
 	ft_printf("}\n");
+}
+
+static void	print_cmd_list(t_list *cmd_list)
+{
+	while (cmd_list)
+	{
+		print_cmd(cmd_list->content);
+		cmd_list = cmd_list->next;
+	}
 }
 
 int	parse(char *input, t_ctx *ctx)
@@ -107,12 +116,13 @@ int	parse(char *input, t_ctx *ctx)
 		ft_lstclear(&token_list, clear_token);
 		safe_exit(&ctx, "Malloc failed.");
 	}
-	(void) print_token_lst;
-	// print_token_lst(token_list);
-	t_cmd *test = token_to_command(token_list->content, ctx);
-	print_cmd(test);
-	// TODO : une focntion clear_token qui clear pas les char * dedans -> puique meme ptr dans cmd
-	ft_lstclear(&token_list, clear_token);
+	// (void) print_token_lst;
+	print_token_lst(token_list);
+	t_list *test = get_cmd_list(token_list, ctx);
+	ft_printf("\n================\ncommand_list\n====================\n");
+	print_cmd_list(test);
+	ft_lstclear(&token_list, clear_token_keep_cmd_arg);
+	ft_lstclear(&test, clear_cmd);
 	ctx->status_code = SUCCESS;
 	return (0);
 }

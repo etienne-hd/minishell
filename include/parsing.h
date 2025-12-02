@@ -59,6 +59,7 @@ t_list	*get_token_list(t_list *pre_token_list);
 t_list	*get_arg(t_pre_token *pre_token);
 void	clear_arg(void *ptr);
 void	clear_token(void *ptr);
+void	clear_token_keep_cmd_arg(void *ptr);
 
 // Expander
 int		expand_tokens(t_list *tokens, t_ctx *ctx);

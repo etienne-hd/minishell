@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
 #include "ctx.h"
 #include "libft.h"
 #include <stddef.h>
@@ -21,7 +20,7 @@
  *
  * @param command command name / full path
  * @param ctx global context of minishell to get PATH
- * @return 
+ * @return command path / NULL if error or not find
  */
 char	*get_cmd_path(char *command, t_ctx *ctx)
 {
@@ -32,11 +31,12 @@ char	*get_cmd_path(char *command, t_ctx *ctx)
 
 	if (command == NULL)
 		return (NULL);
+	full_command = ft_strdup(command);
 	if (access(command, X_OK) == 0)
-		return (ft_strdup(command));
+		return (full_command);
 	path = ft_dict_get(ctx->env, "PATH");
 	if (path == NULL)
-		return (NULL);
+		return (command);
 	all_paths = ft_split(path, ':');
 	if (all_paths == NULL)
 		return (NULL);
@@ -49,5 +49,6 @@ char	*get_cmd_path(char *command, t_ctx *ctx)
 		free(full_command);
 		i++;
 	}
-	return (NULL);
+	full_command = ft_strdup(command);
+	return (full_command);
 }

@@ -14,6 +14,8 @@
 # define EXEC_H
 
 #include "libft.h"
+#include "ctx.h"
+#include "parsing.h"
 
 typedef struct s_file
 {
@@ -33,6 +35,12 @@ typedef struct s_process
 	char	*path;
 	t_file	*file_in;
 	t_file	*file_out;
+	int		is_builtin;
 }				t_process;
+
+char	*get_cmd_path(char *command, t_ctx *ctx);
+void	clear_cmd(void *ptr);
+t_process	*token_to_command(t_token *token, t_ctx *ctx);
+t_list	*get_cmd_list(t_list *token_list, t_ctx *ctx);
 
 #endif

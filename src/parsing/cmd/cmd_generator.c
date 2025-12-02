@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
 #include "ctx.h"
+#include "exec.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "parsing.h"
@@ -34,7 +34,7 @@ static int	is_builtin(char *command)
 	return (0);
 }
 
-static void	fill_cmd_args(t_cmd *cmd, t_list *args_list)
+static void	fill_cmd_args(t_process *cmd, t_list *args_list)
 {
 	t_list	*current_arg;
 	char	**args;
@@ -62,7 +62,7 @@ static void	fill_cmd_args(t_cmd *cmd, t_list *args_list)
 	cmd->args = args;
 }
 
-static int	fill_cmd_path(t_cmd *cmd, t_list *current_arg, t_ctx *ctx)
+static int	fill_cmd_path(t_process *cmd, t_list *current_arg, t_ctx *ctx)
 {
 	if (is_builtin(current_arg->content))
 	{
@@ -74,12 +74,12 @@ static int	fill_cmd_path(t_cmd *cmd, t_list *current_arg, t_ctx *ctx)
 	return (cmd->path == NULL);
 }
 
-t_cmd	*token_to_command(t_token *token, t_ctx *ctx)
+t_process	*token_to_command(t_token *token, t_ctx *ctx)
 {
-	t_cmd	*cmd;
-	t_list	*args;
+	t_process	*cmd;
+	t_list		*args;
 
-	cmd = ft_calloc(1, sizeof(t_cmd));
+	cmd = ft_calloc(1, sizeof(t_process));
 	if (cmd == NULL)
 		return (NULL);
 	args = token->args;

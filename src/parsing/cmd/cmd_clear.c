@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "exec.h"
 #include <stddef.h>
 
 static void	clear_args(char **args)
@@ -28,14 +28,10 @@ static void	clear_args(char **args)
 
 void	clear_cmd(void *ptr)
 {
-	t_cmd	*cmd;
+	t_process	*cmd;
 
-	cmd = (t_cmd *) ptr;
+	cmd = (t_process *) ptr;
 	free(cmd->path);
-	if (cmd->fd_in > 2)
-		close(cmd->fd_in);
-	if (cmd->fd_out > 2)
-		close(cmd->fd_out);
 	if (cmd->args)
 		clear_args(cmd->args);
 	free(cmd);

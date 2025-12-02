@@ -31,6 +31,7 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/cmd/cmd_clear.c \
 	$(SRC_DIR)parsing/cmd/cmd_finder.c \
 	$(SRC_DIR)parsing/cmd/cmd_generator.c \
+	$(SRC_DIR)parsing/cmd/cmd_list.c
 
 
 SRCS = $(SRC_DIR)minishell.c \
