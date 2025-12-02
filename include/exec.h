@@ -24,7 +24,7 @@ typedef struct s_file
 typedef struct s_exec
 {
 	t_list	*processes;
-	t_file	*files;
+	t_list	*files;
 }				t_exec;
 
 typedef struct s_process
