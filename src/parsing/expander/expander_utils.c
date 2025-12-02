@@ -6,12 +6,57 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 18:04:05 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 23:23:44 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/02 22:21:45 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parsing.h"
+#include <stdio.h>
+
+static int	trim_end(size_t *n, char **s)
+{
+	size_t	j;
+	char	*tmp;
+
+	tmp = *s;
+	if (tmp[*n] == 0)
+	{
+		j = 0;
+		while (ft_isspace(tmp[*n - j - 1]))
+			j++;
+		if (j == 0)
+			return (0);
+		*s = ft_strndup(tmp, *n - j);
+		free(tmp);
+		if (!*s)
+			return (1);
+		(*n) -= j;
+	}
+	return (0);
+}
+
+static int	trim_begin(size_t *i, size_t *n, char **s)
+{
+	size_t	j;
+	char	*tmp;
+
+	tmp = *s;
+	j = 0;
+	if (*i == 0)
+	{
+		while (ft_isspace(tmp[j]))
+			j++;
+		if (j == 0)
+			return (0);
+		*s = ft_strdup(tmp + j);
+		free(tmp);
+		if (!*s)
+			return (1);
+		(*n) -= j;
+	}
+	return (0);
+}
 
 /**
  * @brief Split the content of the last_arg lst, 0-i into last_arg and i-end into
@@ -21,7 +66,7 @@
  * @param i index where split
  * @return 0 / 1 in error case free element created inside but not outside
  */
-static int	add_split_list(t_list	*last_arg, size_t *i)
+static int	add_split_list(t_list *last_arg, size_t *i)
 {
 	t_list	*new_elem;
 	char	*current_split;
@@ -31,7 +76,7 @@ static int	add_split_list(t_list	*last_arg, size_t *i)
 	tmp = last_arg->content;
 	current_split = ft_strndup(tmp, *i);
 	if (current_split == NULL)
-		return (-1);
+		return (1);
 	tmp2 = last_arg->content;
 	last_arg->content = current_split;
 	while (ft_isspace(tmp2[*i]))
@@ -64,6 +109,9 @@ t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n)
 
 	last_arg = ft_lstlast(last_arg);
 	n += *i;
+	if (trim_begin(i, &n, (char **)&last_arg->content)
+			|| trim_end(&n, (char **)&last_arg->content))
+		return (NULL);
 	tmp = last_arg->content;
 	while (tmp[*i])
 	{
