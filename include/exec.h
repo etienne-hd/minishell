@@ -31,8 +31,8 @@ typedef struct s_process
 {
 	char	**args;
 	char	*path;
-	t_file	file_in;
-	t_file	file_out;
+	t_file	*file_in;
+	t_file	*file_out;
 }				t_process;
 
 #endif
