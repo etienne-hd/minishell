@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 17:40:40 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/02 00:50:57 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	safe_exit(t_ctx **ctx, char *message);
 int		is_blank(char *s);
 char	is_in_scope(char c);
 int		bounded_join(char **origin, size_t n, char *value, char *end);
+
+// Signal
+void	set_signal_status_code(t_ctx *ctx);
+void	handle_signal(int sig);
 
 // Path
 char	*path_tilde_expand(char *path, t_dict *env);

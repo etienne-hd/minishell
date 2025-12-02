@@ -10,7 +10,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/safe_exit.c \
 	$(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/is_in_scope.c \
-	$(SRC_DIR)utils/bounded_join.c
+	$(SRC_DIR)utils/bounded_join.c \
+	$(SRC_DIR)utils/signal.c
 
 SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/checker/check_scope.c \
