@@ -14,7 +14,7 @@
 
 void	close_file(t_file *file)
 {
-	if (file->fd != -1)
+	if (file->fd > 2)
 	{
 		if (file->args)
 			printf("DEBUG: CLOSING %s\n", (char *)file->args->content);

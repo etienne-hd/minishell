@@ -85,7 +85,7 @@ run_sanitize:
 	@echo "Running with AddressSanitizer..."
 	@echo "================================"
 	@echo ""
-	@ASAN_OPTIONS=detect_leaks=1:halt_on_error=0 LSAN_OPTIONS=report_objects=1 ./$(NAME)
+	@ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 LSAN_OPTIONS=report_objects=1 ./$(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	@echo ""
@@ -130,4 +130,4 @@ clean:
 
 re: fclean all
 
-.PHONY: all fclean clean re sanitize
+.PHONY: all fclean clean re

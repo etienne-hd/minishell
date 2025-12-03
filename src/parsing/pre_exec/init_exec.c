@@ -26,18 +26,17 @@ static int	handle_cmd(t_process **current_process, t_token *current_token,
 	t_list	*current_process_list;
 
 	*current_process = init_process(current_token, ctx);
-	if (*current_process)
+	if (!*current_process)
+		return (1);
+	current_process_list = ft_lstnew(*current_process);
+	if (current_process_list == NULL)
 	{
-		current_process_list = ft_lstnew(*current_process);
-		if (current_process_list == NULL)
-		{
-			free((*current_process)->path);
-			free((*current_process)->args);
-			free(*current_process);
-			return (1);
-		}
-		ft_lstadd_back(&exec->processes, current_process_list);
+		free((*current_process)->path);
+		free((*current_process)->args);
+		free(*current_process);
+		return (1);
 	}
+	ft_lstadd_back(&exec->processes, current_process_list);
 	return (0);
 }
 
@@ -74,6 +73,8 @@ static int	handle_pipe(t_process **current_process, t_file **current_redirection
 	t_list	*current_file_list;
 
 	current_file = ft_calloc(1, sizeof(t_file));
+	if (current_file == NULL)
+		return (1);
 	current_file->type = PIPE;
 	if (*current_process && (*current_process)->file_out == NULL)
 		(*current_process)->file_out = current_file;
@@ -123,6 +124,8 @@ t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 	t_file		*current_redirection[2];
 
 	exec = ft_calloc(1, sizeof(t_exec));
+	if (exec == NULL)
+		return (NULL);
 	current_process = NULL;
 	ft_bzero(current_redirection, sizeof(current_redirection));
 	while (token_list)
@@ -132,6 +135,7 @@ t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 		{
 			ft_lstclear(&exec->processes, clear_process_keep_args);
 			ft_lstclear(&exec->files, free);
+			free(exec);
 			return (NULL);
 		}
 		token_list = token_list->next;

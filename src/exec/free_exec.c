@@ -14,20 +14,9 @@
 #include "libft.h"
 #include "parsing.h"
 
-static void	free_file(void *ptr)
-{
-	t_file	*file;
-
-	if (!ptr)
-		return ;
-	file = (t_file *)ptr;
-	ft_lstclear(&file->args, free);
-	free(file);
-}
-
 void	free_exec(t_exec **exec)
 {
-	ft_lstclear(&(*exec)->files, free_file);
+	ft_lstclear(&(*exec)->files, clear_file);
 	ft_lstclear(&(*exec)->processes, clear_process);
 	free(*exec);
 	*exec = NULL;

@@ -158,6 +158,11 @@ t_exec	*parse(char *input, t_ctx *ctx)
 	// (void) print_token_lst;
 	print_token_lst(token_list);
 	exec = init_exec(token_list, ctx);
+	if (exec == NULL)
+	{
+		ft_lstclear(&token_list, clear_token);
+		safe_exit(&ctx, "Malloc failed.");
+	}
 	print_cmd_list(exec);
 	ft_lstclear(&token_list, clear_token_keep_cmd_arg);
 	ctx->status_code = SUCCESS;
