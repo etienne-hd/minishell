@@ -56,7 +56,7 @@ int	pwd(t_process *process, t_ctx ctx)
 	pwd = get_pwd();
 	if (pwd == NULL)
 		return (FAILURE);
-	ft_printf("%s\n", pwd);
+	ft_dprintf(process->file_out->fd ,"%s\n", pwd);
 	free(pwd);
 	return (SUCCESS);
 }
