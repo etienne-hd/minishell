@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:43:49 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 00:45:47 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 16:50:50 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ static int	handle_pipe(t_process **current_process,
 }
 
 static int	handle_token(t_token *current_token,
-		t_file **current_redirection, t_exec *exec, t_ctx *ctx)
+		t_process **current_process, t_exec *exec, t_ctx *ctx)
 {
-	static t_process	*current_process = NULL;
+	static t_file	*current_redirection[2];
 
 	if (current_token->type == CMD)
 	{
-		if (handle_cmd(&current_process, current_token, exec, ctx))
+		if (handle_cmd(current_process, current_token, exec, ctx))
 			return (1);
 	}
 	else if (is_redirection(current_token))
@@ -107,14 +107,14 @@ static int	handle_token(t_token *current_token,
 		if (handle_redirection(current_redirection, current_token, exec))
 			return (1);
 	}
-	if (current_process)
+	if (*current_process)
 	{
-		current_process->file_in = current_redirection[0];
-		current_process->file_out = current_redirection[1];
+		(*current_process)->file_in = current_redirection[0];
+		(*current_process)->file_out = current_redirection[1];
 	}
 	if (current_token->type == PIPE)
 	{
-		if (handle_pipe(&current_process, current_redirection, exec))
+		if (handle_pipe(current_process, current_redirection, exec))
 			return (1);
 	}
 	return (0);
@@ -123,16 +123,16 @@ static int	handle_token(t_token *current_token,
 t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 {
 	t_exec		*exec;
-	t_file		*current_redirection[2];
+	t_process	*current_process;
 
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (exec == NULL)
 		return (NULL);
-	ft_bzero(current_redirection, sizeof(current_redirection));
+	current_process = NULL;
 	while (token_list)
 	{
 		if (handle_token((t_token *)token_list->content,
-				current_redirection, exec, ctx))
+				&current_process, exec, ctx))
 		{
 			ft_lstclear(&exec->processes, clear_process_keep_args);
 			ft_lstclear(&exec->files, free);

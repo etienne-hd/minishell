@@ -6,21 +6,20 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 18:04:05 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:00:15 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 16:35:20 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parsing.h"
 #include <stdio.h>
-
 static int	trim_end(size_t *n, char **s)
 {
 	size_t	j;
 	char	*tmp;
 
 	tmp = *s;
-	if (tmp[*n] == 0)
+	if (tmp[*n] == 0 && *n != 0)
 	{
 		j = 0;
 		while (ft_isspace(tmp[*n - j - 1]))
@@ -43,7 +42,7 @@ static int	trim_begin(size_t *i, size_t *n, char **s)
 
 	tmp = *s;
 	j = 0;
-	if (*i == 0)
+	if (*i == 0 && *n != 0)
 	{
 		while (ft_isspace(tmp[j]))
 			j++;

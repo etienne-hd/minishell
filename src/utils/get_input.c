@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:10:27 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 15:34:10 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 16:50:10 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ static char	*get_shell_prompt(t_ctx *ctx)
 			prompt = ft_strjoin_wrapper(prompt, ":");
 		collapse_path = path_tilde_collapse(pwd, ctx->env);
 		if (collapse_path)
-		{
 			prompt = ft_strjoin_wrapper(prompt, collapse_path);
-			free(collapse_path);
-		}
 		else
 			prompt = ft_strjoin_wrapper(prompt, pwd);
+		free(pwd);
+		free(collapse_path);
 	}
 	prompt = ft_strjoin_wrapper(prompt, "$ ");
 	return (prompt);

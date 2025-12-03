@@ -6,18 +6,18 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:09:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 15:31:43 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 15:56:48 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "utils.h"
 #include "error.h"
 #include "exec.h"
 #include <stddef.h>
 #include <unistd.h>
 
-int	pwd(t_process *process, t_ctx ctx)
+int	pwd(t_process *process)
 {
 	char	**args;
 	char	*pwd;
