@@ -1,39 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 14:28:34 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 15:16:07 by ncorrear         ###   ########.fr       */
+/*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
+/*   Updated: 2025/12/03 17:35:32 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ctx.h"
-#include "error.h"
 #include "exec.h"
+#include "error.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include <stddef.h>
+#include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
-int	env(t_process *process, t_ctx *ctx)
+int	cd(t_process *process, t_ctx *ctx)
 {
-	t_dict_node	*env_dict;
+	char	**args;
+	char	*path;
+	size_t	i;
 
-	if (ctx->env == NULL)
+	args = process->args;
+	if (args == NULL)
 		return (FAILURE);
-	env_dict = ctx->env->entry;
-	while (env_dict)
+	i = 1;
+	while (args[i])
+		i++;
+	if (i >= 2)
 	{
-		if (process->file_out)
-			ft_dprintf(process->file_out->fd ,"%s=%s\n",env_dict->key,
-				 env_dict->value);
-		else
-			ft_dprintf(STDOUT_FILENO,"%s=%s\n",env_dict->key,
-				 env_dict->value);
-		env_dict = env_dict->next;
+		ft_dprintf(STDERR_FILENO, "minishell: cd: too many arguments\n");
+		return (FAILURE);
+	}
+	else if (i == 1)
+		path = ft_dict_get(ctx->env, "HOME");
+	else
+		path = args[1];
+	if (path == NULL || chdir(path) == -1)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: cd: %s", strerror(errno));
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }
