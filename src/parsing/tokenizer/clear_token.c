@@ -6,17 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:15:37 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/30 15:31:24 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:09:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parsing.h"
-
-void	clear_arg(void *ptr)
-{
-	free(ptr);
-}
 
 void	clear_token_keep_cmd_arg(void *ptr)
 {
@@ -26,9 +21,7 @@ void	clear_token_keep_cmd_arg(void *ptr)
 		return ;
 	token = (t_token *)ptr;
 	if (token->type == CMD)
-		free(token->args);
-	else
-		ft_lstclear(&token->args, clear_arg);
+		ft_lstclear(&token->args, NULL);
 	free(token);
 }
 
@@ -39,6 +32,6 @@ void	clear_token(void *ptr)
 	if (!ptr)
 		return ;
 	token = (t_token *)ptr;
-	ft_lstclear(&token->args, clear_arg);
+	ft_lstclear(&token->args, free);
 	free(token);
 }

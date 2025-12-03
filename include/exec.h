@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 18:42:59 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 00:58:01 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "libft.h"
 #include "ctx.h"
-#include "parsing.h"
+#include "token.h"
 
 typedef struct s_file
 {
@@ -39,12 +39,16 @@ typedef struct s_process
 	int		is_builtin;
 }				t_process;
 
-// Parsing Exec init
-char		*get_cmd_path(char *command, t_ctx *ctx);
-void		clear_process(void *ptr);
-void		clear_process_keep_args(void *ptr);
-t_process	*init_process(t_token *token, t_ctx *ctx);
-t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
-int			is_redirection(t_token *token);
+// Exec
+void		execute(t_exec *exec, t_ctx *ctx);
+void		free_exec(t_exec **exec);
+
+// File
+void		close_file(t_file *file);
+void		close_files(t_exec *exec);
+int			open_file(t_file *file, t_ctx *ctx);
+void		open_files(t_exec *exec, t_ctx *ctx);
+int			here_doc(char *delimiter, t_ctx *ctx);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 18:04:05 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 22:21:45 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:00:15 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	add_split_list(t_list *last_arg, size_t *i)
 	if (tmp == NULL || new_elem == NULL)
 	{
 		free(tmp);
-		ft_lstdelone(new_elem, clear_arg);
+		ft_lstdelone(new_elem, free);
 		return (1);
 	}
 	ft_lstadd_back(&last_arg, new_elem);

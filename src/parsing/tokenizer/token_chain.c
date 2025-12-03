@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 16:49:57 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/29 17:57:21 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:00:46 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_list	*get_args(t_list *pre_token_list, int n)
 		arg_node = get_arg(pre_token);
 		if (!arg_node)
 		{
-			ft_lstclear(&args_list, clear_arg);
+			ft_lstclear(&args_list, free);
 			return (NULL);
 		}
 		ft_lstadd_back(&args_list, arg_node);

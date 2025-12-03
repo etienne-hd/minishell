@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   free_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:15:22 by ehode            ###   ########.fr       */
+/*   Created: 2025/12/03 00:55:37 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/03 02:01:45 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ctx.h"
-#include "ft_printf.h"
-#include <readline/readline.h>
+#include "exec.h"
+#include "libft.h"
+#include "parsing.h"
 
-int g_signal = -1;
-
-void	set_signal_status_code(t_ctx *ctx)
+static void	free_file(void *ptr)
 {
-	if (g_signal == -1)
+	t_file	*file;
+
+	if (!ptr)
 		return ;
-	if (g_signal == 2)
-		ctx->status_code = 130;
-	g_signal = -1;
+	file = (t_file *)ptr;
+	ft_lstclear(&file->args, free);
+	free(file);
 }
 
-void	handle_signal(int sig)
-{ 
-    if (sig == 2)
-    {
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-    g_signal = sig;
-} 
+void	free_exec(t_exec **exec)
+{
+	ft_lstclear(&(*exec)->files, free_file);
+	ft_lstclear(&(*exec)->processes, clear_process);
+	free(*exec);
+	*exec = NULL;
+}

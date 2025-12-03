@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 16:47:26 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:00:47 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,11 @@
 
 # include "ctx.h"
 # include "libft.h"
+# include "exec.h"
+# include "token.h"
 # include <stdlib.h>
 
-typedef enum e_token_type
-{
-	REDIRECTION,
-	PIPE,
-	TEXT,
-\
-	CMD,
-	IN_FILE,
-	IN_HERE_DOC,
-	OUT_FILE,
-	OUT_FILE_APPEND,
-	END,
-}				t_token_type;
-
-int			parse(char *input, t_ctx *ctx);
+t_exec		*parse(char *input, t_ctx *ctx);
 
 // Syntax Checker
 int			is_valid_scope(char *s, t_ctx *ctx);
@@ -57,7 +45,6 @@ typedef struct s_token
 
 t_list		*get_token_list(t_list *pre_token_list);
 t_list		*get_arg(t_pre_token *pre_token);
-void		clear_arg(void *ptr);
 void		clear_token(void *ptr);
 void		clear_token_keep_cmd_arg(void *ptr);
 
@@ -71,5 +58,13 @@ int			handle_tilde(char **s);
 
 // Joiner
 void		join_args_cmd(t_list *token_lst);
+
+// Parsing Exec init
+char		*get_cmd_path(char *command, t_ctx *ctx);
+void		clear_process(void *ptr);
+void		clear_process_keep_args(void *ptr);
+t_process	*init_process(t_token *token, t_ctx *ctx);
+t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
+int			is_redirection(t_token *token);
 
 #endif

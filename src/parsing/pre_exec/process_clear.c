@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 12:07:23 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 18:30:44 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:02:38 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	clear_file(void *ptr)
 	t_file	*file;
 
 	file = (t_file *)ptr;
-	ft_lstclear(&file->args, clear_arg);
+	ft_lstclear(&file->args, free);
 	free(ptr);
 }
 
@@ -39,7 +39,7 @@ void	clear_process(void *ptr)
 {
 	t_process	*process;
 
-	process = (t_process *) ptr;
+	process = (t_process *)ptr;
 	free(process->path);
 	if (process->args)
 		free_2d(&process->args);

@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:15:22 by ehode            ###   ########.fr       */
+/*   Created: 2025/12/02 22:53:43 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/02 22:53:51 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ctx.h"
-#include "ft_printf.h"
-#include <readline/readline.h>
+#ifndef TOKEN_H
+# define TOKEN_H
 
-int g_signal = -1;
-
-void	set_signal_status_code(t_ctx *ctx)
+typedef enum e_token_type
 {
-	if (g_signal == -1)
-		return ;
-	if (g_signal == 2)
-		ctx->status_code = 130;
-	g_signal = -1;
-}
+	REDIRECTION,
+	PIPE,
+	TEXT,
+\
+	CMD,
+	IN_FILE,
+	IN_HERE_DOC,
+	OUT_FILE,
+	OUT_FILE_APPEND,
+	END,
+}				t_token_type;
 
-void	handle_signal(int sig)
-{ 
-    if (sig == 2)
-    {
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-    g_signal = sig;
-} 
+#endif

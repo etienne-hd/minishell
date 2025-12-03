@@ -6,11 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 16:11:33 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:14:11 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
+#include "exec.h"
 #include "utils.h"
 #include "parsing.h"
 #include "signal.h"
@@ -22,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	t_ctx	*ctx;
 	char	*input;
 	int		status_code;
+	t_exec	*exec;
 
     signal(SIGINT, handle_signal);
     signal(SIGQUIT, handle_signal);
@@ -34,18 +36,14 @@ int	main(int argc, char **argv, char **envp)
 		if (!input)
 		{
 			printf("exit\n");
-			break ; // Peut etre break (si on echo "ls" | ./minishell)
+			break ;
 		}
 		if (is_blank(input))
 			continue ;
 		add_history(input);
-		if (ft_strcmp(input, "exit") == 0)
-		{
-			free(input);
-			break ;
-		}
-		set_signal_status_code(ctx);
-		parse(input, ctx);
+		exec = parse(input, ctx);
+		if (exec)
+			execute(exec, ctx);
 	}
 	status_code = ctx->status_code;
 	destroy_ctx(&ctx);

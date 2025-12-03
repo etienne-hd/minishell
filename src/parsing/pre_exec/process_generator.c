@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 11:38:45 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 16:33:33 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 01:49:40 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	fill_cmd_path(t_process *cmd, t_list *current_arg, t_ctx *ctx)
 	if (is_builtin(current_arg->content))
 	{
 		cmd->is_builtin = 1;
-		cmd->path = current_arg->content;
+		cmd->path = ft_strdup(current_arg->content);
 	}
 	else
 		cmd->path = get_cmd_path(current_arg->content, ctx);

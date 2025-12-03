@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/02 18:30:15 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:11:46 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 #include "parsing.h"
+#include "token.h"
 #include "utils.h"
 #include <stddef.h>
 
@@ -67,7 +68,7 @@ static void	print_cmd(t_process *cmd)
 		i = 0;
 		while (cmd->args[i])
 		{
-			ft_printf("\t\t%s,\n", cmd->args[i]);
+			ft_printf("\t\t[%s],\n", cmd->args[i]);
 			i++;
 		}
 		ft_printf("\t}\n");
@@ -89,8 +90,10 @@ static void	print_file(t_file *file)
 			ft_printf("\ttype: IN_HERE_DOC,\n");
 		else if (file->type == OUT_FILE)
 			ft_printf("\ttype: OUT_FILE,\n");
-		else
+		else if (file->type == OUT_FILE_APPEND)
 			ft_printf("\ttype: OUT_FILE_APPEND,\n");
+		else
+			return ;
 		if (file->args)
 			ft_printf("\t%s\n", file->args->content);
 		ft_printf("}\n");
@@ -118,15 +121,16 @@ static void	print_cmd_list(t_exec *cmd_list)
 	}
 }
 
-int	parse(char *input, t_ctx *ctx)
+t_exec	*parse(char *input, t_ctx *ctx)
 {
 	t_list	*pre_token_list;
 	t_list	*token_list;
 	t_exec	*exec;
 
+	set_signal_status_code(ctx);
 	// CHECK SCOPE
 	if (is_valid_scope(input, ctx) == 0)
-		return (1);
+		return (NULL);
 	// PRE TOKENIZE
 	pre_token_list = get_pre_token_list(input);
 	free(input);
@@ -136,7 +140,7 @@ int	parse(char *input, t_ctx *ctx)
 	if (check_syntax(pre_token_list, ctx))
 	{
 		ft_lstclear(&pre_token_list, clear_pre_token);
-		return (1);
+		return (NULL);
 	}
 	// TOKENIZE
 	token_list = get_token_list(pre_token_list);
@@ -155,10 +159,7 @@ int	parse(char *input, t_ctx *ctx)
 	print_token_lst(token_list);
 	exec = init_exec(token_list, ctx);
 	print_cmd_list(exec);
+	ft_lstclear(&token_list, clear_token_keep_cmd_arg);
 	ctx->status_code = SUCCESS;
-	ft_lstclear(&exec->files, free);
-	ft_lstclear(&exec->processes, clear_process_keep_args);
-	free(exec);
-	ft_lstclear(&token_list, clear_token);
-	return (0);
+	return (exec);
 }

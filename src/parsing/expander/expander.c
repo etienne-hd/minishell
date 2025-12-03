@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:10:09 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/01 23:26:50 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 02:00:30 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static int	scope_expand_utils(t_list **expanded_args, char	*current_arg,
 	current_expanded = expand_scope(&current_arg[*i], scope_end, ctx);
 	if (current_expanded == NULL)
 	{
-		ft_lstclear(expanded_args, clear_arg);
+		ft_lstclear(expanded_args, free);
 		return (1);
 	}
 	expand_length = ft_strlen(current_expanded);
 	if (bounded_join((char **)&last_arg->content, *i,
 			current_expanded, scope_end + 1))
 	{
-		ft_lstclear(expanded_args, clear_arg);
+		ft_lstclear(expanded_args, free);
 		return (1);
 	}
 	*i += expand_length;
@@ -84,14 +84,14 @@ static int	outscope_expand_utils(t_list **expanded_args,
 			scope_end - &current_arg[*i], ctx);
 	if (current_expanded == NULL)
 	{
-		ft_lstclear(expanded_args, clear_arg);
+		ft_lstclear(expanded_args, free);
 		return (1);
 	}
 	expand_length = ft_strlen(current_expanded);
 	if (bounded_join((char **)&last_arg->content, *i,
 			current_expanded, scope_end))
 	{
-		ft_lstclear(expanded_args, clear_arg);
+		ft_lstclear(expanded_args, free);
 		return (1);
 	}
 	split_outscope(last_arg, i, expand_length);
@@ -158,13 +158,13 @@ int	expand(t_token *token, t_ctx *ctx)
 		if (!new_arg || tmp == NULL)
 		{
 			free(tmp);
-			ft_lstclear(&new_args, clear_arg);
+			ft_lstclear(&new_args, free);
 			return (1);
 		}
 		ft_lstadd_back(&new_args, new_arg);
 		args = args->next;
 	}
-	ft_lstclear(&token->args, clear_arg);
+	ft_lstclear(&token->args, free);
 	token->args = new_args;
 	return (0);
 }

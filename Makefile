@@ -35,12 +35,19 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/pre_exec/process_finder.c \
 	$(SRC_DIR)parsing/pre_exec/process_generator.c 
 
+SRC_EXEC = $(SRC_DIR)exec/execute.c \
+	$(SRC_DIR)exec/free_exec.c \
+	$(SRC_DIR)exec/file/open_file.c \
+	$(SRC_DIR)exec/file/here_doc.c \
+	$(SRC_DIR)exec/file/close_file.c
+
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
 	$(SRC_UTILS) \
 	$(SRC_ENV) \
 	$(SRC_INPUT) \
-	$(SRC_PARSING)
+	$(SRC_PARSING) \
+	$(SRC_EXEC)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -99,6 +106,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/expander
 	@mkdir -p $(OBJ_DIR)parsing/joiner
 	@mkdir -p $(OBJ_DIR)parsing/pre_exec
+	@mkdir -p $(OBJ_DIR)exec
+	@mkdir -p $(OBJ_DIR)exec/file
+
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

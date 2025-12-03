@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   close_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:15:22 by ehode            ###   ########.fr       */
+/*   Created: 2025/12/03 00:46:29 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/03 01:18:39 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ctx.h"
-#include "ft_printf.h"
-#include <readline/readline.h>
+#include "exec.h"
 
-int g_signal = -1;
-
-void	set_signal_status_code(t_ctx *ctx)
+void	close_file(t_file *file)
 {
-	if (g_signal == -1)
-		return ;
-	if (g_signal == 2)
-		ctx->status_code = 130;
-	g_signal = -1;
+	if (file->fd != -1)
+	{
+		if (file->args)
+			printf("DEBUG: CLOSING %s\n", (char *)file->args->content);
+		close(file->fd);
+		file->fd = -1;
+	}
 }
 
-void	handle_signal(int sig)
-{ 
-    if (sig == 2)
-    {
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+void	close_files(t_exec *exec)
+{
+	t_list	*files;
+	t_file	*file;
+
+	files = exec->files;
+	while (files)
+	{
+		file = (t_file *)files->content;
+		close_file(file);
+		files = files->next;
 	}
-    g_signal = sig;
-} 
+}

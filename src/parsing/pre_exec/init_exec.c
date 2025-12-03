@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:43:49 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 18:51:57 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 00:45:47 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "exec.h"
 #include "libft.h"
 #include "parsing.h"
+#include "token.h"
 #include <fcntl.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -49,6 +50,7 @@ static int	handle_redirection(t_file **current_redirection, t_token *current_tok
 	current_file = ft_calloc(1, sizeof(t_file));
 	if (current_file == NULL)
 		return (1);
+	current_file->fd = -1;
 	current_file->type = current_token->type;
 	current_file->args = current_token->args;
 	if (current_file->type == IN_FILE || current_file->type == IN_HERE_DOC)
@@ -73,7 +75,7 @@ static int	handle_pipe(t_process **current_process, t_file **current_redirection
 
 	current_file = ft_calloc(1, sizeof(t_file));
 	current_file->type = PIPE;
-	if ((*current_process)->file_out == NULL)
+	if (*current_process && (*current_process)->file_out == NULL)
 		(*current_process)->file_out = current_file;
 	ft_bzero(current_redirection, sizeof(current_redirection));
 	current_redirection[0] = current_file;
