@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:10:27 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 14:34:41 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 15:34:10 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*get_shell_prompt(t_ctx *ctx)
 	user = ft_dict_get(ctx->env, "USER");
 	if (user)
 		prompt = ft_strjoin_wrapper(prompt, user);
-	pwd = ft_dict_get(ctx->env, "PWD");
+	pwd = get_pwd();
 	if (pwd)
 	{
 		if (user)

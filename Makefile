@@ -12,7 +12,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/is_in_scope.c \
 	$(SRC_DIR)utils/bounded_join.c \
 	$(SRC_DIR)utils/signal.c \
-	$(SRC_DIR)utils/free_2d.c
+	$(SRC_DIR)utils/free_2d.c \
+	$(SRC_DIR)utils/get_pwd.c
 
 SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/checker/check_scope.c \

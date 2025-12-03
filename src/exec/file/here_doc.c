@@ -6,13 +6,14 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 23:03:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 00:40:02 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 15:45:42 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ctx.h"
 #include "parsing.h"
+#include "utils.h"
 #include <readline/readline.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -62,6 +63,7 @@ int	here_doc(char *delimiter, t_ctx *ctx)
 	char	*line;
 	int		fds[2];
 
+	g_signal = -42;
 	if (pipe(fds) == -1)
 	{
 		printf("%s: Pipe failed\n", delimiter);
