@@ -23,10 +23,10 @@ int	open_file(t_file *file, t_ctx *ctx)
 
 	if (ft_lstsize(file->args) > 1 || !file->args || !file->args->content)
 	{
-		file->fd = -1;
+		file->fd = AMBIGOUS_FD;
 		return (1);
 	}
-	else if (file->fd == -42)
+	else if (file->fd == PIPE_FD)
 		return (1);
 	arg = (char *)file->args->content;
 	printf("DEBUG: OPENING %s\n", arg);

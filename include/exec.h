@@ -13,6 +13,9 @@
 #ifndef EXEC_H
 # define EXEC_H
 
+# define PIPE_FD -42
+# define AMBIGOUS_FD -21
+
 #include "libft.h"
 #include "ctx.h"
 #include "token.h"

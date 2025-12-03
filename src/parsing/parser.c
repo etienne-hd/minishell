@@ -83,7 +83,7 @@ static void	print_file(t_file *file)
 		ft_printf("FILE {\n");
 		ft_printf("\taddress = %p,\n", file);
 		if (file->type == PIPE)
-			ft_printf("PIPE: {\n");
+			ft_printf("\ttype: PIPE,\n");
 		else if (file->type == IN_FILE)
 			ft_printf("\ttype: IN_FILE,\n");
 		else if (file->type == IN_HERE_DOC)
@@ -94,6 +94,7 @@ static void	print_file(t_file *file)
 			ft_printf("\ttype: OUT_FILE_APPEND,\n");
 		else
 			return ;
+		ft_printf("\tfd: %i,\n", file->fd);
 		if (file->args)
 			ft_printf("\t%s\n", file->args->content);
 		ft_printf("}\n");

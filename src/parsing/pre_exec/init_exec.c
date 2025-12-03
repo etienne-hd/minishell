@@ -75,6 +75,7 @@ static int	handle_pipe(t_process **current_process,
 	current_file = ft_calloc(1, sizeof(t_file));
 	if (current_file == NULL)
 		return (1);
+	current_file->fd = PIPE_FD;
 	current_file->type = PIPE;
 	if (*current_process && (*current_process)->file_out == NULL)
 		(*current_process)->file_out = current_file;
