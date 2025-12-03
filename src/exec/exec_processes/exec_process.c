@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 20:10:56 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 22:27:51 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 #include <errno.h>
 #include <unistd.h>
 
+static int	get_empty_in_pipe(t_process *process)
+{
+	if (pipe(process->file_in->pipe) == -1)
+		;// IF PIPE FAILED
+	close_fd(&process->file_in->pipe[1]);
+	return (process->file_in->pipe[0]);
+}
+
 static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 {
 	*fd_in = -1;
@@ -26,7 +34,7 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		if (process->file_in->pipe[0] != -1)
 			*fd_in = process->file_in->pipe[0];
 		else
-			*fd_in = 0;
+			*fd_in = get_empty_in_pipe(process);
 	}
 	else if (process->file_in)
 		*fd_in = process->file_in->fd;

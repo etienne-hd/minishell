@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 19:31:01 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 21:47:48 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 	t_list		*processes;
 	t_process	*current_process;
 	
+	if (ft_lstsize(exec->processes) == 0)
+		return ;
 	processes = exec->processes;
 	current_process = (t_process *)processes->content;
 	if (ft_lstsize(exec->processes) == 1 && (current_process->is_builtin))
