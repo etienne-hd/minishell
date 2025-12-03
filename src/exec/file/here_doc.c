@@ -72,7 +72,7 @@ int	here_doc(char *delimiter, t_ctx *ctx)
 	{
 		line = get_line(delimiter, ctx);
 		if (!line)
-			break;
+			break ;
 		write(fds[1], line, ft_strlen(line));
 		free(line);
 	}

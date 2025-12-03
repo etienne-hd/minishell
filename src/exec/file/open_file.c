@@ -75,12 +75,11 @@ void	open_files(t_exec *exec, t_ctx *ctx)
 			skip = 0;
 			begin_scope = files;
 		}
-		else
-			if (skip == 0 && open_file(file, ctx))
-			{
-				close_all_files_until_pipe(begin_scope);
-				skip = 1;
-			}
+		else if (skip == 0 && open_file(file, ctx))
+		{
+			close_all_files_until_pipe(begin_scope);
+			skip = 1;
+		}
 		files = files->next;
 	}
 }

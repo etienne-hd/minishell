@@ -25,8 +25,8 @@ int	main(int argc, char **argv, char **envp)
 	int		status_code;
 	t_exec	*exec;
 
-    signal(SIGINT, handle_signal);
-    signal(SIGQUIT, handle_signal);
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, handle_signal);
 	ctx = init_ctx(argc, argv, envp);
 	if (!ctx)
 		safe_exit(&ctx, "Unable to init ctx.");
@@ -49,4 +49,3 @@ int	main(int argc, char **argv, char **envp)
 	destroy_ctx(&ctx);
 	return (status_code);
 }
-

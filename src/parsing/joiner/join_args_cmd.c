@@ -16,7 +16,7 @@
 void	join_args_cmd(t_list *token_lst)
 {
 	t_token	*current_cmd;
-	t_token *current_token;
+	t_token	*current_token;
 	t_list	*previous_token_lst;
 
 	previous_token_lst = NULL;
@@ -33,11 +33,11 @@ void	join_args_cmd(t_list *token_lst)
 			free(current_token);
 			free(token_lst);
 			token_lst = previous_token_lst->next;
-			continue;
+			continue ;
 		}
 		else if (current_token->type == PIPE)
 			current_cmd = NULL;
-		previous_token_lst = token_lst; 
+		previous_token_lst = token_lst;
 		token_lst = token_lst->next;
 	}
 }

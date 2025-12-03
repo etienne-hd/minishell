@@ -16,7 +16,7 @@
 int	is_redirection(t_token *token)
 {
 	if (token->type == IN_FILE || token->type == IN_HERE_DOC
-			|| token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
+		|| token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
 		return (1);
 	return (0);
 }

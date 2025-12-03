@@ -110,7 +110,7 @@ t_list	*split_outscope(t_list *last_arg, size_t *i, size_t n)
 	last_arg = ft_lstlast(last_arg);
 	n += *i;
 	if (trim_begin(i, &n, (char **)&last_arg->content)
-			|| trim_end(&n, (char **)&last_arg->content))
+		|| trim_end(&n, (char **)&last_arg->content))
 		return (NULL);
 	tmp = last_arg->content;
 	while (tmp[*i])

@@ -40,8 +40,8 @@ static int	handle_cmd(t_process **current_process, t_token *current_token,
 	return (0);
 }
 
-static int	handle_redirection(t_file **current_redirection, t_token *current_token,
-		t_exec *exec)
+static int	handle_redirection(t_file **current_redirection,
+		t_token *current_token, t_exec *exec)
 {
 	t_file	*current_file;
 	t_list	*current_file_list;
@@ -66,8 +66,8 @@ static int	handle_redirection(t_file **current_redirection, t_token *current_tok
 	return (0);
 }
 
-static int	handle_pipe(t_process **current_process, t_file **current_redirection,
-		t_exec *exec)
+static int	handle_pipe(t_process **current_process,
+		t_file **current_redirection, t_exec *exec)
 {
 	t_file	*current_file;
 	t_list	*current_file_list;
@@ -91,12 +91,14 @@ static int	handle_pipe(t_process **current_process, t_file **current_redirection
 	return (0);
 }
 
-static int	handle_token(t_token *current_token, t_process **current_process,
+static int	handle_token(t_token *current_token,
 		t_file **current_redirection, t_exec *exec, t_ctx *ctx)
 {
+	static t_process	*current_process = NULL;
+
 	if (current_token->type == CMD)
 	{
-		if (handle_cmd(current_process, current_token, exec, ctx))
+		if (handle_cmd(&current_process, current_token, exec, ctx))
 			return (1);
 	}
 	else if (is_redirection(current_token))
@@ -104,14 +106,14 @@ static int	handle_token(t_token *current_token, t_process **current_process,
 		if (handle_redirection(current_redirection, current_token, exec))
 			return (1);
 	}
-	if (*current_process)
+	if (current_process)
 	{
-		(*current_process)->file_in = current_redirection[0];
-		(*current_process)->file_out = current_redirection[1];
+		current_process->file_in = current_redirection[0];
+		current_process->file_out = current_redirection[1];
 	}
 	if (current_token->type == PIPE)
 	{
-		if (handle_pipe(current_process, current_redirection, exec))
+		if (handle_pipe(&current_process, current_redirection, exec))
 			return (1);
 	}
 	return (0);
@@ -120,17 +122,15 @@ static int	handle_token(t_token *current_token, t_process **current_process,
 t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 {
 	t_exec		*exec;
-	t_process	*current_process;
 	t_file		*current_redirection[2];
 
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (exec == NULL)
 		return (NULL);
-	current_process = NULL;
 	ft_bzero(current_redirection, sizeof(current_redirection));
 	while (token_list)
 	{
-		if (handle_token((t_token *)token_list->content, &current_process,
+		if (handle_token((t_token *)token_list->content,
 				current_redirection, exec, ctx))
 		{
 			ft_lstclear(&exec->processes, clear_process_keep_args);

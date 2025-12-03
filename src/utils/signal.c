@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include <readline/readline.h>
 
-int g_signal = -1;
+int	g_signal = -1;
 
 void	set_signal_status_code(t_ctx *ctx)
 {
@@ -26,13 +26,13 @@ void	set_signal_status_code(t_ctx *ctx)
 }
 
 void	handle_signal(int sig)
-{ 
-    if (sig == 2)
-    {
+{
+	if (sig == 2)
+	{
 		ft_printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-    g_signal = sig;
-} 
+	g_signal = sig;
+}
