@@ -6,14 +6,13 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 20:05:27 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 20:10:56 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
 #include "exec.h"
 #include "ft_printf.h"
-#include "libft.h"
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
