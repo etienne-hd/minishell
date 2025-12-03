@@ -27,9 +27,9 @@ int	echo(t_process *process, t_ctx *ctx)
 	i += 1 + is_n;
 	while (args[i])
 	{
-		ft_printf("%s", args[i]);
+		ft_dprintf(process->file_out->fd, "%s", args[i]);
 		if (args[i + 1])
-			ft_printf(" ");
+			ft_dprintf(process->file_out->fd, " ");
 		i++;
 	}
 	return (SUCCESS);

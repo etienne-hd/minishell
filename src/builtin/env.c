@@ -26,7 +26,8 @@ int	env(t_process *process, t_ctx *ctx)
 	env_dict = ctx->env->entry;
 	while (env_dict)
 	{
-		ft_printf("%s=%s\n",env_dict->key, env_dict->value);
+		ft_dprintf(process->file_out->fd ,"%s=%s\n",env_dict->key,
+			 env_dict->value);
 		env_dict = env_dict->next;
 	}
 	return (SUCCESS);
