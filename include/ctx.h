@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:55 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/28 15:15:14 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 17:44:39 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct s_ctx
 {
+	char		**envp;
 	t_dict		*env;
 	uint8_t		status_code;
 }				t_ctx;

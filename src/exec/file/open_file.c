@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 01:16:13 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 19:44:37 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	open_file(t_file *file, t_ctx *ctx)
 	else if (file->fd == PIPE_FD)
 		return (1);
 	arg = (char *)file->args->content;
-	printf("DEBUG: OPENING %s\n", arg);
 	if (file->type == IN_FILE)
 		file->fd = open(arg, O_RDONLY, 0644);
 	else if (file->type == IN_HERE_DOC)
@@ -39,7 +38,7 @@ int	open_file(t_file *file, t_ctx *ctx)
 	else
 		file->fd = open(arg, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (file->fd == -1 && file->type != IN_HERE_DOC)
-		printf("%s: %s\n", arg, strerror(errno));
+		ft_dprintf(2, "%s: %s\n", arg, strerror(errno));
 	return (file->fd == -1);
 }
 

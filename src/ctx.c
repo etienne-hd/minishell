@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:37:01 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/27 14:36:20 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 17:45:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_ctx	*init_ctx(int argc, char **argv, char **envp)
 	ctx = ft_calloc(1, sizeof(t_ctx));
 	if (!ctx)
 		return (NULL);
+	ctx->envp = envp;
 	ctx->env = load_env(envp);
 	if (!ctx->env)
 	{

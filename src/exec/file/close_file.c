@@ -6,29 +6,36 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 00:46:29 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 01:18:39 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 19:47:06 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	close_file(t_file *file)
+void	close_fd(int *fd)
 {
-	if (file->fd > 2)
+	if (*fd != -1)
 	{
-		if (file->args)
-			printf("DEBUG: CLOSING %s\n", (char *)file->args->content);
-		close(file->fd);
-		file->fd = -1;
+		close(*fd);
+		*fd = -1;
 	}
 }
 
-void	close_files(t_exec *exec)
+void	close_file(t_file *file)
 {
-	t_list	*files;
+	if (file->fd == PIPE_FD)
+	{
+		close_fd(&file->pipe[0]);
+		close_fd(&file->pipe[1]);
+	}
+	else if (file->fd > 2)
+		close_fd(&file->fd);
+}
+
+void	close_files(t_list *files)
+{
 	t_file	*file;
 
-	files = exec->files;
 	while (files)
 	{
 		file = (t_file *)files->content;

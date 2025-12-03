@@ -40,7 +40,9 @@ SRC_EXEC = $(SRC_DIR)exec/execute.c \
 	$(SRC_DIR)exec/free_exec.c \
 	$(SRC_DIR)exec/file/open_file.c \
 	$(SRC_DIR)exec/file/here_doc.c \
-	$(SRC_DIR)exec/file/close_file.c
+	$(SRC_DIR)exec/file/close_file.c \
+	$(SRC_DIR)exec/exec_processes/exec_processes.c \
+	$(SRC_DIR)exec/exec_processes/exec_process.c
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -109,6 +111,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)parsing/pre_exec
 	@mkdir -p $(OBJ_DIR)exec
 	@mkdir -p $(OBJ_DIR)exec/file
+	@mkdir -p $(OBJ_DIR)exec/exec_processes
 
 	$(CC) $(CFLAGS) $< -c -o $@
 

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:43:49 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 16:50:50 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 18:45:00 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static int	handle_pipe(t_process **current_process,
 		return (1);
 	current_file->fd = PIPE_FD;
 	current_file->type = PIPE;
+	current_file->pipe[0] = -1;
+	current_file->pipe[1] = -1;
 	if (*current_process && (*current_process)->file_out == NULL)
 		(*current_process)->file_out = current_file;
 	ft_bzero(current_redirection, sizeof(current_redirection));
@@ -93,13 +95,11 @@ static int	handle_pipe(t_process **current_process,
 }
 
 static int	handle_token(t_token *current_token,
-		t_process **current_process, t_exec *exec, t_ctx *ctx)
+		t_process **current_process, t_file **current_redirection, t_exec *exec)
 {
-	static t_file	*current_redirection[2];
-
 	if (current_token->type == CMD)
 	{
-		if (handle_cmd(current_process, current_token, exec, ctx))
+		if (handle_cmd(current_process, current_token, exec, exec->ctx))
 			return (1);
 	}
 	else if (is_redirection(current_token))
@@ -124,15 +124,18 @@ t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 {
 	t_exec		*exec;
 	t_process	*current_process;
+	t_file		*current_redirection[2];
 
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (exec == NULL)
 		return (NULL);
+	exec->ctx = ctx;
 	current_process = NULL;
+	ft_bzero(current_redirection, sizeof(current_redirection));
 	while (token_list)
 	{
 		if (handle_token((t_token *)token_list->content,
-				&current_process, exec, ctx))
+				&current_process, current_redirection, exec))
 		{
 			ft_lstclear(&exec->processes, clear_process_keep_args);
 			ft_lstclear(&exec->files, free);
