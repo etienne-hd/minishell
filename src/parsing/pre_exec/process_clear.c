@@ -20,6 +20,8 @@ void	clear_file(void *ptr)
 {
 	t_file	*file;
 
+	if (ptr == NULL)
+		return ;
 	file = (t_file *)ptr;
 	ft_lstclear(&file->args, free);
 	free(ptr);
@@ -29,6 +31,8 @@ void	clear_process_keep_args(void *ptr)
 {
 	t_process	*process;
 
+	if (ptr == NULL)
+		return ;
 	process = (t_process *) ptr;
 	free(process->path);
 	free(process->args);
@@ -39,6 +43,8 @@ void	clear_process(void *ptr)
 {
 	t_process	*process;
 
+	if (ptr == NULL)
+		return ;
 	process = (t_process *)ptr;
 	free(process->path);
 	if (process->args)

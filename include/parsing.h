@@ -63,7 +63,7 @@ void		join_args_cmd(t_list *token_lst);
 char		*get_cmd_path(char *command, t_ctx *ctx);
 void		clear_process(void *ptr);
 void		clear_process_keep_args(void *ptr);
-void	clear_file(void *ptr);
+void		clear_file(void *ptr);
 t_process	*init_process(t_token *token, t_ctx *ctx);
 t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
 int			is_redirection(t_token *token);
