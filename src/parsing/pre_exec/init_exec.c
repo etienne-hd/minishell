@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:43:49 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 18:45:00 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 20:01:29 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	handle_pipe(t_process **current_process,
 	current_file->pipe[1] = -1;
 	if (*current_process && (*current_process)->file_out == NULL)
 		(*current_process)->file_out = current_file;
-	ft_bzero(current_redirection, sizeof(current_redirection));
+	ft_bzero(current_redirection, sizeof(void *) * 2);
 	current_redirection[0] = current_file;
 	current_file_list = ft_lstnew(current_file);
 	if (current_file_list == NULL)
