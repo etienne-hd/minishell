@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 19:53:11 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/03 20:05:27 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,25 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 	*fd_in = -1;
 	*fd_out = -1;
 	if (process->file_in && process->file_in->fd == PIPE_FD)
-		*fd_in = process->file_in->pipe[0];
+	{
+		if (process->file_in->pipe[0] != -1)
+			*fd_in = process->file_in->pipe[0];
+		else
+			*fd_in = 0;
+	}
 	else if (process->file_in)
 		*fd_in = process->file_in->fd;
 	else if (process->file_in == NULL)
 		*fd_in = 0;
 	if (process->file_out && process->file_out->fd == PIPE_FD)
+	{
 		*fd_out = process->file_out->pipe[1];
+	}
 	else if (process->file_out)
 		*fd_out = process->file_out->fd;
 	else if (process->file_out == NULL)
 		*fd_out = 1;
+	printf("DEBUG: %s; FD_IN %d (%p); FD_OUT %d (%p)\n", process->path, *fd_in, process->file_in, *fd_out, process->file_out);
 }
 
 int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
