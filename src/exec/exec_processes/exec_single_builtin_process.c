@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 01:44:40 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 16:52:28 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_single_builtin_process(t_process *process,
 	dup_stdout = dup(1);
 	dup2(fd_in, 0);
 	dup2(fd_out, 1);
-	ctx->status_code = exec_builtin(process, ctx);
+	ctx->status_code = exec_builtin(process, exec, ctx);
 	close_files(exec->files);
 	dup2(dup_stdin, 0);
 	dup2(dup_stdout, 1);

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:09:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 00:36:18 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 16:51:13 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stddef.h>
 #include <unistd.h>
 
-int	pwd(t_process *process, t_ctx *ctx)
+int	builtin_pwd(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	char	*pwd;

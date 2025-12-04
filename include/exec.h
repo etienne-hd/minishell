@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 01:02:53 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 16:51:43 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ void		open_files(t_exec *exec, t_ctx *ctx);
 int			here_doc(char *delimiter, t_ctx *ctx);
 
 // BuiltIn
-int			exec_builtin(t_process *process, t_ctx *ctx);
-int			echo(t_process *process, t_ctx *ctx);
-int			cd(t_process *process, t_ctx *ctx);
-int			pwd(t_process *process, t_ctx *ctx);
-int			export(t_process *process, t_ctx *ctx);
-int			unset(t_process *process, t_ctx *ctx);
-int			env(t_process *process, t_ctx *ctx);
+int			exec_builtin(t_process *process, t_exec *exec, t_ctx *ctx);
+int			builtin_echo(t_process *process, t_ctx *ctx);
+int			builtin_cd(t_process *process, t_ctx *ctx);
+int			builtin_pwd(t_process *process, t_ctx *ctx);
+int			builtin_export(t_process *process, t_ctx *ctx);
+int			builtin_unset(t_process *process, t_ctx *ctx);
+int			builtin_env(t_process *process, t_ctx *ctx);
+int			builtin_exit(t_process *process, t_exec *exec, t_ctx *ctx);
 
 #endif

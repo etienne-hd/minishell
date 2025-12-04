@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:09:18 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 15:52:07 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:53:44 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	set_val_export(char *post_key, char *key, t_ctx *ctx)
 	value = ft_strndup(&post_key[mode], i);
 	if (mode == 2)
 	{
+		tmp = NULL;
 		old = ft_dict_get(ctx->env, key);
 		if (old)
 			tmp = ft_strjoin(old, value);
@@ -122,7 +123,7 @@ invalide key\n", args[i]);
 	return (error);
 }
 
-int	export(t_process *process, t_ctx *ctx)
+int	builtin_export(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	size_t	i;

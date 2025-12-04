@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 04:03:05 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 16:52:10 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	dup2(fd_out, 1);
 	close_files(exec->files);
 	if (process->is_builtin)
-		exec_builtin(process, ctx);
+		exec_builtin(process, exec, ctx);
 	else if (execve(process->path, process->args, ctx->envp) == -1)
 	{
 		// TODO: CHECK IF IS IT A DIR OR PERMISSION NOT FOUND
