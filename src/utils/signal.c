@@ -27,7 +27,6 @@ void	set_signal_status_code(t_ctx *ctx)
 
 void	handle_signal(int sig)
 {
-	//printf("\nsig -> %d; g_signal -> %d\n", sig, g_signal);
 	if (sig == 2)
 	{
 		if (g_signal == -42)

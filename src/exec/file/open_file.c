@@ -25,7 +25,8 @@ int	open_file(t_file *file, t_ctx *ctx)
 
 	if (ft_lstsize(file->args) > 1 || !file->args || !file->args->content)
 	{
-		ft_dprintf(2, "minishell: ambiguous redirect\n", (char *)file->args->content);
+		ft_dprintf(2, "minishell: ambiguous redirect\n",
+			(char *)file->args->content);
 		file->fd = -1;
 		return (1);
 	}

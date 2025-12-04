@@ -13,6 +13,7 @@
 #include "libft.h"
 #include "parsing.h"
 #include <stdio.h>
+
 static int	trim_end(size_t *n, char **s)
 {
 	size_t	j;

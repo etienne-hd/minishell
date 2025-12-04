@@ -20,7 +20,7 @@ int	echo(t_process *process, t_ctx *ctx)
 	char	**args;
 	size_t	i;
 	int		is_n;
-	
+
 	(void)ctx;
 	i = 0;
 	args = process->args;
@@ -30,10 +30,11 @@ int	echo(t_process *process, t_ctx *ctx)
 	i += 1 + is_n;
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		ft_dprintf(STDOUT_FILENO, "%s", args[i]);
 		if (args[i + 1])
-			printf(" ");
+			ft_dprintf(STDOUT_FILENO, " ");
 		i++;
 	}
+	ft_dprintf(STDOUT_FILENO, "\n");
 	return (SUCCESS);
 }

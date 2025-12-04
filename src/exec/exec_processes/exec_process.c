@@ -51,7 +51,6 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_out = process->file_out->fd;
 	else if (process->file_out == NULL)
 		*fd_out = 1;
-	//printf("DEBUG: %s; FD_IN %d (%p); FD_OUT %d (%p)\n", process->path, *fd_in, process->file_in, *fd_out, process->file_out);
 }
 
 int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
@@ -81,7 +80,8 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	else if (execve(process->path, process->args, ctx->envp) == -1)
 	{
 		// TODO: CHECK IF IS IT A DIR OR PERMISSION NOT FOUND
-		ft_dprintf(2, "%s: command not found\n", process->args[0], strerror(errno));
+		ft_dprintf(2, "%s: command not found\n", process->args[0],
+			strerror(errno));
 		free_exec(&exec);
 		destroy_ctx(&ctx);
 		exit(127);

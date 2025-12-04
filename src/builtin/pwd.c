@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "utils.h"
 #include "error.h"
 #include "exec.h"
@@ -21,7 +20,7 @@ int	pwd(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	char	*pwd;
-	
+
 	(void)ctx;
 	args = process->args;
 	if (args == NULL)

@@ -35,7 +35,7 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 {
 	t_list		*processes;
 	t_process	*current_process;
-	
+
 	if (ft_lstsize(exec->processes) == 0)
 		return ;
 	processes = exec->processes;
@@ -47,15 +47,20 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 		while (processes)
 		{
 			current_process = (t_process *)processes->content;
-			if (current_process->file_out && current_process->file_out->fd == PIPE_FD)
+			if (current_process->file_out
+				&& current_process->file_out->fd == PIPE_FD)
 			{
 				if (pipe(current_process->file_out->pipe) == -1)
-					;// IF PIPE FAILED
+				{
+					// check if pipe failed
+				}
 			}
 			exec_process(current_process, exec, ctx);
-			if (current_process->file_out && current_process->file_out->fd == PIPE_FD)
+			if (current_process->file_out
+				&& current_process->file_out->fd == PIPE_FD)
 				close_fd(&current_process->file_out->pipe[1]);
-			if (current_process->file_in && current_process->file_in->fd == PIPE_FD)
+			if (current_process->file_in
+				&& current_process->file_in->fd == PIPE_FD)
 				close_fd(&current_process->file_in->pipe[0]);
 			processes = processes->next;
 		}

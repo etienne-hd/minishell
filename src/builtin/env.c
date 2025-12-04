@@ -13,7 +13,6 @@
 #include "ctx.h"
 #include "error.h"
 #include "exec.h"
-#include "ft_printf.h"
 #include "libft.h"
 #include <stddef.h>
 #include <unistd.h>
@@ -28,7 +27,7 @@ int	env(t_process *process, t_ctx *ctx)
 	env_dict = ctx->env->entry;
 	while (env_dict)
 	{
-		printf("%s=%s\n",env_dict->key, (char *)env_dict->value);
+		printf("%s=%s\n", env_dict->key, (char *)env_dict->value);
 		env_dict = env_dict->next;
 	}
 	return (SUCCESS);
