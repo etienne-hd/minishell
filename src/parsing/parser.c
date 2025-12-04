@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:11:46 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 18:00:17 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,10 @@ t_exec	*parse(char *input, t_ctx *ctx)
 	set_signal_status_code(ctx);
 	// CHECK SCOPE
 	if (is_valid_scope(input, ctx) == 0)
+	{
+		free(input);
 		return (NULL);
+	}
 	// PRE TOKENIZE
 	pre_token_list = get_pre_token_list(input);
 	free(input);
