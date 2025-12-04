@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 00:04:20 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 21:13:05 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		clear_process_keep_args(void *ptr);
 void		clear_file(void *ptr);
 t_process	*init_process(t_token *token, t_ctx *ctx);
 t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
+int			init_here_doc(t_file *file);
 int			is_redirection(t_token *token);
 
 // Syntax Checker

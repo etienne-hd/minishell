@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 16:51:43 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 22:19:35 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_file
 	t_token_type	type;
 	t_list			*args;
 	int				fd;
+	int				here_doc_to_expand;
 	int				pipe[2];
 }				t_file;
 
@@ -58,7 +59,7 @@ void		close_file(t_file *file);
 void		close_files(t_list *files);
 int			open_file(t_file *file, t_ctx *ctx);
 void		open_files(t_exec *exec, t_ctx *ctx);
-int			here_doc(char *delimiter, t_ctx *ctx);
+int			here_doc(char *delimiter, int to_expand, t_ctx *ctx);
 
 // BuiltIn
 int			exec_builtin(t_process *process, t_exec *exec, t_ctx *ctx);

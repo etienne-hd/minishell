@@ -22,11 +22,11 @@
  */
 void	destroy_ctx(t_ctx **ctx)
 {
+	rl_clear_history();
 	if (!*ctx)
 		return ;
 	if ((*ctx)->env)
 		destroy_env(&(*ctx)->env);
-	rl_clear_history();
 	free(*ctx);
 	*ctx = NULL;
 }

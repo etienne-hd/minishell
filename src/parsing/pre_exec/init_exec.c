@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:43:49 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 20:01:29 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 22:11:24 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ static int	handle_redirection(t_file **current_redirection,
 	current_file->fd = -1;
 	current_file->type = current_token->type;
 	current_file->args = current_token->args;
+	if (current_file->type == IN_HERE_DOC && init_here_doc(current_file))
+	{
+		free(current_file);
+		return (1);
+	}
 	if (current_file->type == IN_FILE || current_file->type == IN_HERE_DOC)
 		current_redirection[0] = current_file;
 	else

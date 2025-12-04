@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 19:34:10 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 22:18:58 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	open_file(t_file *file, t_ctx *ctx)
 	if (file->type == IN_FILE)
 		file->fd = open(arg, O_RDONLY, 0644);
 	else if (file->type == IN_HERE_DOC)
-		file->fd = here_doc(arg, ctx);
+		file->fd = here_doc(arg, file->here_doc_to_expand, ctx);
 	else if (file->type == OUT_FILE)
 		file->fd = open(arg, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	else

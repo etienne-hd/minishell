@@ -35,7 +35,8 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/pre_exec/init_exec.c \
 	$(SRC_DIR)parsing/pre_exec/process_clear.c \
 	$(SRC_DIR)parsing/pre_exec/process_finder.c \
-	$(SRC_DIR)parsing/pre_exec/process_generator.c 
+	$(SRC_DIR)parsing/pre_exec/process_generator.c \
+	$(SRC_DIR)parsing/pre_exec/init_here_doc.c
 
 SRC_EXEC = $(SRC_DIR)exec/execute.c \
 	$(SRC_DIR)exec/free_exec.c \
