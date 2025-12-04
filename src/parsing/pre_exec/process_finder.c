@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 11:27:56 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/02 18:53:47 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 19:31:37 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static char	*find_path(char ***all_paths, char *command)
 		free(full_command);
 		i++;
 	}
-	full_command = ft_strdup(command);
-	return (full_command);
+	return (NULL);
 }
 
 /**
@@ -53,20 +52,21 @@ char	*get_cmd_path(char *command, t_ctx *ctx)
 	char	*path;
 	char	**all_paths;
 	char	*full_command;
+	char	*finded_command;
 
 	if (command == NULL)
 		return (NULL);
 	full_command = ft_strdup(command);
-	if (access(command, X_OK) == 0)
-		return (full_command);
 	path = ft_dict_get(ctx->env, "PATH");
 	if (path == NULL)
 		return (full_command);
-	free(full_command);
 	all_paths = ft_split(path, ':');
 	if (all_paths == NULL)
 		return (NULL);
-	full_command = find_path(&all_paths, command);
+	finded_command = find_path(&all_paths, command);
 	free_2d(&all_paths);
-	return (full_command);
+	if (finded_command == NULL)
+		return (full_command);
+	free(full_command);
+	return (finded_command);
 }

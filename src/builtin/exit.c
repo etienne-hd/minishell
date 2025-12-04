@@ -6,12 +6,11 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:21:41 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 17:07:20 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 19:13:37 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "parsing.h"
 #include "exec.h"
 #include "ctx.h"
 #include "libft.h" 

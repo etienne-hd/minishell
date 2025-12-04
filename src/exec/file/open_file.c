@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 02:05:32 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 19:34:10 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	open_files(t_exec *exec, t_ctx *ctx)
 		}
 		else if (skip == 0 && open_file(file, ctx))
 		{
+			ctx->status_code = 1;
 			close_all_files_until_pipe(begin_scope);
 			skip = 1;
 		}
