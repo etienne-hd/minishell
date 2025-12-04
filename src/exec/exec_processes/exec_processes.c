@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 21:47:48 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 01:44:59 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,22 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 	processes = exec->processes;
 	current_process = (t_process *)processes->content;
 	if (ft_lstsize(exec->processes) == 1 && (current_process->is_builtin))
-		;// EXEC IN MAIN
+		exec_single_builtin_process(current_process, exec, ctx);
 	else
 	{
 		while (processes)
 		{
 			current_process = (t_process *)processes->content;
-			// SI FILE_OUT EST PIPE -> CREATION DE PIPE DANS FILE_OUT
 			if (current_process->file_out && current_process->file_out->fd == PIPE_FD)
 			{
 				if (pipe(current_process->file_out->pipe) == -1)
 					;// IF PIPE FAILED
 			}
 			exec_process(current_process, exec, ctx);
-			// CLOSE PIPE OUT SI PIPE OUT
-			// CLOSE PIPE IN SI PIPE IN
 			if (current_process->file_out && current_process->file_out->fd == PIPE_FD)
 				close_fd(&current_process->file_out->pipe[1]);
 			if (current_process->file_in && current_process->file_in->fd == PIPE_FD)
-				close_fd(&current_process->file_in->pipe[1]);
+				close_fd(&current_process->file_in->pipe[0]);
 			processes = processes->next;
 		}
 		wait_processes(exec, ctx);

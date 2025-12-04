@@ -6,13 +6,15 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 19:44:37 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 02:05:32 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "ft_printf.h"
 #include "libft.h"
 #include "token.h"
+#include "utils.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
@@ -23,7 +25,8 @@ int	open_file(t_file *file, t_ctx *ctx)
 
 	if (ft_lstsize(file->args) > 1 || !file->args || !file->args->content)
 	{
-		file->fd = AMBIGOUS_FD;
+		ft_dprintf(2, "minishell: ambiguous redirect\n", (char *)file->args->content);
+		file->fd = -1;
 		return (1);
 	}
 	else if (file->fd == PIPE_FD)
@@ -66,7 +69,7 @@ void	open_files(t_exec *exec, t_ctx *ctx)
 	skip = 0;
 	files = exec->files;
 	begin_scope = files;
-	while (files)
+	while (files && g_signal != -21)
 	{
 		file = (t_file *)files->content;
 		if (file->type == PIPE)

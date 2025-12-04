@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 15:53:40 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 03:40:39 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,21 @@ void	set_signal_status_code(t_ctx *ctx)
 
 void	handle_signal(int sig)
 {
+	//printf("\nsig -> %d; g_signal -> %d\n", sig, g_signal);
 	if (sig == 2)
 	{
 		if (g_signal == -42)
 		{
-			// HERE DOC
-			g_signal = -1;
+			ft_printf("^C");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			close(0);
+			g_signal = -21;
+			return ;
 		}
 		else
 		{
-			ft_printf("\n");
+			ft_printf("^C\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();

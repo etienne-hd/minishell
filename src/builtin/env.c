@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:28:34 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 15:16:07 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 01:16:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,13 @@ int	env(t_process *process, t_ctx *ctx)
 {
 	t_dict_node	*env_dict;
 
+	(void)process;
 	if (ctx->env == NULL)
 		return (FAILURE);
 	env_dict = ctx->env->entry;
 	while (env_dict)
 	{
-		if (process->file_out)
-			ft_dprintf(process->file_out->fd ,"%s=%s\n",env_dict->key,
-				 env_dict->value);
-		else
-			ft_dprintf(STDOUT_FILENO,"%s=%s\n",env_dict->key,
-				 env_dict->value);
+		printf("%s=%s\n",env_dict->key, (char *)env_dict->value);
 		env_dict = env_dict->next;
 	}
 	return (SUCCESS);

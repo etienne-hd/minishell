@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 17:35:32 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 01:18:52 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	cd(t_process *process, t_ctx *ctx)
 	i = 1;
 	while (args[i])
 		i++;
-	if (i >= 2)
+	if (i > 2)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: cd: too many arguments\n");
 		return (FAILURE);

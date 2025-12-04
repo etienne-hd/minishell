@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:09:59 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:00:47 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 00:04:20 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 # include <stdlib.h>
 
 t_exec		*parse(char *input, t_ctx *ctx);
-
-// Syntax Checker
-int			is_valid_scope(char *s, t_ctx *ctx);
-int			check_syntax(t_list *token_lst, t_ctx *ctx);
 
 // Pre-Token
 typedef struct s_pre_token
@@ -67,5 +63,9 @@ void		clear_file(void *ptr);
 t_process	*init_process(t_token *token, t_ctx *ctx);
 t_exec		*init_exec(t_list *token_list, t_ctx *ctx);
 int			is_redirection(t_token *token);
+
+// Syntax Checker
+int			is_valid_scope(char *s, t_ctx *ctx);
+int			check_syntax(t_list *token_lst, t_ctx *ctx);
 
 #endif

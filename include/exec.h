@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 18:45:14 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 01:02:53 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXEC_H
 
 # define PIPE_FD -42
-# define AMBIGOUS_FD -21
 
 #include "libft.h"
 #include "ctx.h"
@@ -50,6 +49,8 @@ void		execute(t_exec *exec, t_ctx *ctx);
 void		free_exec(t_exec **exec);
 void		exec_processes(t_exec *exec, t_ctx *ctx);
 int			exec_process(t_process *process, t_exec *exec, t_ctx *ctx);
+void		exec_single_builtin_process(t_process *process,
+					t_exec *exec, t_ctx *ctx);
 
 // File
 void		close_fd(int *fd);
@@ -59,5 +60,13 @@ int			open_file(t_file *file, t_ctx *ctx);
 void		open_files(t_exec *exec, t_ctx *ctx);
 int			here_doc(char *delimiter, t_ctx *ctx);
 
+// BuiltIn
+int			exec_builtin(t_process *process, t_ctx *ctx);
+int			echo(t_process *process, t_ctx *ctx);
+int			cd(t_process *process, t_ctx *ctx);
+int			pwd(t_process *process, t_ctx *ctx);
+int			export(t_process *process, t_ctx *ctx);
+int			unset(t_process *process, t_ctx *ctx);
+int			env(t_process *process, t_ctx *ctx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 22:27:51 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 04:03:05 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 static int	get_empty_in_pipe(t_process *process)
 {
 	if (pipe(process->file_in->pipe) == -1)
-		;// IF PIPE FAILED
+	{
+		ft_dprintf(2, "Error\nPipe failed.\n");
+		return (-1);
+	}
 	close_fd(&process->file_in->pipe[1]);
 	return (process->file_in->pipe[0]);
 }
@@ -48,7 +51,7 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_out = process->file_out->fd;
 	else if (process->file_out == NULL)
 		*fd_out = 1;
-	printf("DEBUG: %s; FD_IN %d (%p); FD_OUT %d (%p)\n", process->path, *fd_in, process->file_in, *fd_out, process->file_out);
+	//printf("DEBUG: %s; FD_IN %d (%p); FD_OUT %d (%p)\n", process->path, *fd_in, process->file_in, *fd_out, process->file_out);
 }
 
 int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
@@ -73,9 +76,14 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	dup2(fd_in, 0);
 	dup2(fd_out, 1);
 	close_files(exec->files);
-	if (execve(process->path, process->args, ctx->envp) == -1)
+	if (process->is_builtin)
+		exec_builtin(process, ctx);
+	else if (execve(process->path, process->args, ctx->envp) == -1)
 	{
+		// TODO: CHECK IF IS IT A DIR OR PERMISSION NOT FOUND
 		ft_dprintf(2, "%s: command not found\n", process->args[0], strerror(errno));
+		free_exec(&exec);
+		destroy_ctx(&ctx);
 		exit(127);
 	}
 	free_exec(&exec);

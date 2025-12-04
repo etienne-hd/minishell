@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 23:03:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 15:45:42 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 04:08:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	*get_line(char *delimiter, t_ctx *ctx)
 	char	*tmp;
 
 	line = readline("> ");
-	if (!line)
+	if (!line && g_signal != -21)
 	{
 		ft_dprintf(2, "minishell: warning: here-document \
 delimited by end-of-file (wanted '%s')\n", delimiter);
 		return (NULL);
 	}
-	if (ft_strcmp_endl(line, delimiter) == 0)
+	if (g_signal == -21 || ft_strcmp_endl(line, delimiter) == 0)
 	{
 		free(line);
 		return (NULL);
@@ -62,22 +62,27 @@ int	here_doc(char *delimiter, t_ctx *ctx)
 {
 	char	*line;
 	int		fds[2];
+	int		dup_stdin;
 
-	g_signal = -42;
 	if (pipe(fds) == -1)
 	{
 		printf("%s: Pipe failed\n", delimiter);
 		return (-1);
 	}
+	dup_stdin = dup(0);
 	while (1)
 	{
+		g_signal = -42;
 		line = get_line(delimiter, ctx);
 		if (!line)
 			break ;
 		write(fds[1], line, ft_strlen(line));
+		write(fds[1], "\n", 1);
 		free(line);
 	}
+	dup2(dup_stdin, 0);
 	free(line);
-	close(fds[1]);
+	close_fd(&dup_stdin);
+	close_fd(&fds[1]);
 	return (fds[0]);
 }
