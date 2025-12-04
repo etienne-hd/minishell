@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:28:34 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 01:16:55 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 15:07:16 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	env(t_process *process, t_ctx *ctx)
 	while (env_dict)
 	{
 		if (env_dict->value != NULL)
-			printf("%s=%s\n", env_dict->key, (char *)env_dict->value);
+			printf("%s=\"%s\"\n", env_dict->key, (char *)env_dict->value);
 		env_dict = env_dict->next;
 	}
 	return (SUCCESS);

@@ -48,10 +48,10 @@ SRC_EXEC = $(SRC_DIR)exec/execute.c \
 SRC_BUILTIN = $(SRC_DIR)builtin/cd.c \
 	$(SRC_DIR)builtin/echo.c \
 	$(SRC_DIR)builtin/env.c \
-	$(SRC_DIR)builtin/export.c \
 	$(SRC_DIR)builtin/pwd.c \
 	$(SRC_DIR)builtin/unset.c \
 	$(SRC_DIR)builtin/exec_builtin.c \
+	$(SRC_DIR)builtin/export/export.c \
 
 SRCS = $(SRC_DIR)minishell.c \
 	$(SRC_DIR)ctx.c \
@@ -123,6 +123,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)exec/file
 	@mkdir -p $(OBJ_DIR)exec/exec_processes
 	@mkdir -p $(OBJ_DIR)builtin
+	@mkdir -p $(OBJ_DIR)builtin/export
 
 	$(CC) $(CFLAGS) $< -c -o $@
 
