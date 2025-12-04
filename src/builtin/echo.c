@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:43:30 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 14:12:52 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:03:54 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	echo(t_process *process, t_ctx *ctx)
 	i += is_n;
 	while (args[i])
 	{
-		ft_dprintf(STDOUT_FILENO, "%s", args[i]);
+		printf("%s", args[i]);
 		if (args[i + 1])
-			ft_dprintf(STDOUT_FILENO, " ");
+			printf(" ");
 		i++;
 	}
 	if (!is_n)
-		ft_dprintf(STDOUT_FILENO, "\n");
+		printf("\n");
 	return (SUCCESS);
 }

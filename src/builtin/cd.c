@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 01:18:52 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 16:10:17 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,21 @@ static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 	char	*path;
 
 	if (i == 1)
+	{
 		path = ft_dict_get(ctx->env, "HOME");
+		if (path == NULL)
+			ft_dprintf(STDERR_FILENO, "minishell: cd: << HOME >> not set\n");
+	}
+	else if (ft_strcmp(args[1], "-") == 0)
+	{
+		path = ft_dict_get(ctx->env, "OLD_PWD");
+		if (path == NULL)
+			ft_dprintf(STDERR_FILENO, "minishell: cd: << OLD_PWD >> not set\n");
+	}
 	else
 		path = args[1];
 	if (path == NULL)
-	{
-		ft_dprintf(STDERR_FILENO, "minishell: cd: << HOME >> not set\n");
 		return (FAILURE);
-	}
 	if (chdir(path) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: cd: %s\n", strerror(errno));
