@@ -53,7 +53,7 @@ static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 }
 
 /**
- * @brief 
+ * @brief Juste for the norm
  *
  * @param s_expanded 
  * @param i 

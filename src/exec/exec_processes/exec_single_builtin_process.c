@@ -29,6 +29,13 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_out = 1;
 }
 
+/**
+ * @brief execute a builtin command without fork (only for builtin)
+ *
+ * @param process 
+ * @param exec 
+ * @param ctx 
+ */
 void	exec_single_builtin_process(t_process *process,
 		t_exec *exec, t_ctx *ctx)
 {

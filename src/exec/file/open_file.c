@@ -19,6 +19,13 @@
 #include <fcntl.h>
 #include <string.h>
 
+/**
+ * @brief Open the given file and set his fd
+ *
+ * @param file 
+ * @param ctx 
+ * @return 0 / 1 if open failed
+ */
 int	open_file(t_file *file, t_ctx *ctx)
 {
 	char	*arg;
@@ -60,6 +67,12 @@ static void	close_all_files_until_pipe(t_list *files)
 	}
 }
 
+/**
+ * @brief Open all the file in files of the exec at once (pipe excluded)
+ *
+ * @param exec 
+ * @param ctx 
+ */
 void	open_files(t_exec *exec, t_ctx *ctx)
 {
 	t_list	*begin_scope;

@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "ctx.h"
 #include "parsing.h"
-#include <stdio.h>
 
 static int	check_redirection(t_pre_token *previous_token, t_list *token_lst)
 {
@@ -77,6 +76,14 @@ unexpected token 'newline'\n");
 	return (1);
 }
 
+/**
+ * @brief Check if the token list respect the bash syntax
+ * (check previous and next token of each token)
+ *
+ * @param token_lst 
+ * @param ctx 
+ * @return boolean
+ */
 int	check_syntax(t_list *token_lst, t_ctx *ctx)
 {
 	t_pre_token	*token;
@@ -98,6 +105,6 @@ int	check_syntax(t_list *token_lst, t_ctx *ctx)
 		token_lst = token_lst->next;
 	}
 	if (error_occured)
-		ctx->status_code = FAILURE;
+		ctx->status_code = CMD_BAD_USAGE;
 	return (error_occured);
 }

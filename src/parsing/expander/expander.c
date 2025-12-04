@@ -25,7 +25,7 @@
  * @param ctx global context of minishell for variables
  * @return 
  */
-char	*expand_scope(char *scope, char *scope_end, t_ctx *ctx)
+static char	*expand_scope(char *scope, char *scope_end, t_ctx *ctx)
 {
 	char	scope_type;
 	size_t	scope_length;

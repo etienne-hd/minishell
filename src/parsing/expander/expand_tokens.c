@@ -15,6 +15,13 @@
 #include "parsing.h"
 #include "token.h"
 
+/**
+ * @brief expand all tokens args
+ *
+ * @param tokens 
+ * @param ctx 
+ * @return 0 / 1 if error occurend
+ */
 int	expand_tokens(t_list *tokens, t_ctx *ctx)
 {
 	t_token	*current_token;

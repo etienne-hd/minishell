@@ -18,7 +18,7 @@
 /**
  * @brief Generate a new allocated _token and init it like a pipe
  *
- * @return 
+ * @return pre_token / NULL if error
  */
 static t_pre_token	*get_pipe_token(void)
 {
@@ -40,7 +40,7 @@ static t_pre_token	*get_pipe_token(void)
 /**
  * @brief Generate a new allocated pre_token and init it like a redirectrion
  *
- * @return 
+ * @return pre_token / NULL if error
  */
 static t_pre_token	*get_redirect_token(char *str)
 {
@@ -70,7 +70,7 @@ static t_pre_token	*get_redirect_token(char *str)
  * @brief Generate a new allocated pre_token and init it like a txt
  *
  * @param str 
- * @return 
+ * @return pre_token / NULL if error
  */
 static t_pre_token	*get_text_token(char *str)
 {
@@ -95,7 +95,7 @@ static t_pre_token	*get_text_token(char *str)
  * @brief Return an allocated token with the correct type
  *
  * @param str chain to tokenise
- * @return 
+ * @return pre_token / NULL if error
  */
 t_pre_token	*get_pre_token(char *str)
 {
@@ -115,7 +115,7 @@ t_pre_token	*get_pre_token(char *str)
  * (redirect, pipe, txt)
  *
  * @param str string to parse
- * @return chained list allocated
+ * @return chained list allocated / NULL if error
  */
 t_list	*get_pre_token_list(char *str)
 {

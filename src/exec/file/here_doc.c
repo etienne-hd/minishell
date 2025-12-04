@@ -30,6 +30,13 @@ static int	ft_strcmp_endl(char *s1, char *s2)
 	return (ft_strcmp(s1, s2));
 }
 
+/**
+ * @brief read_user input of the here_doc and expand var in it
+ *
+ * @param delimiter stop word of the here_doc
+ * @param ctx 
+ * @return 
+ */
 static char	*get_line(char *delimiter, t_ctx *ctx)
 {
 	char	*line;
@@ -58,6 +65,13 @@ delimited by end-of-file (wanted '%s')\n", delimiter);
 	return (line);
 }
 
+/**
+ * @brief listen to the user input writing it into a pipe until delimiter word
+ *
+ * @param delimiter 
+ * @param ctx 
+ * @return reading side fd of the pipe
+ */
 int	here_doc(char *delimiter, t_ctx *ctx)
 {
 	char	*line;

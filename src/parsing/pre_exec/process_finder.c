@@ -16,6 +16,13 @@
 #include <stddef.h>
 #include <unistd.h>
 
+/**
+ * @brief find the correct path to the command throught all paths
+ *
+ * @param all_paths 
+ * @param command 
+ * @return command_path / NULL if error
+ */
 static char	*find_path(char ***all_paths, char *command)
 {
 	size_t	i;

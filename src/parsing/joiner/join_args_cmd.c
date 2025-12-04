@@ -13,6 +13,12 @@
 #include "libft.h"
 #include "parsing.h"
 
+/**
+ * @brief take cmd after redirection and put their arg into the last cmd before
+ * (cat >out>out2 -e -a  --> cat -e -a >out >out2)
+ *
+ * @param token_lst 
+ */
 void	join_args_cmd(t_list *token_lst)
 {
 	t_token	*current_cmd;

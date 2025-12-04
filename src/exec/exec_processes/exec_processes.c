@@ -15,7 +15,14 @@
 #include "libft.h"
 #include <sys/wait.h>
 
-void	wait_processes(t_exec *exec, t_ctx *ctx)
+/**
+ * @brief wait all process of the process list from exec -> put the status_code
+ * into the ctx
+ *
+ * @param exec 
+ * @param ctx 
+ */
+static void	wait_processes(t_exec *exec, t_ctx *ctx)
 {
 	t_list		*processes;
 	t_process	*current_process;

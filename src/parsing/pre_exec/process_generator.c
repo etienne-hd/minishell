@@ -34,7 +34,13 @@ static int	is_builtin(char *command)
 	return (0);
 }
 
-static void	fill_process_args(t_process *cmd, t_list *args_list)
+/**
+ * @brief Place all the args_list->content pointer into a char ** in cmd
+ *
+ * @param cmd 
+ * @param args_list 
+ */
+static void	fill_process_args(t_process *process, t_list *args_list)
 {
 	t_list	*current_arg;
 	char	**args;
@@ -54,21 +60,28 @@ static void	fill_process_args(t_process *cmd, t_list *args_list)
 		}
 		args[nb_arg] = NULL;
 	}
-	cmd->args = args;
+	process->args = args;
 }
 
-static int	fill_cmd_path(t_process *cmd, t_list *current_arg, t_ctx *ctx)
+static int	fill_cmd_path(t_process *process, t_list *current_arg, t_ctx *ctx)
 {
 	if (is_builtin(current_arg->content))
 	{
-		cmd->is_builtin = 1;
-		cmd->path = ft_strdup(current_arg->content);
+		process->is_builtin = 1;
+		process->path = ft_strdup(current_arg->content);
 	}
 	else
-		cmd->path = get_cmd_path(current_arg->content, ctx);
-	return (cmd->path == NULL);
+		process->path = get_cmd_path(current_arg->content, ctx);
+	return (process->path == NULL);
 }
 
+/**
+ * @brief create a process from a given token with path, args, other to NULL
+ *
+ * @param token 
+ * @param ctx 
+ * @return process / NULL if error
+ */
 t_process	*init_process(t_token *token, t_ctx *ctx)
 {
 	t_process	*process;

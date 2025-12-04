@@ -20,6 +20,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Create a new process and add it into the process list of exec
+ *
+ * @param current_process pointer to change the current_process
+ * @param current_token 
+ * @param exec 
+ * @param ctx 
+ * @return 0 / 1 if error
+ */
 static int	handle_cmd(t_process **current_process, t_token *current_token,
 		t_exec *exec, t_ctx *ctx)
 {
@@ -40,6 +49,15 @@ static int	handle_cmd(t_process **current_process, t_token *current_token,
 	return (0);
 }
 
+/**
+ * @brief Create a file of type redirection and add it into the file list of exec
+ * and change the current redirection for the current_process
+ *
+ * @param current_redirection pointer to change the current_redirection
+ * @param current_token 
+ * @param exec 
+ * @return 
+ */
 static int	handle_redirection(t_file **current_redirection,
 		t_token *current_token, t_exec *exec)
 {
@@ -66,6 +84,15 @@ static int	handle_redirection(t_file **current_redirection,
 	return (0);
 }
 
+/**
+ * @brief Create a file of type pipe and add it into files list of exec
+ * and change the current redirection for the current process
+ *
+ * @param current_process 
+ * @param current_redirection pointer to change the current_redirection
+ * @param exec 
+ * @return 0 / 1 if error
+ */
 static int	handle_pipe(t_process **current_process,
 		t_file **current_redirection, t_exec *exec)
 {
@@ -94,6 +121,15 @@ static int	handle_pipe(t_process **current_process,
 	return (0);
 }
 
+/**
+ * @brief Edit the correct variabkle based on the current token type
+ *
+ * @param current_token 
+ * @param current_process 
+ * @param current_redirection 
+ * @param exec 
+ * @return 0 / 1 if error
+ */
 static int	handle_token(t_token *current_token,
 		t_process **current_process, t_file **current_redirection, t_exec *exec)
 {
@@ -120,6 +156,14 @@ static int	handle_token(t_token *current_token,
 	return (0);
 }
 
+/**
+ * @brief Init all the exec with process list and all files of redirection / pipe
+ * (not openned)
+ *
+ * @param token_list 
+ * @param ctx 
+ * @return exec / NULL if error
+ */
 t_exec	*init_exec(t_list *token_list, t_ctx *ctx)
 {
 	t_exec		*exec;

@@ -15,6 +15,13 @@
 #include "ctx.h"
 #include "utils.h"
 
+/**
+ * @brief Return if all scope are correctly close in the string
+ *
+ * @param s 
+ * @param ctx 
+ * @return boolean
+ */
 int	is_valid_scope(char *s, t_ctx *ctx)
 {
 	char		scope;

@@ -17,6 +17,13 @@
 #include <errno.h>
 #include <unistd.h>
 
+/**
+ * @brief close the writing side of the process's file_in pipe, print error if
+ * pipe failed
+ *
+ * @param process 
+ * @return 
+ */
 static int	get_empty_in_pipe(t_process *process)
 {
 	if (pipe(process->file_in->pipe) == -1)
@@ -28,6 +35,13 @@ static int	get_empty_in_pipe(t_process *process)
 	return (process->file_in->pipe[0]);
 }
 
+/**
+ * @brief prepare fd_in and fd_out based on process's files
+ *
+ * @param fd_in 
+ * @param fd_out 
+ * @param process 
+ */
 static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 {
 	*fd_in = -1;
@@ -53,6 +67,14 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_out = 1;
 }
 
+/**
+ * @brief execute the given process in all possible case (builtin, pipe, etc..)
+ *
+ * @param process 
+ * @param exec 
+ * @param ctx 
+ * @return 
+ */
 int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 {
 	int	pid;

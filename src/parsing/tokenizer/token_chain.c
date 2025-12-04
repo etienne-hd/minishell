@@ -14,6 +14,13 @@
 #include "parsing.h"
 #include <stdio.h>
 
+/**
+ * @brief tranform into cmd args all continuous text
+ *
+ * @param pre_token_list 
+ * @param n 
+ * @return list of arg / NULL if error
+ */
 static t_list	*get_args(t_list *pre_token_list, int n)
 {
 	t_list		*arg_node;
@@ -40,6 +47,12 @@ static t_list	*get_args(t_list *pre_token_list, int n)
 	return (args_list);
 }
 
+/**
+ * @brief create a valide redirection type based on redirection pre_token
+ *
+ * @param pre_token_list 
+ * @return token / NULL if error
+ */
 static t_token	*get_redirection_token(t_list **pre_token_list)
 {
 	t_token		*token;
@@ -67,6 +80,12 @@ static t_token	*get_redirection_token(t_list **pre_token_list)
 	return (token);
 }
 
+/**
+ * @brief Create a cmd token based on all contiuous txt pre_token
+ *
+ * @param pre_token_list 
+ * @return cmd token / NULL if error
+ */
 static t_token	*get_cmd_token(t_list **pre_token_list)
 {
 	t_token			*token;
@@ -106,6 +125,12 @@ static t_token	*get_pipe_token(t_list **pre_token_list)
 	return (token);
 }
 
+/**
+ * @brief Generate all the token list based on pre_token list
+ *
+ * @param pre_token_list 
+ * @return token list / NULL if error
+ */
 t_list	*get_token_list(t_list *pre_token_list)
 {
 	t_token		*token;

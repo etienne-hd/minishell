@@ -21,6 +21,14 @@
 #include <unistd.h>
 #include <errno.h>
 
+/**
+ * @brief Execute the changment of the working dir, display error message
+ *
+ * @param args 
+ * @param i 
+ * @param ctx 
+ * @return 0 / 1 in fail case
+ */
 static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 {
 	char	*path;
@@ -42,6 +50,14 @@ static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Reset pwd env variable based on the old dir and the new one
+ * (no usage of env pwd / old_pwd in it)
+ *
+ * @param pwd pwd before the move
+ * @param ctx 
+ * @return 
+ */
 static int	set_pwd_var(char *pwd, t_ctx *ctx)
 {
 	char		*tmp;

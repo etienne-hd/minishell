@@ -14,6 +14,13 @@
 #include "parsing.h"
 #include <stdio.h>
 
+/**
+ * @brief Remove all the space at the end of the given string
+ *
+ * @param n 
+ * @param s 
+ * @return 0 / 1 if error
+ */
 static int	trim_end(size_t *n, char **s)
 {
 	size_t	j;
@@ -36,6 +43,13 @@ static int	trim_end(size_t *n, char **s)
 	return (0);
 }
 
+/**
+ * @brief Remove all the space at the beginning of the given string
+ *
+ * @param n 
+ * @param s 
+ * @return 0 / 1 if error
+ */
 static int	trim_begin(size_t *i, size_t *n, char **s)
 {
 	size_t	j;

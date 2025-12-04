@@ -18,6 +18,15 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/**
+ * @brief get the concatated value of old var with the new one in case 
+ * of test+=test
+ *
+ * @param key 
+ * @param current_value value to add to the existing one
+ * @param ctx 
+ * @return 
+ */
 static char	*get_concat_value(char *key, char *current_value, t_ctx *ctx)
 {
 	char	*new_value;
@@ -31,6 +40,15 @@ static char	*get_concat_value(char *key, char *current_value, t_ctx *ctx)
 	return (new_value);
 }
 
+/**
+ * @brief set all value of param to base on export type (= / +=)
+ *
+ * @param args 
+ * @param key 
+ * @param i 
+ * @param j 
+ * @return value of export type / -1 in fail
+ */
 static int	get_type_export(char **args, char **key, size_t i, size_t *j)
 {
 	int	export_type;
@@ -57,6 +75,15 @@ static int	is_end_key(char c)
 	return (0);
 }
 
+/**
+ * @brief logique of exporting with both case (= / +=)
+ *
+ * @param i 
+ * @param j 
+ * @param args 
+ * @param ctx 
+ * @return 
+ */
 static int	export_valid(size_t i, size_t j, char **args, t_ctx *ctx)
 {
 	int		export_type;
