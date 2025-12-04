@@ -6,13 +6,14 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 16:52:10 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 19:10:08 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ctx.h"
 #include "error.h"
 #include "exec.h"
+#include "utils.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 #include <string.h>
@@ -69,6 +70,27 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_out = 1;
 }
 
+static void	display_error(t_process *process, t_exec *exec, t_ctx *ctx)
+{
+	int	status_code;
+
+	if (is_dir(process->args[0]))
+	{
+		ft_dprintf(2, "minishell: %s: Is a directory\n", process->args[0],
+			strerror(errno));
+		status_code = 126;
+	}
+	else
+	{
+		ft_dprintf(2, "minishell: %s: command not found\n", process->args[0],
+			strerror(errno));
+		status_code = 127;
+	}
+	free_exec(&exec);
+	destroy_ctx(&ctx);
+	exit(status_code);
+}
+
 /**
  * @brief execute the given process in all possible case (builtin, pipe, etc..)
  *
@@ -84,9 +106,7 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	int	fd_out;
 
 	pid = fork();
-	if (pid == -1)
-		; // FORK FAILED
-	else if (pid != 0)
+	if (pid != 0 || pid == -1)
 		return (pid);
 	get_fd(&fd_in, &fd_out, process);
 	if (fd_in == -1 || fd_out == -1)
@@ -102,14 +122,7 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	if (process->is_builtin)
 		exec_builtin(process, exec, ctx);
 	else if (execve(process->path, process->args, ctx->envp) == -1)
-	{
-		// TODO: CHECK IF IS IT A DIR OR PERMISSION NOT FOUND
-		ft_dprintf(2, "minishell: %s: command not found\n", process->args[0],
-			strerror(errno));
-		free_exec(&exec);
-		destroy_ctx(&ctx);
-		exit(CMD_NOT_FOUND);
-	}
+		display_error(process, exec, ctx);
 	free_exec(&exec);
 	destroy_ctx(&ctx);
 	exit(SUCCESS);

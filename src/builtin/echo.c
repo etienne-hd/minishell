@@ -6,13 +6,12 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:43:30 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:51:06 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 17:09:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "exec.h"
-#include "ft_printf.h"
 #include <unistd.h>
 
 int	builtin_echo(t_process *process, t_ctx *ctx)
