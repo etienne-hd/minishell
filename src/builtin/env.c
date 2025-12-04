@@ -27,7 +27,8 @@ int	env(t_process *process, t_ctx *ctx)
 	env_dict = ctx->env->entry;
 	while (env_dict)
 	{
-		printf("%s=%s\n", env_dict->key, (char *)env_dict->value);
+		if (env_dict->value != NULL)
+			printf("%s=%s\n", env_dict->key, (char *)env_dict->value);
 		env_dict = env_dict->next;
 	}
 	return (SUCCESS);

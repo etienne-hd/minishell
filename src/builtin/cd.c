@@ -90,7 +90,7 @@ int	cd(t_process *process, t_ctx *ctx)
 	if (i > 2)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: cd: too many arguments\n");
-		return (FAILURE);
+		return (CMD_BAD_USAGE);
 	}
 	if (cd_movement(args, i, ctx))
 	{

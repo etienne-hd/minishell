@@ -13,6 +13,7 @@
 #include "ctx.h"
 #include "exec.h"
 #include "libft.h"
+#include <stdlib.h>
 #include <sys/wait.h>
 
 /**
@@ -35,7 +36,7 @@ static void	wait_processes(t_exec *exec, t_ctx *ctx)
 		waitpid(current_process->pid, &stats, 0);
 		processes = processes->next;
 	}
-	ctx->status_code = stats;
+	ctx->status_code = WEXITSTATUS(stats);
 }
 
 void	exec_processes(t_exec *exec, t_ctx *ctx)
@@ -62,7 +63,7 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 					// check if pipe failed
 				}
 			}
-			exec_process(current_process, exec, ctx);
+			current_process->pid = exec_process(current_process, exec, ctx);
 			if (current_process->file_out
 				&& current_process->file_out->fd == PIPE_FD)
 				close_fd(&current_process->file_out->pipe[1]);

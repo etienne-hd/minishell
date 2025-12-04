@@ -92,6 +92,8 @@ static int	export_valid(size_t i, size_t j, char **args, t_ctx *ctx)
 	char	*key;
 
 	export_type = get_type_export(args, &key, i, &j);
+	if (export_type == 0)
+		return (2);
 	tmp = NULL;
 	if (export_type > 0)
 	{
@@ -117,8 +119,11 @@ int	export(t_process *process, t_ctx *ctx)
 {
 	size_t	i;
 	size_t	j;
+	int		error;
+	int		tmp_error;
 
 	i = 1;
+	error = 0;
 	while (process->args[i])
 	{
 		j = 0;
@@ -126,15 +131,21 @@ int	export(t_process *process, t_ctx *ctx)
 			j++;
 		if (process->args[i][j] != '=' && process->args[i][j] != '+'
 				&& process->args[i][j] != '\0')
+		{
 			ft_dprintf(STDERR_FILENO,
 				"minishell: export: << %s >> : invalide key\n",
 				process->args[i]);
+			error = FAILURE;
+		}
 		else if (process->args[i][j] != '\0')
 		{
-			if (export_valid(i, j, process->args, ctx))
+			tmp_error = export_valid(i, j, process->args, ctx);
+			if (tmp_error == 1)
 				return (FAILURE);
+			else if (tmp_error == 2)
+				error = FAILURE;
 		}
 		i++;
 	}
-	return (SUCCESS);
+	return (error);
 }

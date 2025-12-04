@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "ctx.h"
+#include "error.h"
 #include "exec.h"
 #include "ft_printf.h"
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
@@ -92,7 +94,7 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 		close_files(exec->files);
 		free_exec(&exec);
 		destroy_ctx(&ctx);
-		exit(1);
+		exit(FAILURE);
 	}
 	dup2(fd_in, 0);
 	dup2(fd_out, 1);
@@ -102,13 +104,13 @@ int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 	else if (execve(process->path, process->args, ctx->envp) == -1)
 	{
 		// TODO: CHECK IF IS IT A DIR OR PERMISSION NOT FOUND
-		ft_dprintf(2, "%s: command not found\n", process->args[0],
+		ft_dprintf(2, "minishell: %s: command not found\n", process->args[0],
 			strerror(errno));
 		free_exec(&exec);
 		destroy_ctx(&ctx);
-		exit(127);
+		exit(CMD_NOT_FOUND);
 	}
 	free_exec(&exec);
 	destroy_ctx(&ctx);
-	exit(1);
+	exit(SUCCESS);
 }
