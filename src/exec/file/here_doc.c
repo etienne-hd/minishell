@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 23:03:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 23:04:45 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 20:03:52 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	here_doc(char *delimiter, int to_expand, t_ctx *ctx)
 
 	if (pipe(fds) == -1)
 	{
-		printf("%s: Pipe failed\n", delimiter);
+		ft_dprintf(2, "%s: Pipe failed\n", delimiter);
 		return (-1);
 	}
 	dup_stdin = dup(0);
