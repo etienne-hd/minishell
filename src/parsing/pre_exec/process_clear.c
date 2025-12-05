@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 12:07:23 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 02:02:38 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 03:54:21 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	clear_file(void *ptr)
 	if (ptr == NULL)
 		return ;
 	file = (t_file *)ptr;
-	ft_lstclear(&file->args, free);
+	if (file->args)
+		ft_lstclear(&file->args, free);
 	free(ptr);
 }
 
