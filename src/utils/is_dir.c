@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_exec_utils.c                                  :+:      :+:    :+:   */
+/*   is_dir.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 18:42:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 23:36:12 by ehode            ###   ########.fr       */
+/*   Created: 2025/12/04 18:45:21 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/04 23:19:42 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "token.h"
-#include "parsing.h"
+#include "utils.h"
+#include <errno.h>
+#include <asm-generic/errno-base.h>
+#include <dirent.h>
+#include <string.h>
 
-void	init_redirection(t_file	*file, t_token *token)
+int	is_dir(char *path)
 {
-	file->fd = -1;
-	file->type = token->type;
-	file->args = token->args;
-}
+	DIR	*dir;
 
-int	is_redirection(t_token *token)
-{
-	if (token->type == IN_FILE || token->type == IN_HERE_DOC
-		|| token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
+	dir = opendir(path);
+	if (dir == NULL && errno == EACCES)
 		return (1);
-	return (0);
+	if (dir == NULL)
+		return (0);
+	closedir(dir);
+	return (1);
 }

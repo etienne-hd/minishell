@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 23:03:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 04:08:31 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 23:04:45 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_strcmp_endl(char *s1, char *s2)
  * @param ctx 
  * @return 
  */
-static char	*get_line(char *delimiter, t_ctx *ctx)
+static char	*get_line(char *delimiter, int to_expand, t_ctx *ctx)
 {
 	char	*line;
 	char	*tmp;
@@ -54,6 +54,8 @@ delimited by end-of-file (wanted '%s')\n", delimiter);
 		free(line);
 		return (NULL);
 	}
+	if (!to_expand)
+		return (line);
 	tmp = line;
 	line = n_expand(line, ft_strlen(line), ctx);
 	free(tmp);
@@ -72,7 +74,7 @@ delimited by end-of-file (wanted '%s')\n", delimiter);
  * @param ctx 
  * @return reading side fd of the pipe
  */
-int	here_doc(char *delimiter, t_ctx *ctx)
+int	here_doc(char *delimiter, int to_expand, t_ctx *ctx)
 {
 	char	*line;
 	int		fds[2];
@@ -87,7 +89,7 @@ int	here_doc(char *delimiter, t_ctx *ctx)
 	while (1)
 	{
 		g_signal = -42;
-		line = get_line(delimiter, ctx);
+		line = get_line(delimiter, to_expand, ctx);
 		if (!line)
 			break ;
 		write(fds[1], line, ft_strlen(line));

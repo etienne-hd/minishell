@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:10:17 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:51:03 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 	}
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
-		path = ft_dict_get(ctx->env, "OLD_PWD");
+		path = ft_dict_get(ctx->env, "OLDPWD");
 		if (path == NULL)
-			ft_dprintf(STDERR_FILENO, "minishell: cd: << OLD_PWD >> not set\n");
+			ft_dprintf(STDERR_FILENO, "minishell: cd: OLDPWD not set\n");
 	}
 	else
 		path = args[1];
@@ -69,9 +69,9 @@ static int	set_pwd_var(char *pwd, t_ctx *ctx)
 {
 	char		*tmp;
 
-	tmp = ft_dict_get(ctx->env, "OLD_PWD");
+	tmp = ft_dict_get(ctx->env, "OLDPWD");
 	free(tmp);
-	if (ft_dict_set(ctx->env, "OLD_PWD", pwd) == NULL)
+	if (ft_dict_set(ctx->env, "OLDPWD", pwd) == NULL)
 		return (FAILURE);
 	pwd = get_pwd();
 	tmp = ft_dict_get(ctx->env, "PWD");
@@ -81,7 +81,7 @@ static int	set_pwd_var(char *pwd, t_ctx *ctx)
 	return (0);
 }
 
-int	cd(t_process *process, t_ctx *ctx)
+int	builtin_cd(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	char	*tmp_set;

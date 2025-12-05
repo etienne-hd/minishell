@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 15:37:32 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 18:53:00 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	handle_signal(int sig);
 
 // Path
 char	*get_pwd(void);
+int		is_dir(char *path);
 char	*path_tilde_expand(char *path, t_dict *env);
 char	*path_tilde_collapse(char *path, t_dict *env);
 
