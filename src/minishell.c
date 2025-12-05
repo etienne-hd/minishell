@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 22:10:27 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 03:10:51 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utils.h"
 #include "parsing.h"
 #include "signal.h"
+#include "printf.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 
@@ -39,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		input = get_input(ctx);
 		if (!input)
 		{
-			printf("exit\n");
+			ft_dprintf(2, "exit\n");
 			break ;
 		}
 		if (is_blank(input))

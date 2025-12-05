@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:21:41 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 01:06:33 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 01:46:00 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	builtin_exit(t_process *process, t_exec *exec, t_ctx *ctx)
 	int		argc;
 
 	if (ft_lstsize(exec->processes) == 1)
-		ft_printf("exit\n");
+		ft_dprintf(2, "exit\n");
 	argc = get_argc(process->args);
 	if (argc > 2 && is_valid_arg(process->args[1]))
 	{

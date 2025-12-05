@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 22:18:58 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 03:14:15 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	open_file(t_file *file, t_ctx *ctx)
 	else
 		file->fd = open(arg, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (file->fd == -1 && file->type != IN_HERE_DOC)
-		ft_dprintf(2, "%s: %s\n", arg, strerror(errno));
+		ft_dprintf(2, "minishell: %s: %s\n", arg, strerror(errno));
 	return (file->fd == -1);
 }
 
