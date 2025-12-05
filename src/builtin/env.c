@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:28:34 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:02:28 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:51:09 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stddef.h>
 #include <unistd.h>
 
-int	env(t_process *process, t_ctx *ctx)
+int	builtin_env(t_process *process, t_ctx *ctx)
 {
 	t_dict_node	*env_dict;
 

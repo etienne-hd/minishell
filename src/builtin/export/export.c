@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:09:18 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/05 10:19:23 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/05 10:24:24 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	export_vars(char **args, t_ctx *ctx)
 	return (error);
 }
 
-int	export(t_process *process, t_ctx *ctx)
+int	builtin_export(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	size_t	i;

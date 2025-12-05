@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:33:11 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 15:16:11 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:51:16 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include <stddef.h>
 
-int	unset(t_process *process, t_ctx *ctx)
+int	builtin_unset(t_process *process, t_ctx *ctx)
 {
 	size_t	i;
 	char	*value;

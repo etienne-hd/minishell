@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 02:05:32 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 03:14:15 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	open_file(t_file *file, t_ctx *ctx)
 	if (file->type == IN_FILE)
 		file->fd = open(arg, O_RDONLY, 0644);
 	else if (file->type == IN_HERE_DOC)
-		file->fd = here_doc(arg, ctx);
+		file->fd = here_doc(arg, file->here_doc_to_expand, ctx);
 	else if (file->type == OUT_FILE)
 		file->fd = open(arg, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	else
 		file->fd = open(arg, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (file->fd == -1 && file->type != IN_HERE_DOC)
-		ft_dprintf(2, "%s: %s\n", arg, strerror(errno));
+		ft_dprintf(2, "minishell: %s: %s\n", arg, strerror(errno));
 	return (file->fd == -1);
 }
 
@@ -93,6 +93,7 @@ void	open_files(t_exec *exec, t_ctx *ctx)
 		}
 		else if (skip == 0 && open_file(file, ctx))
 		{
+			ctx->status_code = 1;
 			close_all_files_until_pipe(begin_scope);
 			skip = 1;
 		}

@@ -6,16 +6,15 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:43:30 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:03:54 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:09:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "exec.h"
-#include "ft_printf.h"
 #include <unistd.h>
 
-int	echo(t_process *process, t_ctx *ctx)
+int	builtin_echo(t_process *process, t_ctx *ctx)
 {
 	char	**args;
 	size_t	i;

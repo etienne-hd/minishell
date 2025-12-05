@@ -13,7 +13,8 @@ SRC_UTILS = $(SRC_DIR)utils/path.c \
 	$(SRC_DIR)utils/bounded_join.c \
 	$(SRC_DIR)utils/signal.c \
 	$(SRC_DIR)utils/free_2d.c \
-	$(SRC_DIR)utils/get_pwd.c
+	$(SRC_DIR)utils/get_pwd.c \
+	$(SRC_DIR)utils/is_dir.c
 
 SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/checker/check_scope.c \
@@ -34,7 +35,8 @@ SRC_PARSING = $(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/pre_exec/init_exec.c \
 	$(SRC_DIR)parsing/pre_exec/process_clear.c \
 	$(SRC_DIR)parsing/pre_exec/process_finder.c \
-	$(SRC_DIR)parsing/pre_exec/process_generator.c 
+	$(SRC_DIR)parsing/pre_exec/process_generator.c \
+	$(SRC_DIR)parsing/pre_exec/init_here_doc.c
 
 SRC_EXEC = $(SRC_DIR)exec/execute.c \
 	$(SRC_DIR)exec/free_exec.c \
@@ -50,6 +52,7 @@ SRC_BUILTIN = $(SRC_DIR)builtin/cd.c \
 	$(SRC_DIR)builtin/env.c \
 	$(SRC_DIR)builtin/pwd.c \
 	$(SRC_DIR)builtin/unset.c \
+	$(SRC_DIR)builtin/exit.c \
 	$(SRC_DIR)builtin/exec_builtin.c \
 	$(SRC_DIR)builtin/export/export_print.c \
 	$(SRC_DIR)builtin/export/export_utils.c \
