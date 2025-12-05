@@ -51,6 +51,8 @@ SRC_BUILTIN = $(SRC_DIR)builtin/cd.c \
 	$(SRC_DIR)builtin/pwd.c \
 	$(SRC_DIR)builtin/unset.c \
 	$(SRC_DIR)builtin/exec_builtin.c \
+	$(SRC_DIR)builtin/export/export_print.c \
+	$(SRC_DIR)builtin/export/export_utils.c \
 	$(SRC_DIR)builtin/export/export.c \
 
 SRCS = $(SRC_DIR)minishell.c \

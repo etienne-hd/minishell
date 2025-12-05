@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 01:02:53 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 10:16:48 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int			exec_builtin(t_process *process, t_ctx *ctx);
 int			echo(t_process *process, t_ctx *ctx);
 int			cd(t_process *process, t_ctx *ctx);
 int			pwd(t_process *process, t_ctx *ctx);
+int			print_export(t_dict *origin);
+char		*get_concat_value(char *value, char *key, t_ctx *ctx);
+int			is_valide_export_mode(char *export_mode);
+int			check_error(char *key, char	**args, size_t i, size_t j);
 int			export(t_process *process, t_ctx *ctx);
 int			unset(t_process *process, t_ctx *ctx);
 int			env(t_process *process, t_ctx *ctx);

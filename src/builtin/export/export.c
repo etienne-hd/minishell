@@ -6,31 +6,16 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:09:18 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 15:52:07 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/05 10:19:23 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "exec.h"
 #include "ctx.h"
-#include "ft_printf.h"
 #include "libft.h"
 #include <stddef.h>
 #include <unistd.h>
-
-static int	is_valide_export_mode(char *export_mode)
-{
-	if (export_mode[0] == '+')
-	{
-		if (export_mode[1] == '=')
-			return (2);
-	}
-	else if (export_mode[0] == '=')
-		return (1);
-	else if (export_mode[0] == '\0')
-		return (3);
-	return (0);
-}
 
 static int	add_to_dict(char *value, char *key, t_ctx *ctx)
 {
@@ -61,8 +46,6 @@ static int	add_to_dict(char *value, char *key, t_ctx *ctx)
 static int	set_val_export(char *post_key, char *key, t_ctx *ctx)
 {
 	char	*value;
-	char	*old;
-	char	*tmp;
 	int		mode;
 	size_t	i;
 
@@ -77,13 +60,7 @@ static int	set_val_export(char *post_key, char *key, t_ctx *ctx)
 		i++;
 	value = ft_strndup(&post_key[mode], i);
 	if (mode == 2)
-	{
-		old = ft_dict_get(ctx->env, key);
-		if (old)
-			tmp = ft_strjoin(old, value);
-		free(value);
-		value = tmp;
-	}
+		value = get_concat_value(value, key, ctx);
 	if (add_to_dict(value, key, ctx))
 		return (FAILURE);
 	return (SUCCESS);
@@ -104,16 +81,8 @@ static int	export_vars(char **args, t_ctx *ctx)
 		while (args[i][j] && (ft_isalnum(args[i][j]) || args[i][j] == '_'))
 			j++;
 		key = ft_strndup(args[i], j);
-		if (!key)
-		{
-			// gestion erreur
-		}
-		if (is_valide_export_mode(&args[i][j]) == 0)
-		{
-			ft_dprintf(STDERR_FILENO, "minishell: export: << %s >> \
-invalide key\n", args[i]);
+		if (check_error(key, args, i, j))
 			error = FAILURE;
-		}
 		else
 			set_val_export(&args[i][j], key, ctx);
 		free(key);
@@ -132,14 +101,11 @@ int	export(t_process *process, t_ctx *ctx)
 	if (!args)
 		return (FAILURE);
 	i = 0;
-	error = 0;
+	error = SUCCESS;
 	while (args[i])
 		i++;
 	if (i == 1)
-	{
-		// affichage de con
-		return (SUCCESS);
-	}
+		print_export(ctx->env);
 	else
 		error = export_vars(&args[1], ctx);
 	return (error);
