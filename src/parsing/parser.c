@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:35:50 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 19:14:58 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 01:06:59 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ t_exec	*parse(char *input, t_ctx *ctx)
 		safe_exit(&ctx, "Malloc failed.");
 	}
 	ft_lstclear(&token_list, clear_token_keep_cmd_arg);
-	ctx->status_code = SUCCESS;
 	return (exec);
 }

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 23:15:53 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/04 23:19:24 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	exec_processes(t_exec *exec, t_ctx *ctx)
 		{
 			current_process = (t_process *)processes->content;
 			if (current_process->file_out
-				&& current_process->file_out->fd == PIPE_FD)
-				if (pipe(current_process->file_out->pipe) == -1)
-				{
-					ft_dprintf(2, "Error\nPipe failed.\n");
-					break ;
-				}
+				&& current_process->file_out->fd == PIPE_FD
+				&& (pipe(current_process->file_out->pipe) == -1))
+			{
+				ft_dprintf(2, "Error\nPipe failed.\n");
+				break ;
+			}
 			current_process->pid = exec_process(current_process, exec, ctx);
 			close_pipe(current_process);
 			processes = processes->next;
