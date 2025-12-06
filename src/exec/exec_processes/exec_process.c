@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 17:05:37 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 17:42:54 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,12 @@ static void	display_error(t_process *process, t_exec *exec, t_ctx *ctx)
  */
 int	exec_process(t_process *process, t_exec *exec, t_ctx *ctx)
 {
-	int	pid;
 	int	fd_in;
 	int	fd_out;
 
-	pid = fork();
-	if (pid != 0 || pid == -1)
-		return (pid);
+	process->pid = fork();
+	if (process->pid != 0 || process->pid == -1)
+		return (process->pid);
 	set_process_signal_handler();
 	get_fd(&fd_in, &fd_out, process);
 	if (fd_in == -1 || fd_out == -1)
