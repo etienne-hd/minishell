@@ -56,7 +56,7 @@ static int	set_val_export(char *post_key, char *key, t_ctx *ctx)
 		return (mode);
 	}
 	i = mode - 1;
-	while (post_key[i])
+	while (post_key[0] && post_key[i])
 		i++;
 	value = ft_strndup(&post_key[mode], i);
 	if (mode == 2)

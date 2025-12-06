@@ -44,6 +44,7 @@ static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 		path = ft_dict_get(ctx->env, "OLDPWD");
 		if (path == NULL)
 			ft_dprintf(STDERR_FILENO, "minishell: cd: OLDPWD not set\n");
+		ft_dprintf(STDIN_FILENO, "%s\n", path);
 	}
 	else
 		path = args[1];
