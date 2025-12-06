@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:21:41 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 10:22:06 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 12:59:19 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	is_valid_arg(char *arg)
 	long long	number;
 	int			sign;
 
+	if (arg[0] == 0)
+		return (0);
 	sign = 1;
 	if (*arg == '-' || *arg == '+')
 	{

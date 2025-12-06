@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:41:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 11:09:20 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 12:46:43 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	execute(t_exec *exec, t_ctx *ctx)
 {
+	g_signal = -1;
 	open_files(exec, ctx);
 	if (g_signal != -21 && ft_lstsize(exec->processes) > 0)
 	{

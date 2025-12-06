@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 10:56:59 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 12:42:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_signal_status_code(t_ctx *ctx)
 {
 	if (g_signal == -1)
 		return ;
-	if (g_signal == 2)
+	if (g_signal == 2 || g_signal == -21)
 		ctx->status_code = 130;
 	g_signal = -1;
 }

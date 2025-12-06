@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 11:20:56 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 12:47:38 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	minishell_routine(t_ctx *ctx)
 
 	while (1)
 	{
-		g_signal = -1;
+		if (g_signal == -42)
+			g_signal = -1;
 		input = get_input(ctx);
 		set_signal_status_code(ctx);
 		if (!input)
