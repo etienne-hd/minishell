@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/06 09:49:55 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 10:22:27 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	cd_movement(char **args, size_t i, t_ctx *ctx)
 	{
 		path = ft_dict_get(ctx->env, "HOME");
 		if (path == NULL)
-			ft_dprintf(STDERR_FILENO, "minishell: cd: << HOME >> not set\n");
+			ft_dprintf(STDERR_FILENO, "minishell: cd: HOME not set\n");
 	}
 	else if (ft_strcmp(args[1], "-") == 0)
 	{
@@ -91,22 +91,22 @@ int	builtin_cd(t_process *process, t_ctx *ctx)
 	args = process->args;
 	if (args == NULL)
 		return (FAILURE);
-	i = 1;
-	while (args[i])
-		i++;
+	i = get_argc(args);
 	if (i > 2)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: cd: too many arguments\n");
 		return (CMD_BAD_USAGE);
 	}
-	if (cd_movement(args, i, ctx))
-		return (FAILURE);
 	tmp_set = get_pwd();
+	if (cd_movement(args, i, ctx))
+	{
+		free(tmp_set);
+		return (FAILURE);
+	}
 	if (set_pwd_var(tmp_set, ctx))
 	{
 		free(tmp_set);
 		return (FAILURE);
 	}
-	free(tmp_set);
 	return (SUCCESS);
 }

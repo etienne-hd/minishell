@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 16:21:41 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 01:46:00 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 10:22:06 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "exec.h"
 #include "ctx.h"
 #include "libft.h" 
+#include "utils.h"
 #include <stddef.h>
 #include <stdint.h>
 
@@ -61,16 +62,6 @@ static int	get_status_code(char *arg)
 		arg++;
 	}
 	return (status_code * sign);
-}
-
-static int	get_argc(char **args)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i])
-		i++;
-	return (i);
 }
 
 int	builtin_exit(t_process *process, t_exec *exec, t_ctx *ctx)

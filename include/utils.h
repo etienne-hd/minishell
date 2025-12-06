@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 18:53:00 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 10:21:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		is_blank(char *s);
 char	is_in_scope(char c);
 int		bounded_join(char **origin, size_t n, char *value, char *end);
 void	free_2d(char ***tab);
+int		get_argc(char **args);
 
 // Signal
 extern 	int g_signal;
