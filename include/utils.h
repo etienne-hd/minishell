@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 10:21:55 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 11:03:27 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_2d(char ***tab);
 int		get_argc(char **args);
 
 // Signal
-extern 	int g_signal;
+extern int	g_signal;
 void	set_signal_status_code(t_ctx *ctx);
 void	handle_signal(int sig);
 

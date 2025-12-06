@@ -1,0 +1,59 @@
+==1788201== Memcheck, a memory error detector
+==1788201== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1788201== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==1788201== Command: .//minishell
+==1788201== Parent PID: 1786162
+==1788201== 
+--1788201-- 
+--1788201-- Valgrind options:
+--1788201--    --leak-check=full
+--1788201--    --show-leak-kinds=all
+--1788201--    --track-origins=yes
+--1788201--    --verbose
+--1788201--    --log-file=tmp_valgrind-out.txt
+--1788201-- Contents of /proc/version:
+--1788201--   Linux version 5.15.0-161-generic (buildd@lcy02-amd64-072) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #171-Ubuntu SMP Sat Oct 11 08:17:01 UTC 2025
+--1788201-- 
+--1788201-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--1788201-- Page sizes: currently 4096, max supported 4096
+--1788201-- Valgrind library directory: /usr/libexec/valgrind
+--1788201-- Reading syms from /home/ehode/Documents/cc/minishell/minishell
+--1788201-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--1788201--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
+--1788201--   .. build-id is valid
+--1788201-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--1788201--    object doesn't have a symbol table
+--1788201--    object doesn't have a dynamic symbol table
+--1788201-- Scheduler: using generic scheduler lock implementation.
+--1788201-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==1788201== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1788201-by-ehode-on-???
+==1788201== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1788201-by-ehode-on-???
+==1788201== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1788201-by-ehode-on-???
+==1788201== 
+==1788201== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1788201== don't want to do, unless you know exactly what you're doing,
+==1788201== or are doing some strange experiment):
+==1788201==   /usr/bin/vgdb --pid=1788201 ...command...
+==1788201== 
+==1788201== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1788201==   /path/to/gdb .//minishell
+==1788201== and then give GDB the following command
+==1788201==   target remote | /usr/bin/vgdb --pid=1788201
+==1788201== --pid is optional if only one valgrind process is running
+==1788201== 
+--1788201-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--1788201-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--1788201-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--1788201--    object doesn't have a symbol table
+--1788201-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--1788201--    object doesn't have a symbol table
+==1788201== WARNING: new redirection conflicts with existing -- ignoring it
+--1788201--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--1788201--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--1788201-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--1788201-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--1788201-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+--1788201--    object doesn't have a symbol table
+--1788201-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--1788201--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
+--1788201--   .. build-id is valid

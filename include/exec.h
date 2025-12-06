@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 22:46:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 10:32:47 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/12/06 11:03:01 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # define PIPE_FD -42
 
-#include "libft.h"
-#include "ctx.h"
-#include "token.h"
+# include "libft.h"
+# include "ctx.h"
+# include "token.h"
 
 typedef struct s_file
 {
@@ -51,7 +51,7 @@ void		free_exec(t_exec **exec);
 void		exec_processes(t_exec *exec, t_ctx *ctx);
 int			exec_process(t_process *process, t_exec *exec, t_ctx *ctx);
 void		exec_single_builtin_process(t_process *process,
-					t_exec *exec, t_ctx *ctx);
+				t_exec *exec, t_ctx *ctx);
 
 // File
 void		close_fd(int *fd);

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:53:30 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 03:10:51 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 11:20:56 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 #include "utils.h"
 #include "parsing.h"
 #include "signal.h"
-#include "printf.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv, char **envp)
+static t_ctx	*init_signal(int argc, char **argv, char **envp)
 {
 	t_ctx	*ctx;
-	char	*input;
-	int		status_code;
-	t_exec	*exec;
 
 	rl_outstream = stderr;
 	rl_catch_signals = 0;
@@ -34,10 +31,19 @@ int	main(int argc, char **argv, char **envp)
 	ctx = init_ctx(argc, argv, envp);
 	if (!ctx)
 		safe_exit(&ctx, "Unable to init ctx.");
+	return (ctx);
+}
+
+static void	minishell_routine(t_ctx *ctx)
+{
+	char		*input;
+	t_exec		*exec;
+
 	while (1)
 	{
 		g_signal = -1;
 		input = get_input(ctx);
+		set_signal_status_code(ctx);
 		if (!input)
 		{
 			ft_dprintf(2, "exit\n");
@@ -53,6 +59,15 @@ int	main(int argc, char **argv, char **envp)
 		if (exec)
 			execute(exec, ctx);
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_ctx		*ctx;
+	u_int8_t	status_code;
+
+	ctx = init_signal(argc, argv, envp);
+	minishell_routine(ctx);
 	status_code = ctx->status_code;
 	destroy_ctx(&ctx);
 	return (status_code);

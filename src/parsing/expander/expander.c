@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:10:09 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/03 02:00:30 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 11:59:05 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ static int	outscope_expand_utils(t_list **expanded_args,
 		ft_lstclear(expanded_args, free);
 		return (1);
 	}
-	split_outscope(last_arg, i, expand_length);
-	return (0);
+	last_arg = split_outscope(last_arg, i, expand_length);
+	return (last_arg == NULL);
 }
 
 /**
@@ -105,14 +105,15 @@ static int	outscope_expand_utils(t_list **expanded_args,
  * @param ctx global context of minishell for variables
  * @return 
  */
-t_list	*expand_arg(char *arg, t_ctx *ctx)
+t_list	*expand_arg(char **arg, t_ctx *ctx)
 {
 	t_list	*expanded_args;
 	t_list	*last_arg;
 	size_t	i;
 	char	*current_arg;
 
-	expanded_args = ft_lstnew(arg);
+	expanded_args = ft_lstnew(*arg);
+	*arg = NULL;
 	i = 0;
 	last_arg = expanded_args;
 	while (last_arg && ((char *)last_arg->content)[i])
@@ -147,6 +148,7 @@ int	expand(t_token *token, t_ctx *ctx)
 	t_list	*new_arg;
 	char	*tmp;
 
+	(void) ctx;
 	args = token->args;
 	new_args = NULL;
 	while (args)
@@ -154,10 +156,9 @@ int	expand(t_token *token, t_ctx *ctx)
 		tmp = ft_strdup(args->content);
 		new_arg = NULL;
 		if (tmp != NULL && handle_tilde(&tmp) == 0)
-			new_arg = expand_arg(tmp, ctx);
-		if (!new_arg || tmp == NULL)
+			new_arg = expand_arg(&tmp, ctx);
+		if (!new_arg && tmp == NULL)
 		{
-			free(tmp);
 			ft_lstclear(&new_args, free);
 			return (1);
 		}
