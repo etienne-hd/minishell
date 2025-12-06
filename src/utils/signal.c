@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/04 03:40:39 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 10:56:59 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	handle_signal(int sig)
 			g_signal = -21;
 			return ;
 		}
+		else if (g_signal == -10)
+			ft_printf("\n");
 		else
 		{
 			ft_printf("^C\n");
@@ -46,5 +48,7 @@ void	handle_signal(int sig)
 			rl_redisplay();
 		}
 	}
+	if (sig == 3 && g_signal == -10)
+		ft_printf("Quit\n");
 	g_signal = sig;
 }
