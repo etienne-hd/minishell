@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:09:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:51:13 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/05 20:00:57 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	builtin_pwd(t_process *process, t_ctx *ctx)
 	pwd = get_pwd();
 	if (pwd == NULL)
 		return (FAILURE);
-	printf("%s\n", pwd);
+	ft_printf("%s\n", pwd);
 	free(pwd);
 	return (SUCCESS);
 }
