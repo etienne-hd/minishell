@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 23:03:51 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 20:03:52 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 16:34:31 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static char	*get_line(char *delimiter, int to_expand, t_ctx *ctx)
 	char	*tmp;
 
 	line = readline("> ");
-	if (!line && g_signal != -21)
+	if (!line && (g_signal != 2))
 	{
 		ft_dprintf(2, "minishell: warning: here-document \
 delimited by end-of-file (wanted '%s')\n", delimiter);
 		return (NULL);
 	}
-	if (g_signal == -21 || ft_strcmp_endl(line, delimiter) == 0)
+	if (g_signal == 2 || ft_strcmp_endl(line, delimiter) == 0)
 	{
 		free(line);
 		return (NULL);
@@ -88,7 +88,7 @@ int	here_doc(char *delimiter, int to_expand, t_ctx *ctx)
 	dup_stdin = dup(0);
 	while (1)
 	{
-		g_signal = -42;
+		set_heredoc_signal_handler();
 		line = get_line(delimiter, to_expand, ctx);
 		if (!line)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:29:18 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 03:14:15 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 16:26:49 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	open_file(t_file *file, t_ctx *ctx)
 		file->fd = open(arg, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (file->fd == -1 && file->type != IN_HERE_DOC)
 		ft_dprintf(2, "minishell: %s: %s\n", arg, strerror(errno));
+	set_default_signal_handler();
 	return (file->fd == -1);
 }
 
@@ -83,7 +84,7 @@ void	open_files(t_exec *exec, t_ctx *ctx)
 	skip = 0;
 	files = exec->files;
 	begin_scope = files;
-	while (files && g_signal != -21)
+	while (files && g_signal != 2)
 	{
 		file = (t_file *)files->content;
 		if (file->type == PIPE)

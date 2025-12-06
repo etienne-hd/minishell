@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 20:00:25 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 16:24:02 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	exec_single_builtin_process(t_process *process,
 	int	fd_out;
 
 	get_fd(&fd_in, &fd_out, process);
+	if (fd_in == -1 || fd_out == -1)
+		return ;
 	dup_stdin = dup(0);
 	if (add_to_files(dup_stdin, exec))
 		return ;

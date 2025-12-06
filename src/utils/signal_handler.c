@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 22:41:36 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 16:25:00 by ehode            ###   ########.fr       */
+/*   Created: 2025/12/06 16:16:44 by ehode             #+#    #+#             */
+/*   Updated: 2025/12/06 16:36:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ctx.h"
-#include "exec.h"
 #include "utils.h"
+#include <signal.h>
 
-void	execute(t_exec *exec, t_ctx *ctx)
+void	set_process_signal_handler(void)
 {
-	g_signal = -1;
-	open_files(exec, ctx);
-	if (g_signal != 2 && ft_lstsize(exec->processes) > 0)
-	{
-		set_process_signal_handler();
-		exec_processes(exec, ctx);
-	}
-	close_files(exec->files);
-	free_exec(&exec);
+	signal(SIGINT, process_handle_signal);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	set_heredoc_signal_handler(void)
+{
+	signal(SIGINT, heredoc_handle_signal);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	set_default_signal_handler(void)
+{
+	signal(SIGINT, default_handle_signal);
+	signal(SIGQUIT, SIG_IGN);
 }

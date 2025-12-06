@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 11:38:45 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/03 01:49:40 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 16:36:17 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	fill_process_args(t_process *process, t_list *args_list)
 
 	current_arg = args_list;
 	nb_arg = ft_lstsize(args_list);
-	args = calloc(nb_arg + 1, sizeof(char *));
+	args = ft_calloc(nb_arg + 1, sizeof(char *));
 	if (args != NULL)
 	{
 		current_arg = args_list;

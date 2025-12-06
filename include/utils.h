@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 21:27:43 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 11:03:27 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 16:22:24 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int		get_argc(char **args);
 // Signal
 extern int	g_signal;
 void	set_signal_status_code(t_ctx *ctx);
-void	handle_signal(int sig);
+void	default_handle_signal(int sig);
+void	heredoc_handle_signal(int sig);
+void	process_handle_signal(int sig);
+void	set_default_signal_handler(void);
+void	set_heredoc_signal_handler(void);
+void	set_process_signal_handler(void);
 
 // Path
 char	*get_pwd(void);
