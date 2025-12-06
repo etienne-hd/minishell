@@ -78,7 +78,8 @@ static int	export_vars(char **args, t_ctx *ctx)
 	while (args[i])
 	{
 		j = 0;
-		while (args[i][j] && (ft_isalnum(args[i][j]) || args[i][j] == '_'))
+		while (args[i][j] && !ft_isdigit(args[i][0])
+			&& (ft_isalnum(args[i][j]) || args[i][j] == '_'))
 			j++;
 		key = ft_strndup(args[i], j);
 		if (check_error(key, args, i, j))

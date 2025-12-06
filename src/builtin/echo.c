@@ -12,7 +12,22 @@
 
 #include "error.h"
 #include "exec.h"
+#include <stddef.h>
 #include <unistd.h>
+
+int	is_full_n(char *str)
+{
+	size_t	i;
+
+	if (str[0] == '\0' || str[0] != '-' || str[1] == '\0')
+		return (0);
+	i = 1;
+	while (str[i] && str[i] == 'n')
+		i++;
+	if (str[i] != '\0')
+		return (0);
+	return (1);
+}
 
 int	builtin_echo(t_process *process, t_ctx *ctx)
 {
@@ -26,7 +41,7 @@ int	builtin_echo(t_process *process, t_ctx *ctx)
 	if (args == NULL)
 		return (FAILURE);
 	is_n = 0;
-	while (args[i + is_n] && ft_strncmp(args[i + is_n], "-n", 2) == 0)
+	while (args[i + is_n] && is_full_n(args[i + is_n]))
 		is_n++;
 	i += is_n;
 	while (args[i])
