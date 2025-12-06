@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:43:46 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/05 01:56:03 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 18:21:07 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 	char		*value;
 
 	*key_length = 0;
-	while (((ft_isalnum(var[*key_length]) || var[*key_length] == '_'))
-		|| (var[*key_length - 1] != '?' && (var[*key_length] == '?')))
+	while (((ft_isalnum(var[*key_length]) || var[*key_length] == '_' || var[*key_length] == '?'))
+		&& (var[*key_length - 1] != '?'))
 		(*key_length)++;
 	key = ft_strndup(var, *key_length);
 	if (!key)
