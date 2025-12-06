@@ -33,7 +33,7 @@ static char	*expand_var(char *var, size_t *key_length, t_ctx *ctx)
 
 	*key_length = 0;
 	while (((ft_isalnum(var[*key_length]) || var[*key_length] == '_'))
-			|| (var[*key_length - 1] != '?' && (var[*key_length] == '?')))
+		|| (var[*key_length - 1] != '?' && (var[*key_length] == '?')))
 		(*key_length)++;
 	key = ft_strndup(var, *key_length);
 	if (!key)
