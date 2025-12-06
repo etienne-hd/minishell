@@ -57,6 +57,8 @@ char	*get_cmd_path(char *command, t_ctx *ctx)
 	if (command == NULL)
 		return (NULL);
 	full_command = ft_strdup(command);
+	if (ft_strchr(command, '/'))
+		return (full_command);
 	path = ft_dict_get(ctx->env, "PATH");
 	if (path == NULL)
 		return (full_command);
