@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:54:15 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 16:24:02 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 17:29:48 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 #include "exec.h"
 #include "ft_printf.h"
 #include "libft.h"
+#include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+
+static int	get_empty_outfile(void)
+{
+	int	fd;
+
+	fd = open("/dev/null", O_WRONLY);
+	if (fd == -1)
+		ft_dprintf(2, "Error\nUnable to open pipe.\n");
+	return (fd);
+}
 
 static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 {
@@ -25,7 +36,12 @@ static void	get_fd(int *fd_in, int *fd_out, t_process *process)
 		*fd_in = process->file_in->fd;
 	else if (process->file_in == NULL)
 		*fd_in = 0;
-	if (process->file_out)
+	if (process->file_out && process->file_out->fd == -42)
+	{
+		process->file_out->fd = get_empty_outfile();
+		*fd_out = process->file_out->fd;
+	}
+	else if (process->file_out)
 		*fd_out = process->file_out->fd;
 	else if (process->file_out == NULL)
 		*fd_out = 1;

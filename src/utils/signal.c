@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 00:10:44 by ehode             #+#    #+#             */
-/*   Updated: 2025/12/06 16:49:46 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 17:35:15 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	set_signal_status_code(t_ctx *ctx)
 	if (g_signal == 2)
 		ctx->status_code = 130;
 	g_signal = -1;
+}
+
+void	out_process_handle_signal(int sig)
+{
+	if (sig == 3)
+		ft_dprintf(2, "Quit");
+	ft_dprintf(2, "\n");
+	g_signal = sig;
 }
 
 void	process_handle_signal(int sig)
