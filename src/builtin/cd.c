@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:01:24 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/04 16:51:03 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 09:49:55 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	builtin_cd(t_process *process, t_ctx *ctx)
 	size_t	i;
 
 	args = process->args;
-	tmp_set = get_pwd();
 	if (args == NULL)
 		return (FAILURE);
 	i = 1;
@@ -101,11 +100,13 @@ int	builtin_cd(t_process *process, t_ctx *ctx)
 		return (CMD_BAD_USAGE);
 	}
 	if (cd_movement(args, i, ctx))
+		return (FAILURE);
+	tmp_set = get_pwd();
+	if (set_pwd_var(tmp_set, ctx))
 	{
 		free(tmp_set);
 		return (FAILURE);
 	}
-	if (set_pwd_var(tmp_set, ctx))
-		return (FAILURE);
+	free(tmp_set);
 	return (SUCCESS);
 }
