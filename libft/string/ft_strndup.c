@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:25:12 by ehode             #+#    #+#             */
-/*   Updated: 2025/11/20 16:26:11 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 10:04:48 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strndup(char *str, size_t n)
 	if (!new_str)
 		return (NULL);
 	i = 0;
-	while (i < n)
+	while (str[i] && i < n)
 	{
 		new_str[i] = str[i];
 		i++;
