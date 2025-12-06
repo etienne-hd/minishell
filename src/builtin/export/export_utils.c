@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:57:18 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/12/06 02:12:50 by ehode            ###   ########.fr       */
+/*   Updated: 2025/12/06 09:51:46 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	check_error(char *key, char	**args, size_t i, size_t j)
 		return (FAILURE);
 	}
 	if (is_valide_export_mode(&args[i][j]) == 0
-		|| ft_strcmp(args[i], "=") == 0
-		|| ft_strcmp(args[i], "+=") == 0)
+		|| j == 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: export: '%s': \
 not a valid identifier\n", args[i]);
