@@ -76,12 +76,12 @@ int	builtin_exit(t_process *process, t_exec *exec, t_ctx *ctx)
 	argc = get_argc(process->args);
 	if (argc > 2 && is_valid_arg(process->args[1]))
 	{
-		ft_dprintf(2, "bash: exit: too many arguments\n");
+		ft_dprintf(2, "minishell: exit: too many arguments\n");
 		return (1);
 	}
 	if (argc >= 2 && !is_valid_arg(process->args[1]))
 	{
-		ft_dprintf(2, "bash: exit: %s: numeric argument required\n",
+		ft_dprintf(2, "minishell: exit: %s: numeric argument required\n",
 			process->args[1]);
 		exit_code = 2;
 	}
